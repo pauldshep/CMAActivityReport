@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">CMA Activity Report</string>
+    <string name="actionbar_title">CMA Activity Report</string>
+
+    <string name="event_info">Event Information</string>
+    <string name="event_name">Name</string>
+    <string name="event_type">Type</string>
+    <string name="event_date">Date</string>
+    <string name="event_attend">Attendance</string>
+    <string name="event_salvations">Salvations</string>
+    <string name="event_rededications">Rededications</string>
+    <string name="event_other">Other Ministry</string>
+    <string name="event_totals">Totals</string>
+
+    <string name="edittext_date">date of event</string>
+    <string name="edittext_type">type of event</string>
+    <string name="edittext_name">name of event</string>
+    <string name="edittext_attend">0</string>
+    <string name="edittext_salvations">0</string>
+    <string name="edittext_rededications">0</string>
+    <string name="edittext_other">0</string>
+
+    <string name="button_send">Send</string>
+
+    <!-- Action Bar Menu Item Titles -->
+    <string name="action_bar_settings">Settings</string>
+    <string name="action_bar_save">Save</string>
+    <string name="action_bar_recall">Recall</string>
+    <string name="action_bar_clear">Clear</string>
+    <string name="action_bar_about">About</string>
+
+
+</resources>

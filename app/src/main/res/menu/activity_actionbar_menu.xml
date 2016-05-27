@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!-- display settings dialog -->
+    <item
+        android:id="@+id/action_bar_settings"
+        android:title="@string/action_bar_settings"
+        app:showAsAction="never"/>
+
+    <!-- save current values to database -->
+    <item
+        android:id="@+id/action_bar_save"
+        android:title="@string/action_bar_save"
+        app:showAsAction="never"/>
+
+    <!-- recall current value from database -->
+    <item
+        android:id="@+id/action_bar_recall"
+        android:title="@string/action_bar_recall"
+        app:showAsAction="never"/>
+
+    <!-- clear any existing input -->
+    <item
+        android:id="@+id/action_bar_clear"
+        android:title="@string/action_bar_clear"
+        app:showAsAction="never"/>
+
+    <!-- display about information -->
+    <item
+        android:id="@+id/action_bar_about"
+        android:title="@string/action_bar_about"
+        app:showAsAction="never"/>
+
+</menu>
