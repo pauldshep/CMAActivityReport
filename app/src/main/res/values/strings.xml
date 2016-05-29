@@ -29,5 +29,24 @@
     <string name="action_bar_clear">Clear</string>
     <string name="action_bar_about">About</string>
 
+    <!-- Settings Activity Strings -->
+    <string name="settings_action_bar_title">Activity Report Settings</string>
+    <string name="settings_email_title">EMail</string>
+    <string name="settings_email_to">To:</string>
+    <string name="settings_email_addr">Addr:</string>
+    <string name="settings_email_from">From:</string>
+    <string name="settings_email_from_def">Paul Shepherd</string>
+    <string name="settings_email_subject">Subject:</string>
+    <string name="settings_email_subject_value">CMA Activity Report</string>
+
+    <!-- About Activity Strings -->
+    <string name="activity_about_title">About CMA Activity Report</string>
+    <string name="activity_about_text">
+        This application was written for the Christian Motorcyclists Association
+        to automate the creation of event activity reports.  It\'s author is
+        Shepherd Software Solutions.  Please direct any comments and suggestions
+        to: pauldshep@gmail.com
+    </string>
+
 
 </resources>

@@ -1,6 +1,5 @@
 package com.sss.android.cmaactivityreport;
 
-import android.content.ClipData;
 import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -19,7 +18,7 @@ import android.widget.Toast;
 /**
  * CMA Activity Report Application entry point.
  */
-public class MainActivity extends AppCompatActivity
+public class ActivityMain extends AppCompatActivity
 {
 
     //**************************************************************************
@@ -33,7 +32,7 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Log.i("MainActivity", "::onCreate()");
+        Log.i("ActivityMain", "::onCreate()");
 
         // configure the action bar and handle its messages
         ActionBar action_bar = getSupportActionBar();
@@ -42,8 +41,8 @@ public class MainActivity extends AppCompatActivity
         // configure the event type display
         TextView text_view_type = (TextView)findViewById(R.id.textViewType);
         Intent this_intent      = getIntent();
-        int event_type          = this_intent.getIntExtra(EventActivity.EVENT_TYPE, EventActivity.DEFAULT_EVENT_TYPE);
-        text_view_type.setText(EventActivity.CMAActivityTypes[event_type]);
+        int event_type          = this_intent.getIntExtra(ActivityEventTypes.EVENT_TYPE, ActivityEventTypes.DEFAULT_EVENT_TYPE);
+        text_view_type.setText(ActivityEventTypes.CMAActivityTypes[event_type]);
 
         // configure the date display
         TextView text_view_date = (TextView)findViewById(R.id.textViewDate);
@@ -63,8 +62,8 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                Log.i("MainActivity", "textview type selected");
-                Intent intent = new Intent(getApplicationContext(), EventActivity.class);
+                Log.i("ActivityMain", "textview type selected");
+                Intent intent = new Intent(getApplicationContext(), ActivityEventTypes.class);
                 startActivity(intent);
             }
         });
@@ -74,8 +73,8 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                Log.i("MainActivity", "textview type selected");
-                Intent intent = new Intent(getApplicationContext(), EventActivity.class);
+                Log.i("ActivityMain", "textview type selected");
+                Intent intent = new Intent(getApplicationContext(), ActivityEventTypes.class);
                 startActivity(intent);
             }
         });
@@ -89,7 +88,7 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                Log.i("MainActivity", "Date onClick() start");
+                Log.i("ActivityMain", "Date onClick() start");
 
                 DatePickerFragment date_picker = new DatePickerFragment()
                 {
@@ -108,7 +107,7 @@ public class MainActivity extends AppCompatActivity
                     {
                         int    loc_month = month + 1;
                         String date_str  =  loc_month + "-" + day + "-" + year;
-                        Log.i("MainActivity", "specified date = " + date_str);
+                        Log.i("ActivityMain", "specified date = " + date_str);
                         TextView date_text_view = (TextView)findViewById(R.id.textViewDate);
                         date_text_view.setText(date_str);
                     }
@@ -120,7 +119,7 @@ public class MainActivity extends AppCompatActivity
 
                 TextView date_text_view = (TextView)findViewById((R.id.textViewDate));
                 String date_fr_picker   = date_picker.toString();
-                Log.d("MainActivity", "Date onClick() end " + date_fr_picker);
+                Log.d("ActivityMain", "Date onClick() end " + date_fr_picker);
             }
         });
 
@@ -129,7 +128,7 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                Log.i("MainActivity", "Date onClick() start");
+                Log.i("ActivityMain", "Date onClick() start");
 
                 DatePickerFragment date_picker = new DatePickerFragment()
                 {
@@ -148,7 +147,7 @@ public class MainActivity extends AppCompatActivity
                     {
                         int loc_month = month + 1;
                         String date_str =  loc_month + "-" + day + "-" + year;
-                        Log.i("MainActivity", "specified date = " + date_str);
+                        Log.i("ActivityMain", "specified date = " + date_str);
                         TextView date_text_view = (TextView)findViewById(R.id.textViewDate);
                         date_text_view.setText(date_str);
                     }
@@ -160,7 +159,7 @@ public class MainActivity extends AppCompatActivity
 
                 TextView date_text_view = (TextView)findViewById((R.id.textViewDate));
                 String date_fr_picker   = date_picker.toString();
-                Log.d("MainActivity", "Date onClick() end " + date_fr_picker);
+                Log.d("ActivityMain", "Date onClick() end " + date_fr_picker);
             }   // end public void onClick(View v)
         });
 
@@ -208,14 +207,13 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
     {
+        Intent intent;
+
         switch(item.getItemId())
         {
             case R.id.action_bar_settings:
                 // display settings activity
-                Toast.makeText(this, "Action Bar Settings Menu Item",
-                        Toast.LENGTH_SHORT).show();
-                Log.i("MainActivity", "textview type selected");
-                Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
+                intent = new Intent(getApplicationContext(), ActivitySettings.class);
                 startActivity(intent);
                 break;
 
@@ -235,12 +233,13 @@ public class MainActivity extends AppCompatActivity
                 break;
 
             case R.id.action_bar_about:
-                Toast.makeText(this, "Action Bar About Menu Item",
-                        Toast.LENGTH_SHORT).show();
+                // display the About activity
+                intent = new Intent(getApplicationContext(), ActivityAbout.class);
+                startActivity(intent);
                 break;
 
             default:
-                Log.e("MainActivity",
+                Log.e("ActivityMain",
                       "action bar menu item not handled = " + item.getItemId());
                 break;
         }
@@ -263,7 +262,7 @@ public class MainActivity extends AppCompatActivity
     }
 
 
-}   // end public class MainActivity extends AppCompatActivity
+}   // end public class ActivityMain extends AppCompatActivity
 
 
 

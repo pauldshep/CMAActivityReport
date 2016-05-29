@@ -17,7 +17,7 @@
         android:paddingTop="@dimen/activity_vertical_margin"
         android:descendantFocusability="beforeDescendants"
         android:focusableInTouchMode="true"
-        tools:context="com.sss.android.cmaactivityreport.MainActivity"
+        tools:context=".ActivityMain"
         >
 
         <TextView

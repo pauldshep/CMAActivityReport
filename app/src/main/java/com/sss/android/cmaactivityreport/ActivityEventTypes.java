@@ -10,7 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 
-public class EventActivity extends AppCompatActivity
+public class ActivityEventTypes extends AppCompatActivity
 {
     // identifies the current event type in the array
     public final static String EVENT_TYPE         = "event_id";
@@ -42,7 +42,7 @@ public class EventActivity extends AppCompatActivity
 
         // get intent that started this activity
         Intent this_intent = getIntent();
-        int event_type     = this_intent.getIntExtra(EventActivity.EVENT_TYPE, DEFAULT_EVENT_TYPE);
+        int event_type     = this_intent.getIntExtra(ActivityEventTypes.EVENT_TYPE, DEFAULT_EVENT_TYPE);
 
         listViewEventTypes = (ListView)findViewById(R.id.listViewEventType);
 
@@ -63,14 +63,14 @@ public class EventActivity extends AppCompatActivity
             public void onItemClick(AdapterView<?> parent, View view, int position, long id)
             {
                 String itemValue    = (String)listViewEventTypes.getItemAtPosition(position);
-                Log.i("EventActivity", "onClick::itemValue = " + itemValue);
+                Log.i("ActivityEventTypes", "onClick::itemValue = " + itemValue);
 
                 // go back to the main activity
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                Intent intent = new Intent(getApplicationContext(), ActivityMain.class);
                 intent.putExtra("event_id", position);
                 startActivity(intent);
             }
         });
     }   // end OnCreate
 
-}   // end public class EventActivity extends AppCompatActivity
+}   // end public class ActivityEventTypes extends AppCompatActivity
