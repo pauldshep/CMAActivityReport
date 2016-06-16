@@ -1,8 +1,6 @@
 package com.sss.android.cmaactivityreport;
 
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -46,15 +44,15 @@ public class CMAActivityInfo
     public void getInfo()
     {
         // event name from edit text
-        EditText edittext_name  = (EditText)appCompatActivity.findViewById(R.id.editTextName);
+        EditText edittext_name  = (EditText)appCompatActivity.findViewById(R.id.editTextEventName);
         eventName               = edittext_name.getText().toString();
 
         // event type from edit text
-        TextView edittext_type  = (TextView)appCompatActivity.findViewById(R.id.textViewType);
+        TextView edittext_type  = (TextView)appCompatActivity.findViewById(R.id.textViewEventType);
         eventType               = edittext_type.getText().toString();
 
         // event date from edit text
-        TextView edittext_date  = (TextView)appCompatActivity.findViewById(R.id.textViewDate);
+        TextView edittext_date  = (TextView)appCompatActivity.findViewById(R.id.textViewEventDate);
         eventType               = edittext_date.getText().toString();
 
         //----------------------------------------------------------------------
@@ -63,7 +61,7 @@ public class CMAActivityInfo
         // number attending event from edit text
         try
         {
-            EditText edittext_attend = (EditText)appCompatActivity.findViewById(R.id.editTextAttend);
+            EditText edittext_attend = (EditText)appCompatActivity.findViewById(R.id.editTextEventAttend);
             numAttend = Integer.parseInt(edittext_attend.getText().toString());
         }
         catch(NumberFormatException nfe)

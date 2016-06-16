@@ -14,7 +14,7 @@
 
     <string name="edittext_date">date of event</string>
     <string name="edittext_type">type of event</string>
-    <string name="edittext_name">name of event</string>
+    <string name="edittext_event_name">name of event</string>
     <string name="edittext_attend">0</string>
     <string name="edittext_salvations">0</string>
     <string name="edittext_rededications">0</string>

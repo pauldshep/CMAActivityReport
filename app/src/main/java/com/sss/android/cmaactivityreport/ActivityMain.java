@@ -11,8 +11,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 
 /**
@@ -20,6 +23,13 @@ import android.widget.Toast;
  */
 public class ActivityMain extends AppCompatActivity
 {
+    private final static String TAG        = "ACtivityMain";
+    private final static String EVENT_TYPE = "event_type";
+    private final static String EVENT_DATE = "event_date";
+
+    // widget variables
+    private TextView mTextViewEventType;
+    private TextView mTextViewEventDate;
 
     //**************************************************************************
     /**
@@ -32,22 +42,24 @@ public class ActivityMain extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Log.i("ActivityMain", "::onCreate()");
+        Log.i(TAG, "onCreate()");
+
+        // lookup widgets
+        mTextViewEventType = (TextView)findViewById(R.id.textViewEventType);
+        mTextViewEventDate = (TextView)findViewById(R.id.textViewEventDate);
 
         // configure the action bar and handle its messages
         ActionBar action_bar = getSupportActionBar();
         action_bar.setTitle(R.string.actionbar_title);
 
         // configure the event type display
-        TextView text_view_type = (TextView)findViewById(R.id.textViewType);
         Intent this_intent      = getIntent();
         int event_type          = this_intent.getIntExtra(ActivityEventTypes.EVENT_TYPE, ActivityEventTypes.DEFAULT_EVENT_TYPE);
-        text_view_type.setText(ActivityEventTypes.CMAActivityTypes[event_type]);
+        mTextViewEventType.setText(ActivityEventTypes.CMAActivityTypes[event_type]);
 
         // configure the date display
-        TextView text_view_date = (TextView)findViewById(R.id.textViewDate);
         UtilDate util_date      = new UtilDate();
-        text_view_date.setText(util_date.toString());
+        mTextViewEventDate.setText(util_date.toString());
 
 
         ////////////////////////////////////////////////////////////////////////
@@ -55,7 +67,7 @@ public class ActivityMain extends AppCompatActivity
         ////////////////////////////////////////////////////////////////////////
 
         //----------------------------------------------------------------------
-        // Event Type TextView
+        // Event Type message handler associated with the title and type field
         //----------------------------------------------------------------------
         TextView text_view_type_title = (TextView)findViewById(R.id.textViewTypeTitle);
         text_view_type_title.setOnClickListener(new View.OnClickListener(){
@@ -64,20 +76,21 @@ public class ActivityMain extends AppCompatActivity
             {
                 Log.i("ActivityMain", "textview type selected");
                 Intent intent = new Intent(getApplicationContext(), ActivityEventTypes.class);
-                startActivity(intent);
+                startActivityForResult(intent, ActivityEventTypes.REQUEST_CODE);
             }
         });
 
 
-        text_view_type.setOnClickListener(new View.OnClickListener(){
+        mTextViewEventType.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v)
             {
                 Log.i("ActivityMain", "textview type selected");
                 Intent intent = new Intent(getApplicationContext(), ActivityEventTypes.class);
-                startActivity(intent);
+                startActivityForResult(intent, ActivityEventTypes.REQUEST_CODE);
             }
         });
+
 
         //----------------------------------------------------------------------
         // Event Date TextView
@@ -108,7 +121,7 @@ public class ActivityMain extends AppCompatActivity
                         int    loc_month = month + 1;
                         String date_str  =  loc_month + "-" + day + "-" + year;
                         Log.i("ActivityMain", "specified date = " + date_str);
-                        TextView date_text_view = (TextView)findViewById(R.id.textViewDate);
+                        TextView date_text_view = (TextView)findViewById(R.id.textViewEventDate);
                         date_text_view.setText(date_str);
                     }
                 };
@@ -117,13 +130,12 @@ public class ActivityMain extends AppCompatActivity
                 date_picker.setArguments(util_date.buildBundle());
                 date_picker.show(getFragmentManager(), "datePicker");
 
-                TextView date_text_view = (TextView)findViewById((R.id.textViewDate));
                 String date_fr_picker   = date_picker.toString();
                 Log.d("ActivityMain", "Date onClick() end " + date_fr_picker);
             }
         });
 
-        text_view_date.setOnClickListener(new View.OnClickListener()
+        mTextViewEventDate.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
@@ -148,7 +160,7 @@ public class ActivityMain extends AppCompatActivity
                         int loc_month = month + 1;
                         String date_str =  loc_month + "-" + day + "-" + year;
                         Log.i("ActivityMain", "specified date = " + date_str);
-                        TextView date_text_view = (TextView)findViewById(R.id.textViewDate);
+                        TextView date_text_view = (TextView)findViewById(R.id.textViewEventDate);
                         date_text_view.setText(date_str);
                     }
                 };
@@ -157,15 +169,14 @@ public class ActivityMain extends AppCompatActivity
                 date_picker.setArguments(util_date.buildBundle());
                 date_picker.show(getFragmentManager(), "datePicker");
 
-                TextView date_text_view = (TextView)findViewById((R.id.textViewDate));
-                String date_fr_picker   = date_picker.toString();
+                String date_fr_picker = date_picker.toString();
                 Log.d("ActivityMain", "Date onClick() end " + date_fr_picker);
             }   // end public void onClick(View v)
         });
 
 
         //----------------------------------------------------------------------
-        // Send Button
+        // Send Button event listener
         //----------------------------------------------------------------------
         Button button_send = (Button)findViewById(R.id.button_send);
         button_send.setOnClickListener(new View.OnClickListener()
@@ -173,9 +184,8 @@ public class ActivityMain extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-              Log.i("cmarpt", "send button selected");
-
-                getActivityReportInfo();
+                Log.i("cmarpt", "send button selected");
+                emailActivityReport();
             }
         });
 
@@ -248,19 +258,214 @@ public class ActivityMain extends AppCompatActivity
     }   // end public boolean onOptionsItemSelected(MenuItem item)
 
 
+    /**
+     * Handle results genererated by other activities
+     */
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        Log.i(TAG, "onActivityResult(requestCode = " + requestCode +
+                   ", resultCode = " + resultCode + ", data = " + data);
+
+        if(requestCode == ActivityEventTypes.REQUEST_CODE)
+        {
+            if(resultCode == RESULT_OK)
+            {
+                int event_type = data.getIntExtra(ActivityEventTypes.EVENT_TYPE, 0);
+                mTextViewEventType.setText(ActivityEventTypes.CMAActivityTypes[event_type]);
+            }
+        }
+    }
+
+
+    ////////////////////////////////////////////////////////////////////////////
+    /////////////////////////// LIFE CYCLE FUNCTIONS ///////////////////////////
+    ////////////////////////////////////////////////////////////////////////////
+    @Override
+    protected void onStart()
+    {
+        super.onStart();
+        Log.i(TAG, "onStart()");
+    }
+
+    @Override
+    protected void onRestart()
+    {
+        super.onRestart();
+        Log.i(TAG, "onRestart()");
+    }
+
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+        Log.i(TAG, "onResume()");
+    }
+
+    @Override
+    protected void onPause()
+    {
+        super.onPause();
+        Log.i(TAG, "onPause()");
+    }
+
+    @Override
+    protected void onStop()
+    {
+        super.onStop();
+        Log.i(TAG, "onStop()");
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState)
+    {
+        Log.i(TAG, "onSaveInstanceState()");
+        super.onSaveInstanceState(outState);
+
+        // save event type
+        String event_type = mTextViewEventType.getText().toString();
+        outState.putString(EVENT_TYPE, event_type);
+        Log.i(TAG, "onSaveInstanceState(): saving event type = " + event_type);
+
+        // save event date
+        String event_date = mTextViewEventDate.getText().toString();
+        outState.putString(EVENT_DATE, event_date);
+        Log.i(TAG, "onSaveInstanceState(): saving event date = " + event_date);
+    }
+
+    @Override
+    public void onRestoreInstanceState(Bundle outState)
+    {
+        Log.i(TAG, "onRestoreInstanceState()");
+        super.onRestoreInstanceState(outState);
+
+        // restore event type
+        String event_type = outState.getString(EVENT_TYPE, "Secular");
+        mTextViewEventType.setText(event_type);
+        Log.i(TAG, "onRestoreInstanceState(): restoring event type = " + event_type);
+
+        // restore event date
+        String event_date = outState.getString(EVENT_TYPE, "01/01/01");
+        mTextViewEventDate.setText(event_date);
+        Log.i(TAG, "onRestoreInstanceState(): restoring event date = " + event_date);
+    }
+
+
+
+
     ////////////////////////////////////////////////////////////////////////////
     ///////////////////////// PRIVATE MEMBER FUNCTIONS /////////////////////////
     ////////////////////////////////////////////////////////////////////////////
     /**
-     * get CMA activity report info
+     * Builds CMA activity report and EMails it to the location specified in
+     * the settings dialog.
      */
-    private void getActivityReportInfo()
+    public void emailActivityReport()
     {
-        CMAActivityInfo activity_info = new CMAActivityInfo(this);
-        activity_info.getInfo();
-        Log.i("CMAActivityInfo", activity_info.toString());
+        Log.i(TAG, "emailActivityReport()");
+
+        // get email settings
+        DataSettings data_settings = new DataSettings(this);
+        Log.i(TAG, "Report Settings: " + data_settings);
+
+        // get report information and generate report text
+        DataReport data_report     = new DataReport();
+        String     activity_report = data_report.buildActivityReport();
+        Log.i(TAG, "Activity Report: " + activity_report);
+
+        // send the email
+        Intent send_email = new Intent(Intent.ACTION_SEND);
+        send_email.setType(("message/rfc822"));
+        send_email.putExtra(Intent.EXTRA_EMAIL,   new String[] {data_settings.mEmailAddr});
+        send_email.putExtra(Intent.EXTRA_SUBJECT, data_settings.mEmailSubject);
+        send_email.putExtra(Intent.EXTRA_TEXT,    data_report.toString());
+
+        try
+        {
+            startActivity(Intent.createChooser(send_email,
+                    "Send CMA Report Email"));
+        }
+        catch(android.content.ActivityNotFoundException ex)
+        {
+            Toast.makeText(this, "WARNING: there are no email clients installed.",
+                    Toast.LENGTH_SHORT).show();
+        }
+
     }
 
+
+    ////////////////////////////////////////////////////////////////////////////
+    //////////////////////////// INTERNAL CLASSES //////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////
+    /**
+     * Encapsulates this classes dynamic data
+     */
+    private class DataReport
+    {
+        public String mEventName;
+        public String mEventType;
+        public String mEventDate;
+        public String mCMAAttend;
+        public String mSalvations;
+        public String mRededications;
+        public String mOtherMinistry;
+
+        // application widgets
+        private EditText mEditViewEventName;
+        private TextView mTextViewEventType;
+        private TextView mTextViewEventDate;
+        private EditText mEditTextAttend;
+        private EditText mEditTextSalvations;
+        private EditText mEditTextRededications;
+        private EditText mEditTextOtherMinistery;
+
+
+        /**
+         * Default Constructor.  Get current data from activity widgets
+         */
+        public DataReport()
+        {
+            // get the widgets
+            mEditViewEventName      = (EditText)findViewById((R.id.editTextEventName));
+            mTextViewEventType      = (TextView)findViewById((R.id.textViewEventType));
+            mTextViewEventDate      = (TextView)findViewById((R.id.textViewEventDate));
+            mEditTextAttend         = (EditText)findViewById((R.id.editTextEventAttend));
+            mEditTextSalvations     = (EditText)findViewById((R.id.editTextSalvations));
+            mEditTextRededications  = (EditText)findViewById((R.id.editTextRededications));
+            mEditTextOtherMinistery = (EditText)findViewById((R.id.editTextOther));
+
+            // get current widget data
+            mEventName     = mEditViewEventName.getText().toString();
+            mEventType     = mTextViewEventType.getText().toString();
+            mEventDate     = mTextViewEventDate.getText().toString();
+            mCMAAttend     = mEditTextAttend.getText().toString();
+            mSalvations    = mEditTextSalvations.getText().toString();
+            mRededications = mEditTextRededications.getText().toString();
+            mOtherMinistry = mEditTextOtherMinistery.getText().toString();
+        }
+
+
+        /**
+         * Builds activity report text to be emailed
+         * @return  activity report text to be emailed
+         */
+        public String buildActivityReport()
+        {
+            String activity_report =
+                            "\nEvent = "          + mEventName +
+                            "\nEvent Type = "     + mEventType +
+                            "\nEvent Date = "     + mEventDate +
+                            "\nCMA Attendence = " + mCMAAttend +
+                            "\nSalvations = "     + mSalvations +
+                            "\nRededications = "  + mRededications +
+                            "\nOther = "          + mOtherMinistry;
+
+            return activity_report;
+        }
+
+    }   // end internal private class DataReport
 
 }   // end public class ActivityMain extends AppCompatActivity
 

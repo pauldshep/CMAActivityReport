@@ -1,16 +1,11 @@
 package com.sss.android.cmaactivityreport;
 
-import android.content.ContentValues;
 import android.content.Context;
-import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 public class ActivitySettings extends AppCompatActivity
@@ -69,10 +64,10 @@ public class ActivitySettings extends AppCompatActivity
         Context      context       = view.getContext();
         DataSettings data_settings = new DataSettings(context);
 
-        data_settings.setProperty(DataSettings.mKeyEmailTo,      mEditTextEmailTo.getText().toString());
-        data_settings.setProperty(DataSettings.mKeyEmailAddr,    mEditTextEmailAddr.getText().toString());
-        data_settings.setProperty(DataSettings.mKeyEmailFrom,    mEditTextEmailFrom.getText().toString());
-        data_settings.setProperty(DataSettings.mKeyEmailSubject, mEditTextEmailSubject.getText().toString());
+        data_settings.setProperty(DataSettings.KEY_EMAIL_TO,      mEditTextEmailTo.getText().toString());
+        data_settings.setProperty(DataSettings.KEY_EMAIL_ADDR,    mEditTextEmailAddr.getText().toString());
+        data_settings.setProperty(DataSettings.KEY_EMAIL_FROM,    mEditTextEmailFrom.getText().toString());
+        data_settings.setProperty(DataSettings.KEY_EMAIL_SUBJECT, mEditTextEmailSubject.getText().toString());
 
         // go back to the main activity
         finish();
