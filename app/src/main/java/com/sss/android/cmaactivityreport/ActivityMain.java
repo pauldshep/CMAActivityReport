@@ -230,6 +230,7 @@ public class ActivityMain extends AppCompatActivity
             case R.id.action_bar_save:
                 Toast.makeText(this, "Action Bar Save Menu Item",
                         Toast.LENGTH_SHORT).show();
+                saveActivityInformation();
                 break;
 
             case R.id.action_bar_recall:
@@ -371,8 +372,8 @@ public class ActivityMain extends AppCompatActivity
         Log.i(TAG, "Report Settings: " + data_settings);
 
         // get report information and generate report text
-        DataReport data_report     = new DataReport();
-        String     activity_report = data_report.buildActivityReport();
+        ActivityInfo activity_info = new ActivityInfo();
+        String     activity_report = activity_info.buildActivityReport();
         Log.i(TAG, "Activity Report: " + activity_report);
 
         // send the email
@@ -380,7 +381,7 @@ public class ActivityMain extends AppCompatActivity
         send_email.setType(("message/rfc822"));
         send_email.putExtra(Intent.EXTRA_EMAIL,   new String[] {data_settings.mEmailAddr});
         send_email.putExtra(Intent.EXTRA_SUBJECT, data_settings.mEmailSubject);
-        send_email.putExtra(Intent.EXTRA_TEXT,    data_report.toString());
+        send_email.putExtra(Intent.EXTRA_TEXT,    activity_info.buildActivityReport());
 
         try
         {
@@ -392,6 +393,17 @@ public class ActivityMain extends AppCompatActivity
             Toast.makeText(this, "WARNING: there are no email clients installed.",
                     Toast.LENGTH_SHORT).show();
         }
+    }   // end public void emailActivityReport()
+
+
+    //**************************************************************************
+    /**
+     * Save current activity information to properties file
+     */
+    private void saveActivityInformation()
+    {
+        // get current activity report settings
+        ActivityInfo activity_info = new ActivityInfo();
 
     }
 
@@ -400,9 +412,9 @@ public class ActivityMain extends AppCompatActivity
     //////////////////////////// INTERNAL CLASSES //////////////////////////////
     ////////////////////////////////////////////////////////////////////////////
     /**
-     * Encapsulates this classes dynamic data
+     * Internal Class that encapsulates CMA activity report dynamic data
      */
-    private class DataReport
+    private class ActivityInfo
     {
         public String mEventName;
         public String mEventType;
@@ -425,7 +437,7 @@ public class ActivityMain extends AppCompatActivity
         /**
          * Default Constructor.  Get current data from activity widgets
          */
-        public DataReport()
+        public ActivityInfo()
         {
             // get the widgets
             mEditViewEventName      = (EditText)findViewById((R.id.editTextEventName));
@@ -454,13 +466,14 @@ public class ActivityMain extends AppCompatActivity
         public String buildActivityReport()
         {
             String activity_report =
-                            "\nEvent = "          + mEventName +
-                            "\nEvent Type = "     + mEventType +
-                            "\nEvent Date = "     + mEventDate +
-                            "\nCMA Attendence = " + mCMAAttend +
-                            "\nSalvations = "     + mSalvations +
+                            "\nEvent = "          + mEventName     +
+                            "\nEvent Type = "     + mEventType     +
+                            "\nEvent Date = "     + mEventDate     +
+                            "\nCMA Attendence = " + mCMAAttend     +
+                            "\nSalvations = "     + mSalvations    +
                             "\nRededications = "  + mRededications +
-                            "\nOther = "          + mOtherMinistry;
+                            "\nOther = "          + mOtherMinistry +
+                            "\n\nComment: ";
 
             return activity_report;
         }

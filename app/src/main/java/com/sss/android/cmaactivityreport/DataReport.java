@@ -12,7 +12,7 @@ import java.util.Properties;
  */
 public class DataReport extends DataProperties
 {
-    private final static String TAG            =  "DataReport";
+    private final static String TAG            = "DataReport";
     private final static String PROP_FILE_NAME = "Report.properties";
 
     // property keys
@@ -38,6 +38,8 @@ public class DataReport extends DataProperties
     private Integer mRededications;
     private Integer mOtherMinistry;
 
+
+    //--------------------------------------------------------------------------
     /**
      * Default Constructor
      * @param context of the current activity
