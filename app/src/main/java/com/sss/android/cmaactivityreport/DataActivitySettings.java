@@ -18,7 +18,7 @@ import java.util.Properties;
  *
  * Created by Paul Shepherd on 5/31/2016.
  */
-public class DataSettings extends DataProperties
+public class DataActivitySettings extends DataProperties
 {
     // settings data variables
     public String mEmailTo;
@@ -32,7 +32,7 @@ public class DataSettings extends DataProperties
     public final static String KEY_EMAIL_FROM    = "EmailFrom";
     public final static String KEY_EMAIL_SUBJECT = "EmailSubject";
 
-    private final static String TAG              = "DataSettings";
+    private final static String TAG              = "DataActivitySettings";
     private final static String PROP_FILE_NAME   = "Setting.properties";
 
 
@@ -41,85 +41,11 @@ public class DataSettings extends DataProperties
      * Default Constructor
      * @param context of the current activity
      */
-    public DataSettings(Context context)
+    public DataActivitySettings(Context context)
     {
         super(context, PROP_FILE_NAME);
         getProperties();
-    }   // end public DataSettings
-
-
-//    //**************************************************************************
-//    /**
-//     * Get setting properties from property file and set widget values.  Verify
-//     * the properties file exists.  If it does not then create it
-//     */
-//    public void getProperties()
-//    {
-//        Log.i(TAG, "getProperties()");
-//        File prop_file = new File(mDataContext.getFilesDir(), PROP_FILE);
-//
-//        if(!prop_file.exists())
-//        {
-//            // here the property file does not exits, create default
-//            Log.i(TAG, "getProperties() - property file does not exist");
-//            try
-//            {
-//                prop_file.createNewFile();
-//                createDefaultProperties();
-//                OutputStream out = new FileOutputStream(prop_file);
-//                mProperties.store(out, "");
-//            }
-//            catch(IOException ioe)
-//            {
-//                Log.e(TAG, "could not create properties file: " + ioe.toString());
-//            }
-//        }
-//        else
-//        {
-//            // here the properties file exits, read it
-//            Log.i(TAG, "getProperties() - property file found");
-//            try
-//            {
-//                InputStream in = new FileInputStream(prop_file);
-//                mProperties.load(in);
-//                extractProperties();
-//            }
-//            catch(FileNotFoundException fnf)
-//            {
-//                Log.e(TAG, "could not find properties file: " + fnf.toString());
-//            }
-//            catch(IOException ioe)
-//            {
-//                Log.e(TAG, "could not read properties file" + ioe.toString());
-//            }
-//        }
-//
-//        Log.i(TAG, "settings = " + toString());
-//    }   // end private void getProperties()
-
-
-//    //**************************************************************************
-//    /**
-//     * Sets specified property file value locally and in the properties file.
-//     * @param propKey
-//     * @param propValue
-//     */
-//    public void setProperty(String propKey, String propValue)
-//    {
-//        Log.i(TAG, "setProperty(key = " + propKey + ", value = " + propValue +")");
-//        File prop_file = new File(mDataContext.getFilesDir(), PROP_FILE);
-//
-//        try
-//        {
-//            mProperties.setProperty(propKey, propValue);
-//            OutputStream out = new FileOutputStream(prop_file);
-//            mProperties.store(out, "");
-//        }
-//        catch(IOException ioe)
-//        {
-//            Log.e(TAG, "could not save property to file: " + ioe.toString());
-//        }
-//    }
+    }   // end public DataActivitySettings
 
 
     //**************************************************************************
@@ -170,4 +96,4 @@ public class DataSettings extends DataProperties
         Log.i(TAG, "settings from properties: " + toString());
     }
 
-}   // end public class DataSettings
+}   // end public class DataActivitySettings

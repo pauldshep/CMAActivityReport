@@ -1,5 +1,6 @@
 package com.sss.android.cmaactivityreport;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -14,8 +15,6 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import org.w3c.dom.Text;
 
 
 /**
@@ -186,6 +185,8 @@ public class ActivityMain extends AppCompatActivity
             {
                 Log.i("cmarpt", "send button selected");
                 emailActivityReport();
+                CMAActivityInfo cma_activity = new CMAActivityInfo();
+                cma_activity.mDataCMAActivity.setProperties();
             }
         });
 
@@ -217,7 +218,8 @@ public class ActivityMain extends AppCompatActivity
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
     {
-        Intent intent;
+        Intent          intent;
+        CMAActivityInfo cma_activity;
 
         switch(item.getItemId())
         {
@@ -230,17 +232,25 @@ public class ActivityMain extends AppCompatActivity
             case R.id.action_bar_save:
                 Toast.makeText(this, "Action Bar Save Menu Item",
                         Toast.LENGTH_SHORT).show();
-                saveActivityInformation();
+                cma_activity = new CMAActivityInfo();
+                cma_activity.mDataCMAActivity.setProperties();
                 break;
 
             case R.id.action_bar_recall:
                 Toast.makeText(this, "ActionBar Recall Menu Item",
                         Toast.LENGTH_SHORT).show();
+                cma_activity = new CMAActivityInfo();
+                cma_activity.mDataCMAActivity.getProperties();
+                cma_activity.mDataCMAActivity.extractProperties();
+                cma_activity.setCMAActivityData();
                 break;
 
             case R.id.action_bar_clear:
                 Toast.makeText(this, "Action Bar Clear Menu Item",
                         Toast.LENGTH_SHORT).show();
+                cma_activity = new CMAActivityInfo();
+                cma_activity.mDataCMAActivity.createDefaultProperties();
+                cma_activity.setCMAActivityData();
                 break;
 
             case R.id.action_bar_about:
@@ -368,11 +378,11 @@ public class ActivityMain extends AppCompatActivity
         Log.i(TAG, "emailActivityReport()");
 
         // get email settings
-        DataSettings data_settings = new DataSettings(this);
+        DataActivitySettings data_settings = new DataActivitySettings(this);
         Log.i(TAG, "Report Settings: " + data_settings);
 
         // get report information and generate report text
-        ActivityInfo activity_info = new ActivityInfo();
+        CMAActivityInfo activity_info = new CMAActivityInfo();
         String     activity_report = activity_info.buildActivityReport();
         Log.i(TAG, "Activity Report: " + activity_report);
 
@@ -396,33 +406,16 @@ public class ActivityMain extends AppCompatActivity
     }   // end public void emailActivityReport()
 
 
-    //**************************************************************************
-    /**
-     * Save current activity information to properties file
-     */
-    private void saveActivityInformation()
-    {
-        // get current activity report settings
-        ActivityInfo activity_info = new ActivityInfo();
-
-    }
-
-
     ////////////////////////////////////////////////////////////////////////////
     //////////////////////////// INTERNAL CLASSES //////////////////////////////
     ////////////////////////////////////////////////////////////////////////////
     /**
      * Internal Class that encapsulates CMA activity report dynamic data
      */
-    private class ActivityInfo
+    private class CMAActivityInfo
     {
-        public String mEventName;
-        public String mEventType;
-        public String mEventDate;
-        public String mCMAAttend;
-        public String mSalvations;
-        public String mRededications;
-        public String mOtherMinistry;
+        // class to hold, save, and recall activity data
+        DataCMAActivity mDataCMAActivity;
 
         // application widgets
         private EditText mEditViewEventName;
@@ -437,8 +430,12 @@ public class ActivityMain extends AppCompatActivity
         /**
          * Default Constructor.  Get current data from activity widgets
          */
-        public ActivityInfo()
+        public CMAActivityInfo()
         {
+            // create class instance to hold the data
+            Context context  = getApplicationContext();
+            mDataCMAActivity = new DataCMAActivity(context);
+
             // get the widgets
             mEditViewEventName      = (EditText)findViewById((R.id.editTextEventName));
             mTextViewEventType      = (TextView)findViewById((R.id.textViewEventType));
@@ -449,16 +446,48 @@ public class ActivityMain extends AppCompatActivity
             mEditTextOtherMinistery = (EditText)findViewById((R.id.editTextOther));
 
             // get current widget data
-            mEventName     = mEditViewEventName.getText().toString();
-            mEventType     = mTextViewEventType.getText().toString();
-            mEventDate     = mTextViewEventDate.getText().toString();
-            mCMAAttend     = mEditTextAttend.getText().toString();
-            mSalvations    = mEditTextSalvations.getText().toString();
-            mRededications = mEditTextRededications.getText().toString();
-            mOtherMinistry = mEditTextOtherMinistery.getText().toString();
+            getCMAActivityData();
         }
 
 
+        /***********************************************************************
+        /**
+         *  Get CMA activity information from the widgets and saves their
+         *  values to program storage
+         */
+        public void getCMAActivityData()
+        {
+            mDataCMAActivity.mEventName     = mEditViewEventName.getText().toString();
+            mDataCMAActivity.mEventType     = mTextViewEventType.getText().toString();
+            mDataCMAActivity.mEventDate     = mTextViewEventDate.getText().toString();
+            mDataCMAActivity.mCMAAttendence = mEditTextAttend.getText().toString();
+            mDataCMAActivity.mSalvations    = mEditTextSalvations.getText().toString();
+            mDataCMAActivity.mRededications = mEditTextRededications.getText().toString();
+            mDataCMAActivity.mOtherMinistry = mEditTextOtherMinistery.getText().toString();
+
+            Log.i(TAG, "getCMAActivityData(): " + mDataCMAActivity.toString());
+        }
+
+
+        /***********************************************************************
+        /**
+         * Sets CMA Activity Data from local storage
+         */
+        public void setCMAActivityData()
+        {
+            mEditViewEventName.setText(mDataCMAActivity.mEventName);
+            mTextViewEventType.setText(mDataCMAActivity.mEventType);
+            mTextViewEventDate.setText(mDataCMAActivity.mEventDate);
+            mEditTextAttend.setText(mDataCMAActivity.mCMAAttendence);
+            mEditTextSalvations.setText(mDataCMAActivity.mSalvations);
+            mEditTextRededications.setText(mDataCMAActivity.mRededications);
+            mEditTextOtherMinistery.setText(mDataCMAActivity.mOtherMinistry);
+
+            Log.i(TAG, "setCMAActivityData(): " + mDataCMAActivity.toString());
+        }
+
+
+        /***********************************************************************
         /**
          * Builds activity report text to be emailed
          * @return  activity report text to be emailed
@@ -466,13 +495,13 @@ public class ActivityMain extends AppCompatActivity
         public String buildActivityReport()
         {
             String activity_report =
-                            "\nEvent = "          + mEventName     +
-                            "\nEvent Type = "     + mEventType     +
-                            "\nEvent Date = "     + mEventDate     +
-                            "\nCMA Attendence = " + mCMAAttend     +
-                            "\nSalvations = "     + mSalvations    +
-                            "\nRededications = "  + mRededications +
-                            "\nOther = "          + mOtherMinistry +
+                            "\nEvent = "          + mDataCMAActivity.mEventName     +
+                            "\nEvent Type = "     + mDataCMAActivity.mEventType     +
+                            "\nEvent Date = "     + mDataCMAActivity.mEventDate     +
+                            "\nCMA Attendence = " + mDataCMAActivity.mCMAAttendence +
+                            "\nSalvations = "     + mDataCMAActivity.mSalvations    +
+                            "\nRededications = "  + mDataCMAActivity.mRededications +
+                            "\nOther = "          + mDataCMAActivity.mOtherMinistry +
                             "\n\nComment: ";
 
             return activity_report;

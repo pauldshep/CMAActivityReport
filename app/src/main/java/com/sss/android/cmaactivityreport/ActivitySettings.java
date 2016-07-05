@@ -29,7 +29,7 @@ public class ActivitySettings extends AppCompatActivity
         setTitle("Activity Report Settings");
 
         // get setting from property file
-        DataSettings data_settings = new DataSettings(this);
+        DataActivitySettings data_settings = new DataActivitySettings(this);
         data_settings.getProperties();
         Log.i(TAG, "settings: " + data_settings.toString());
 
@@ -62,12 +62,12 @@ public class ActivitySettings extends AppCompatActivity
 
         // get current settings properties
         Context      context       = view.getContext();
-        DataSettings data_settings = new DataSettings(context);
+        DataActivitySettings data_settings = new DataActivitySettings(context);
 
-        data_settings.setProperty(DataSettings.KEY_EMAIL_TO,      mEditTextEmailTo.getText().toString());
-        data_settings.setProperty(DataSettings.KEY_EMAIL_ADDR,    mEditTextEmailAddr.getText().toString());
-        data_settings.setProperty(DataSettings.KEY_EMAIL_FROM,    mEditTextEmailFrom.getText().toString());
-        data_settings.setProperty(DataSettings.KEY_EMAIL_SUBJECT, mEditTextEmailSubject.getText().toString());
+        data_settings.setProperty(DataActivitySettings.KEY_EMAIL_TO,      mEditTextEmailTo.getText().toString());
+        data_settings.setProperty(DataActivitySettings.KEY_EMAIL_ADDR,    mEditTextEmailAddr.getText().toString());
+        data_settings.setProperty(DataActivitySettings.KEY_EMAIL_FROM,    mEditTextEmailFrom.getText().toString());
+        data_settings.setProperty(DataActivitySettings.KEY_EMAIL_SUBJECT, mEditTextEmailSubject.getText().toString());
 
         // go back to the main activity
         finish();
