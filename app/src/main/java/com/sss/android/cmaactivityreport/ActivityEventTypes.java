@@ -9,11 +9,16 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-
-public class EventActivity extends AppCompatActivity
+/**
+ * Event Types Activity Class
+ */
+public class ActivityEventTypes extends AppCompatActivity
 {
     // identifies the current event type in the array
     public final static String EVENT_TYPE         = "event_id";
+
+    // request code associated with event types
+    public final static int    REQUEST_CODE = 1;
 
     // default event type
     public final static int    DEFAULT_EVENT_TYPE = 1;
@@ -26,6 +31,12 @@ public class EventActivity extends AppCompatActivity
                     "Outreach",
                     "CMA Fellowship"
             };
+
+    // event type indexes
+    public final static Integer EVENT_TYPE_OTHER      = 0;
+    public final static Integer EVENT_TYPE_SECULAR    = 1;
+    public final static Integer EVENT_TYPE_OUTREACH   = 2;
+    public final static Integer EVENT_TYPE_FELLOWSHIP = 3;
 
     private ListView listViewEventTypes;
 
@@ -42,7 +53,7 @@ public class EventActivity extends AppCompatActivity
 
         // get intent that started this activity
         Intent this_intent = getIntent();
-        int event_type     = this_intent.getIntExtra(EventActivity.EVENT_TYPE, DEFAULT_EVENT_TYPE);
+        int event_type     = this_intent.getIntExtra(ActivityEventTypes.EVENT_TYPE, DEFAULT_EVENT_TYPE);
 
         listViewEventTypes = (ListView)findViewById(R.id.listViewEventType);
 
@@ -63,14 +74,19 @@ public class EventActivity extends AppCompatActivity
             public void onItemClick(AdapterView<?> parent, View view, int position, long id)
             {
                 String itemValue    = (String)listViewEventTypes.getItemAtPosition(position);
-                Log.i("EventActivity", "onClick::itemValue = " + itemValue);
+                Log.i("ActivityEventTypes", "onClick::itemValue = " + itemValue);
 
-                // go back to the main activity
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                intent.putExtra("event_id", position);
-                startActivity(intent);
+                // go back to the main activity passing the new event id
+                //Intent intent = new Intent(getApplicationContext(), ActivityMain.class);
+                //intent.putExtra(EVENT_TYPE, position);
+                //startActivity(intent);
+
+                Intent intent = new Intent();
+                intent.putExtra(EVENT_TYPE, position);
+                setResult(RESULT_OK, intent);
+                finish();
             }
         });
     }   // end OnCreate
 
-}   // end public class EventActivity extends AppCompatActivity
+}   // end public class ActivityEventTypes extends AppCompatActivity

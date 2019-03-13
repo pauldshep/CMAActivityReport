@@ -17,7 +17,7 @@
         android:paddingTop="@dimen/activity_vertical_margin"
         android:descendantFocusability="beforeDescendants"
         android:focusableInTouchMode="true"
-        tools:context="com.sss.android.cmaactivityreport.MainActivity"
+        tools:context=".ActivityMain"
         >
 
         <TextView
@@ -40,13 +40,13 @@
             android:layout_below="@+id/eventInfo"
             android:gravity="center_vertical"
             android:width="70dp"
-            android:layout_alignBottom="@+id/editTextName"/>
+            android:layout_alignBottom="@+id/editTextEventName"/>
 
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/editTextName"
-            android:text="@string/edittext_name"
+            android:id="@+id/editTextEventName"
+            android:text="@string/edittext_event_name"
             android:layout_below="@+id/eventInfo"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
@@ -67,16 +67,16 @@
             android:layout_alignRight="@+id/eventName"
             android:layout_alignEnd="@+id/eventName"
             android:layout_below="@+id/eventName"
-            android:layout_above="@+id/textViewDate"/>
+            android:layout_above="@+id/textViewEventDate"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/textViewType"
+            android:id="@+id/textViewEventType"
             android:text="@string/edittext_type"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:layout_alignLeft="@+id/editTextName"
-            android:layout_alignStart="@+id/editTextName"
+            android:layout_alignLeft="@+id/editTextEventName"
+            android:layout_alignStart="@+id/editTextEventName"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:layout_below="@+id/eventName"/>
@@ -94,7 +94,7 @@
             android:gravity="center_vertical"
             android:layout_alignRight="@+id/textViewTypeTitle"
             android:layout_alignEnd="@+id/textViewTypeTitle"
-            android:layout_alignBottom="@+id/textViewDate"
+            android:layout_alignBottom="@+id/textViewEventDate"
             android:layout_below="@+id/textViewTypeTitle"/>
 
         <TextView
@@ -104,12 +104,12 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="@string/edittext_date"
             android:ems="10"
-            android:id="@+id/textViewDate"
-            android:layout_alignLeft="@+id/textViewType"
-            android:layout_alignStart="@+id/textViewType"
-            android:layout_alignRight="@+id/textViewType"
-            android:layout_alignEnd="@+id/textViewType"
-            android:layout_below="@+id/textViewType"/>
+            android:id="@+id/textViewEventDate"
+            android:layout_alignLeft="@+id/textViewEventType"
+            android:layout_alignStart="@+id/textViewEventType"
+            android:layout_alignRight="@+id/textViewEventType"
+            android:layout_alignEnd="@+id/textViewEventType"
+            android:layout_below="@+id/textViewEventType"/>
 
 
         <!-- Totals Section -->
@@ -134,10 +134,10 @@
             android:id="@+id/eventAttend"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:gravity="center_vertical"
-            android:layout_alignTop="@+id/editTextAttend"
+            android:layout_alignTop="@+id/editTextEventAttend"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_alignBottom="@+id/editTextAttend"/>
+            android:layout_alignBottom="@+id/editTextEventAttend"/>
 
 
         <EditText
@@ -146,10 +146,10 @@
             android:inputType="date"
             android:text="@string/edittext_attend"
             android:ems="10"
-            android:id="@+id/editTextAttend"
+            android:id="@+id/editTextEventAttend"
             android:paddingTop="10dp"
-            android:layout_alignRight="@+id/textViewDate"
-            android:layout_alignEnd="@+id/textViewDate"
+            android:layout_alignRight="@+id/textViewEventDate"
+            android:layout_alignEnd="@+id/textViewEventDate"
             android:layout_below="@+id/textView_totals"/>
 
 
@@ -163,7 +163,7 @@
             android:id="@+id/textView_salvations"
             android:layout_alignRight="@+id/eventAttend"
             android:layout_alignEnd="@+id/eventAttend"
-            android:layout_below="@+id/editTextAttend"
+            android:layout_below="@+id/editTextEventAttend"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_alignBottom="@+id/editTextSalvations"/>
@@ -176,9 +176,9 @@
             android:ems="10"
             android:id="@+id/editTextSalvations"
             android:text="@string/edittext_salvations"
-            android:layout_alignLeft="@+id/editTextAttend"
-            android:layout_alignStart="@+id/editTextAttend"
-            android:layout_below="@+id/editTextAttend"/>
+            android:layout_alignLeft="@+id/editTextEventAttend"
+            android:layout_alignStart="@+id/editTextEventAttend"
+            android:layout_below="@+id/editTextEventAttend"/>
 
 
         <!-- Number of rededications -->

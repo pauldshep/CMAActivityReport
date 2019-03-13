@@ -8,7 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.sss.android.cmaactivityreport.SettingsActivity"
+    tools:context=".ActivitySettings"
     android:orientation="vertical">
 
 
@@ -16,7 +16,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="EMail"
+        android:text="@string/settings_email_title"
         android:id="@+id/textView_email"
         android:textStyle="bold"/>
 
@@ -25,7 +25,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="To:"
+        android:text="@string/settings_email_to"
         android:id="@+id/textView_email_to"
         android:layout_below="@+id/textView_email"
         android:layout_toLeftOf="@+id/editText_email_to"
@@ -43,20 +43,22 @@
         android:text="Paul Shepherd"
         android:layout_weight="1"
         android:layout_alignTop="@+id/textView_email_to"
-        android:layout_toRightOf="@+id/textView_email"
-        android:layout_toEndOf="@+id/textView_email"/>
+        android:layout_alignRight="@+id/settings_button_abort"
+        android:layout_alignEnd="@+id/settings_button_abort"
+        android:layout_toRightOf="@+id/settings_button_use"
+        android:layout_toEndOf="@+id/settings_button_use"/>
 
-    <!-- email to address -->>
+    <!-- email to address -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Addr:"
+        android:text="@string/settings_email_addr"
         android:id="@+id/textView_email_addr"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignBottom="@+id/editText_addr"
-        android:layout_alignTop="@+id/editText_addr"
+        android:layout_alignBottom="@+id/editText_email_addr"
+        android:layout_alignTop="@+id/editText_email_addr"
         android:gravity="center_vertical"/>
 
     <EditText
@@ -64,31 +66,89 @@
         android:layout_height="wrap_content"
         android:inputType="textEmailAddress"
         android:ems="10"
-        android:id="@+id/editText_addr"
+        android:id="@+id/editText_email_addr"
         android:layout_weight="1"
         android:text="pauldshep@gmail.com"
         android:layout_below="@+id/editText_email_to"
         android:layout_alignLeft="@+id/editText_email_to"
-        android:layout_alignStart="@+id/editText_email_to"/>
+        android:layout_alignStart="@+id/editText_email_to"
+        android:layout_alignRight="@+id/editText_email_to"
+        android:layout_alignEnd="@+id/editText_email_to"/>
+
+    <!-- sender information (From) -->
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/settings_email_from"
+        android:id="@+id/textView_email_from"
+        android:layout_below="@+id/textView_email_addr"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignBottom="@+id/editText_email_from"
+        android:gravity="center_vertical"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:text="@string/settings_email_from_def"
+        android:ems="10"
+        android:id="@+id/editText_email_from"
+        android:layout_below="@+id/editText_email_addr"
+        android:layout_alignLeft="@+id/editText_email_addr"
+        android:layout_alignStart="@+id/editText_email_addr"
+        android:layout_alignRight="@+id/editText_email_addr"
+        android:layout_alignEnd="@+id/editText_email_addr"/>
+
+    <!-- email subject: CMA Activity Report -->
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/settings_email_subject"
+        android:id="@+id/textView_subject"
+        android:layout_below="@+id/editText_email_from"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:paddingTop="10dp"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText_email_subject"
+        android:text="@string/settings_email_subject_value"
+        android:layout_alignTop="@+id/textView_subject"
+        android:layout_alignLeft="@+id/editText_email_from"
+        android:layout_alignStart="@+id/editText_email_from"
+        android:layout_alignRight="@+id/editText_email_from"
+        android:layout_alignEnd="@+id/editText_email_from"/>
+
+    <!-- USE and ABORT buttons -->
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="USE"
         android:id="@+id/settings_button_use"
-        android:layout_below="@+id/textView_email_addr"
+        android:onClick="onClickSettingsButtonUse"
+        android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:onClick="onClickSettingsButtonUse"/>
+        android:layout_alignParentStart="true"/>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="ABORT"
         android:id="@+id/settings_button_abort"
-        android:layout_below="@+id/editText_addr"
-        android:layout_alignRight="@+id/editText_addr"
-        android:layout_alignEnd="@+id/editText_addr"
-        android:onClick="onClickSettingsButtonAbort"/>
+        android:onClick="onClickSettingsButtonAbort"
+        android:layout_alignTop="@+id/settings_button_use"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"/>
+
+
+
 
 </RelativeLayout>
