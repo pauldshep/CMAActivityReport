@@ -30,6 +30,7 @@ public class ActivityMain extends AppCompatActivity
     private TextView mTextViewEventType;
     private TextView mTextViewEventDate;
 
+
     //**************************************************************************
     /**
      * Called when this application view is created.
