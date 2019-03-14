@@ -10,6 +10,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/listViewEventType"
-        android:choiceMode="singleChoice"/>
+        android:choiceMode="singleChoice">
+    </ListView>
+
+    <Button
+            android:text="Help"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:layout_marginTop="40dp"
+            android:id="@+id/button_help"/>
 
 </LinearLayout>

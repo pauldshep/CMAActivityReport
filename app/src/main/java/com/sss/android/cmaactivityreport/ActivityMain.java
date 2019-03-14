@@ -1,8 +1,11 @@
 package com.sss.android.cmaactivityreport;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.media.Image;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,11 +13,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.DatePicker;
-import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.*;
 
 
 /**
@@ -191,9 +190,43 @@ public class ActivityMain extends AppCompatActivity
             }
         });
 
+
+        //----------------------------------------------------------------------
+        // Help Buttons
+        //----------------------------------------------------------------------
+        ImageButton ib_other_help = findViewById(R.id.imageButtonOtherHelp);
+        ib_other_help.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                helpDialog("Other Ministry",
+                    "Those you personally prayed with or helped in a matter other than salvation or rededication");
+            }
+        });
+
+        ImageButton ib_salvation    = findViewById(R.id.imageButtonSlavationHelp);
+        ib_salvation.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                helpDialog("Salvation",
+                        "Those you personally prayed with to accept Christ as Lord and Savior");
+            }
+        });
+
+        ImageButton ib_rededication = findViewById(R.id.imageButtonRededicationHelp);
+        ib_rededication.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                helpDialog("Rededication",
+                        "Those you personally prayed with for rededication or recommitment to Christ");
+            }
+        });
     }   // end protected void onCreate(Bundle savedInstanceState)
-
-
 
 
     //**************************************************************************
@@ -405,6 +438,27 @@ public class ActivityMain extends AppCompatActivity
                     Toast.LENGTH_SHORT).show();
         }
     }   // end public void emailActivityReport()
+
+
+    /**
+     * Build and display help dialog
+     */
+    private void helpDialog(String helpTitle, String helpMsg)
+    {
+        AlertDialog alertDialog =
+                new AlertDialog.Builder(ActivityMain.this).create();
+        alertDialog.setTitle(helpTitle);
+        alertDialog.setMessage(helpMsg);
+        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                new DialogInterface.OnClickListener()
+                {
+                    public void onClick(DialogInterface dialog, int which)
+                    {
+                        dialog.dismiss();
+                    }
+                });
+        alertDialog.show();
+    }   // end private void helpDialog(String helpTitle, String helpMsg)
 
 
     ////////////////////////////////////////////////////////////////////////////

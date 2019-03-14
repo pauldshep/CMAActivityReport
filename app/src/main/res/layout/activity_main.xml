@@ -16,48 +16,62 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent">
 
-
-    <android.support.constraint.ConstraintLayout
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            xmlns:tools="http://schemas.android.com/tools"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingLeft="8dp"
-            android:paddingRight="8dp"
-            android:scrollbars="vertical">
+        <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:scrollbars="vertical">
 
             <!-- Title: Event Information -->
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/event_info"
-                android:id="@+id/eventInfo"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textStyle="bold"
-                android:layout_marginTop="16dp"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginStart="24dp"
-                app:layout_constraintStart_toStartOf="parent"
+            <ImageButton
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    app:srcCompat="@android:drawable/ic_menu_help"
+                    android:id="@+id/imageButtonOtherHelp"
+                    app:layout_constraintStart_toEndOf="@+id/textView_other"
+                    android:layout_marginStart="8dp"
+                    app:layout_constraintTop_toTopOf="@+id/textView_other"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView_other"/>
+            <ImageButton
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    app:srcCompat="@android:drawable/ic_menu_help"
+                    android:id="@+id/imageButtonSlavationHelp"
+                    app:layout_constraintStart_toEndOf="@+id/textView_salvations"
+                    android:layout_marginStart="8dp"
+                    app:layout_constraintTop_toTopOf="@+id/textView_salvations"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView_salvations"/>
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/event_info"
+                    android:id="@+id/eventInfo"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textStyle="bold"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginStart="24dp"
+                    app:layout_constraintStart_toStartOf="parent"
                 />
 
             <!-- Event Name -->
-        <TextView
-                android:layout_width="55dp"
-                android:layout_height="wrap_content"
-                android:text="@string/event_name"
-                android:id="@+id/eventName"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/eventInfo"
-                android:gravity="center_vertical"
-                android:width="70dp"
-                android:layout_alignBottom="@+id/editTextEventName"
-                android:layout_marginStart="24dp"
-                app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginTop="16dp"
-                app:layout_constraintTop_toBottomOf="@+id/eventInfo"/>
+            <TextView
+                    android:layout_width="55dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/event_name"
+                    android:id="@+id/eventName"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@+id/eventInfo"
+                    android:gravity="center_vertical"
+                    android:width="70dp"
+                    android:layout_alignBottom="@+id/editTextEventName"
+                    android:layout_marginStart="24dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintTop_toBottomOf="@+id/eventInfo"/>
 
         <EditText
                 android:layout_width="235dp"
@@ -65,10 +79,8 @@
                 android:id="@+id/editTextEventName"
                 android:text="@string/edittext_event_name"
                 android:layout_below="@+id/eventInfo"
-                android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
                 android:layout_toEndOf="@+id/eventName"
-                android:layout_toRightOf="@+id/eventName"
                 app:layout_constraintStart_toEndOf="@+id/eventName"
                 android:layout_marginStart="32dp"
                 app:layout_constraintBottom_toBottomOf="@+id/eventName"
@@ -81,10 +93,8 @@
                 android:text="@string/event_type"
                 android:id="@+id/textViewTypeTitle"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:gravity="center_vertical"
-                android:layout_alignRight="@+id/eventName"
                 android:layout_alignEnd="@+id/eventName"
                 android:layout_below="@+id/eventName"
                 android:layout_above="@+id/textViewEventDate"
@@ -99,9 +109,7 @@
                 android:id="@+id/textViewEventType"
                 android:text="@string/edittext_type"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:layout_alignLeft="@+id/editTextEventName"
                 android:layout_alignStart="@+id/editTextEventName"
-                android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
                 android:layout_below="@+id/eventName"
                 app:layout_constraintStart_toEndOf="@+id/textViewTypeTitle"
@@ -115,10 +123,8 @@
                 android:text="@string/event_date"
                 android:id="@+id/textViewDateTitle"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:gravity="center_vertical"
-                android:layout_alignRight="@+id/textViewTypeTitle"
                 android:layout_alignEnd="@+id/textViewTypeTitle"
                 android:layout_alignBottom="@+id/textViewEventDate"
                 android:layout_below="@+id/textViewTypeTitle"
@@ -135,9 +141,7 @@
                 android:text="@string/edittext_date"
                 android:ems="10"
                 android:id="@+id/textViewEventDate"
-                android:layout_alignLeft="@+id/textViewEventType"
                 android:layout_alignStart="@+id/textViewEventType"
-                android:layout_alignRight="@+id/textViewEventType"
                 android:layout_alignEnd="@+id/textViewEventType"
                 android:layout_below="@+id/textViewEventType"
                 app:layout_constraintStart_toEndOf="@+id/textViewDateTitle"
@@ -152,7 +156,6 @@
                 android:id="@+id/textView_totals"
                 android:text="@string/event_totals"
                 android:layout_below="@+id/textViewDateTitle"
-                android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:textStyle="bold"
                 android:paddingTop="10dp"
@@ -171,7 +174,6 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:gravity="center_vertical"
                 android:layout_alignTop="@+id/editTextEventAttend"
-                android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_alignBottom="@+id/editTextEventAttend"
                 android:layout_marginTop="16dp"
@@ -179,21 +181,20 @@
                 android:layout_marginStart="24dp"
                 app:layout_constraintStart_toStartOf="parent"/>
 
-        <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:inputType="date"
-                android:text="@string/edittext_attend"
-                android:ems="10"
-                android:id="@+id/editTextEventAttend"
-                android:paddingTop="10dp"
-                android:layout_alignRight="@+id/textViewEventDate"
-                android:layout_alignEnd="@+id/textViewEventDate"
-                android:layout_below="@+id/textView_totals"
-                app:layout_constraintStart_toEndOf="@+id/eventAttend"
-                android:layout_marginStart="24dp"
-                app:layout_constraintBottom_toBottomOf="@+id/eventAttend"
-                app:layout_constraintTop_toTopOf="@+id/eventAttend"/>
+            <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:inputType="date"
+                    android:text="@string/edittext_attend"
+                    android:ems="10"
+                    android:id="@+id/editTextEventAttend"
+                    android:paddingTop="10dp"
+                    android:layout_alignEnd="@+id/textViewEventDate"
+                    android:layout_below="@+id/textView_totals"
+                    app:layout_constraintBottom_toBottomOf="@+id/eventAttend"
+                    app:layout_constraintTop_toTopOf="@+id/eventAttend"
+                    app:layout_constraintStart_toStartOf="@+id/editTextSalvations"
+                    app:layout_constraintVertical_bias="0.761"/>
 
         <!-- Number of Salvations -->
         <TextView
@@ -203,10 +204,8 @@
                 android:gravity="center_vertical"
                 android:text="@string/event_salvations"
                 android:id="@+id/textView_salvations"
-                android:layout_alignRight="@+id/eventAttend"
                 android:layout_alignEnd="@+id/eventAttend"
                 android:layout_below="@+id/editTextEventAttend"
-                android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_alignBottom="@+id/editTextSalvations"
                 android:layout_marginTop="24dp"
@@ -215,20 +214,20 @@
                 app:layout_constraintStart_toStartOf="parent"/>
 
 
-        <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:inputType="number"
-                android:ems="10"
-                android:id="@+id/editTextSalvations"
-                android:text="@string/edittext_salvations"
-                android:layout_alignLeft="@+id/editTextEventAttend"
-                android:layout_alignStart="@+id/editTextEventAttend"
-                android:layout_below="@+id/editTextEventAttend"
-                app:layout_constraintStart_toEndOf="@+id/textView_salvations"
-                android:layout_marginStart="24dp"
-                app:layout_constraintBottom_toBottomOf="@+id/textView_salvations"
-                app:layout_constraintTop_toTopOf="@+id/textView_salvations"/>
+            <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:ems="10"
+                    android:id="@+id/editTextSalvations"
+                    android:text="@string/edittext_salvations"
+                    android:layout_alignStart="@+id/editTextEventAttend"
+                    android:layout_below="@+id/editTextEventAttend"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView_salvations"
+                    app:layout_constraintTop_toTopOf="@+id/textView_salvations"
+                    app:layout_constraintVertical_bias="0.333"
+                    app:layout_constraintStart_toEndOf="@+id/imageButtonSlavationHelp"
+                    android:layout_marginStart="8dp"/>
 
         <!-- Number of rededications -->
         <TextView
@@ -238,7 +237,6 @@
                 android:gravity="center_vertical"
                 android:text="@string/event_rededications"
                 android:id="@+id/textView_rededications"
-                android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_alignTop="@+id/editTextRededications"
                 android:layout_alignBottom="@+id/editTextRededications"
@@ -247,20 +245,20 @@
                 android:layout_marginTop="24dp"
                 app:layout_constraintTop_toBottomOf="@+id/textView_salvations"/>
 
-        <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:inputType="number"
-                android:ems="10"
-                android:id="@+id/editTextRededications"
-                android:text="@string/edittext_rededications"
-                android:layout_alignLeft="@+id/editTextSalvations"
-                android:layout_alignStart="@+id/editTextSalvations"
-                android:layout_below="@+id/editTextSalvations"
-                app:layout_constraintTop_toTopOf="@+id/textView_rededications"
-                app:layout_constraintStart_toEndOf="@+id/textView_rededications"
-                android:layout_marginStart="24dp"
-                app:layout_constraintBottom_toBottomOf="@+id/textView_rededications"/>
+            <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:ems="10"
+                    android:id="@+id/editTextRededications"
+                    android:text="@string/edittext_rededications"
+                    android:layout_alignLeft="@+id/editTextSalvations"
+                    android:layout_alignStart="@+id/editTextSalvations"
+                    android:layout_below="@+id/editTextSalvations"
+                    app:layout_constraintTop_toTopOf="@+id/textView_rededications"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView_rededications"
+                    app:layout_constraintStart_toEndOf="@+id/imageButtonRededicationHelp"
+                    android:layout_marginStart="8dp"/>
 
 
         <!-- Other Ministry -->
@@ -271,31 +269,28 @@
                 android:gravity="center_vertical"
                 android:text="@string/event_other"
                 android:id="@+id/textView_other"
-                android:layout_alignRight="@+id/textView_rededications"
                 android:layout_alignEnd="@+id/textView_rededications"
                 android:layout_alignTop="@+id/editTextOther"
                 android:layout_alignBottom="@+id/editTextOther"
-                android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_marginStart="24dp"
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginTop="24dp"
                 app:layout_constraintTop_toBottomOf="@+id/textView_rededications"/>
 
-        <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:inputType="number"
-                android:ems="10"
-                android:id="@+id/editTextOther"
-                android:text="@string/edittext_other"
-                android:layout_alignLeft="@+id/editTextRededications"
-                android:layout_alignStart="@+id/editTextRededications"
-                android:layout_below="@+id/editTextRededications"
-                app:layout_constraintTop_toTopOf="@+id/textView_other"
-                app:layout_constraintStart_toEndOf="@+id/textView_other"
-                android:layout_marginStart="24dp"
-                app:layout_constraintBottom_toBottomOf="@+id/textView_other"/>
+            <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:ems="10"
+                    android:id="@+id/editTextOther"
+                    android:text="@string/edittext_other"
+                    android:layout_alignStart="@+id/editTextRededications"
+                    android:layout_below="@+id/editTextRededications"
+                    app:layout_constraintTop_toTopOf="@+id/textView_other"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView_other"
+                    app:layout_constraintStart_toEndOf="@+id/imageButtonOtherHelp"
+                    android:layout_marginStart="8dp"/>
 
         !-- Control Buttons -->
         <Button
@@ -304,9 +299,7 @@
                 android:text="@string/button_send"
                 android:id="@+id/button_send"
                 android:layout_below="@+id/textView_other"
-                android:layout_alignLeft="@+id/textView_other"
                 android:layout_alignStart="@+id/textView_other"
-                android:layout_alignRight="@+id/editTextOther"
                 android:layout_alignEnd="@+id/editTextOther"
                 android:layout_marginEnd="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -314,6 +307,15 @@
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginTop="48dp"
                 app:layout_constraintTop_toBottomOf="@+id/textView_other"/>
+            <ImageButton
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    app:srcCompat="@android:drawable/ic_menu_help"
+                    android:id="@+id/imageButtonRededicationHelp"
+                    app:layout_constraintStart_toEndOf="@+id/textView_rededications"
+                    android:layout_marginStart="8dp"
+                    app:layout_constraintTop_toTopOf="@+id/textView_rededications"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView_rededications"/>
 
         </android.support.constraint.ConstraintLayout>
 

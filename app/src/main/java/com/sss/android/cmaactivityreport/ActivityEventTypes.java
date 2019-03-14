@@ -1,12 +1,15 @@
 package com.sss.android.cmaactivityreport;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
 /**
@@ -87,6 +90,32 @@ public class ActivityEventTypes extends AppCompatActivity
                 finish();
             }
         });
+
+        Button btn_help = findViewById(R.id.button_help);
+        btn_help.setOnClickListener(new View.OnClickListener()
+        {
+            public void onClick(View v)
+            {
+                AlertDialog alertDialog =
+                    new AlertDialog.Builder(ActivityEventTypes.this).create();
+                alertDialog.setTitle("CMA Events");
+                alertDialog.setMessage(
+                    "Secular - Put on by non-Christian motorcycling groups: rallies, races, poker runs, chapter meetings, bike shows, swap meets, etc\n\n" +
+                        "Outreach - Ministry with non-motorcycling groups: church visit, jail, childrens home homeless shelter parade, crusades, etc\n\n" +
+                        "Fellowship - CMA events such as: CMA rallies, SOR, RFS, chapter meetings, chapter Bible studies, chapter rides, cookouts, etc");
+
+                alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                        new DialogInterface.OnClickListener()
+                        {
+                            public void onClick(DialogInterface dialog, int which)
+                            {
+                                dialog.dismiss();
+                            }
+                        });
+                alertDialog.show();
+            }
+        });
+
     }   // end OnCreate
 
 }   // end public class ActivityEventTypes extends AppCompatActivity
