@@ -1,260 +1,321 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:id="@+id/scrollView">
-
-    <RelativeLayout
+<android.support.constraint.ConstraintLayout
+        android:orientation="vertical"
         xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingBottom="@dimen/activity_vertical_margin"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/activity_vertical_margin"
-        android:descendantFocusability="beforeDescendants"
-        android:focusableInTouchMode="true"
-        tools:context=".ActivityMain"
-        >
+        android:id="@+id/activity_main"
+        tools:context=".ActivityMain">
 
-        <TextView
-            android:layout_width="wrap_content"
+    <ScrollView
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/event_info"
-            android:id="@+id/eventInfo"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textStyle="bold"/>
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent">
 
-        <!-- Event Name -->
-        <TextView
-            android:layout_width="wrap_content"
+
+    <android.support.constraint.ConstraintLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/event_name"
-            android:id="@+id/eventName"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/eventInfo"
-            android:gravity="center_vertical"
-            android:width="70dp"
-            android:layout_alignBottom="@+id/editTextEventName"/>
+            android:orientation="vertical"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:scrollbars="vertical">
+
+            <!-- Title: Event Information -->
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/event_info"
+                android:id="@+id/eventInfo"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textStyle="bold"
+                android:layout_marginTop="16dp"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginStart="24dp"
+                app:layout_constraintStart_toStartOf="parent"
+                />
+
+            <!-- Event Name -->
+        <TextView
+                android:layout_width="55dp"
+                android:layout_height="wrap_content"
+                android:text="@string/event_name"
+                android:id="@+id/eventName"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/eventInfo"
+                android:gravity="center_vertical"
+                android:width="70dp"
+                android:layout_alignBottom="@+id/editTextEventName"
+                android:layout_marginStart="24dp"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="16dp"
+                app:layout_constraintTop_toBottomOf="@+id/eventInfo"/>
 
         <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/editTextEventName"
-            android:text="@string/edittext_event_name"
-            android:layout_below="@+id/eventInfo"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_toEndOf="@+id/eventName"
-            android:layout_toRightOf="@+id/eventName"/>
-
+                android:layout_width="235dp"
+                android:layout_height="43dp"
+                android:id="@+id/editTextEventName"
+                android:text="@string/edittext_event_name"
+                android:layout_below="@+id/eventInfo"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_toEndOf="@+id/eventName"
+                android:layout_toRightOf="@+id/eventName"
+                app:layout_constraintStart_toEndOf="@+id/eventName"
+                android:layout_marginStart="32dp"
+                app:layout_constraintBottom_toBottomOf="@+id/eventName"
+                app:layout_constraintTop_toTopOf="@+id/eventName"/>
 
         <!-- Event Type -->
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/event_type"
-            android:id="@+id/textViewTypeTitle"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:gravity="center_vertical"
-            android:layout_alignRight="@+id/eventName"
-            android:layout_alignEnd="@+id/eventName"
-            android:layout_below="@+id/eventName"
-            android:layout_above="@+id/textViewEventDate"/>
+                android:layout_width="55dp"
+                android:layout_height="wrap_content"
+                android:text="@string/event_type"
+                android:id="@+id/textViewTypeTitle"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:gravity="center_vertical"
+                android:layout_alignRight="@+id/eventName"
+                android:layout_alignEnd="@+id/eventName"
+                android:layout_below="@+id/eventName"
+                android:layout_above="@+id/textViewEventDate"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@+id/eventName"/>
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/textViewEventType"
-            android:text="@string/edittext_type"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:layout_alignLeft="@+id/editTextEventName"
-            android:layout_alignStart="@+id/editTextEventName"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_below="@+id/eventName"/>
-
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textViewEventType"
+                android:text="@string/edittext_type"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_alignLeft="@+id/editTextEventName"
+                android:layout_alignStart="@+id/editTextEventName"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_below="@+id/eventName"
+                app:layout_constraintStart_toEndOf="@+id/textViewTypeTitle"
+                android:layout_marginStart="32dp"
+                app:layout_constraintTop_toTopOf="@+id/textViewTypeTitle"/>
 
         <!-- Event Date -->
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/event_date"
-            android:id="@+id/textViewDateTitle"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:gravity="center_vertical"
-            android:layout_alignRight="@+id/textViewTypeTitle"
-            android:layout_alignEnd="@+id/textViewTypeTitle"
-            android:layout_alignBottom="@+id/textViewEventDate"
-            android:layout_below="@+id/textViewTypeTitle"/>
+                android:layout_width="55dp"
+                android:layout_height="wrap_content"
+                android:text="@string/event_date"
+                android:id="@+id/textViewDateTitle"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:gravity="center_vertical"
+                android:layout_alignRight="@+id/textViewTypeTitle"
+                android:layout_alignEnd="@+id/textViewTypeTitle"
+                android:layout_alignBottom="@+id/textViewEventDate"
+                android:layout_below="@+id/textViewTypeTitle"
+                android:layout_marginStart="24dp"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@+id/textViewTypeTitle"/>
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="date"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/edittext_date"
-            android:ems="10"
-            android:id="@+id/textViewEventDate"
-            android:layout_alignLeft="@+id/textViewEventType"
-            android:layout_alignStart="@+id/textViewEventType"
-            android:layout_alignRight="@+id/textViewEventType"
-            android:layout_alignEnd="@+id/textViewEventType"
-            android:layout_below="@+id/textViewEventType"/>
-
+                android:layout_width="wrap_content"
+                android:layout_height="19dp"
+                android:inputType="date"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/edittext_date"
+                android:ems="10"
+                android:id="@+id/textViewEventDate"
+                android:layout_alignLeft="@+id/textViewEventType"
+                android:layout_alignStart="@+id/textViewEventType"
+                android:layout_alignRight="@+id/textViewEventType"
+                android:layout_alignEnd="@+id/textViewEventType"
+                android:layout_below="@+id/textViewEventType"
+                app:layout_constraintStart_toEndOf="@+id/textViewDateTitle"
+                android:layout_marginStart="32dp"
+                app:layout_constraintTop_toTopOf="@+id/textViewDateTitle"/>
 
         <!-- Totals Section -->
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:id="@+id/textView_totals"
-            android:text="@string/event_totals"
-            android:layout_below="@+id/textViewDateTitle"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:textStyle="bold"
-            android:paddingTop="10dp"/>
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:id="@+id/textView_totals"
+                android:text="@string/event_totals"
+                android:layout_below="@+id/textViewDateTitle"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:textStyle="bold"
+                android:paddingTop="10dp"
+                android:layout_marginTop="28dp"
+                app:layout_constraintTop_toBottomOf="@+id/textViewDateTitle"
+                android:layout_marginStart="24dp"
+                app:layout_constraintStart_toStartOf="parent"/>
 
 
         <!-- Number of  CMA members attending the event -->
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/event_attend"
-            android:id="@+id/eventAttend"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:gravity="center_vertical"
-            android:layout_alignTop="@+id/editTextEventAttend"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignBottom="@+id/editTextEventAttend"/>
-
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:text="@string/event_attend"
+                android:id="@+id/eventAttend"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:gravity="center_vertical"
+                android:layout_alignTop="@+id/editTextEventAttend"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignBottom="@+id/editTextEventAttend"
+                android:layout_marginTop="16dp"
+                app:layout_constraintTop_toBottomOf="@+id/textView_totals"
+                android:layout_marginStart="24dp"
+                app:layout_constraintStart_toStartOf="parent"/>
 
         <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="date"
-            android:text="@string/edittext_attend"
-            android:ems="10"
-            android:id="@+id/editTextEventAttend"
-            android:paddingTop="10dp"
-            android:layout_alignRight="@+id/textViewEventDate"
-            android:layout_alignEnd="@+id/textViewEventDate"
-            android:layout_below="@+id/textView_totals"/>
-
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="date"
+                android:text="@string/edittext_attend"
+                android:ems="10"
+                android:id="@+id/editTextEventAttend"
+                android:paddingTop="10dp"
+                android:layout_alignRight="@+id/textViewEventDate"
+                android:layout_alignEnd="@+id/textViewEventDate"
+                android:layout_below="@+id/textView_totals"
+                app:layout_constraintStart_toEndOf="@+id/eventAttend"
+                android:layout_marginStart="24dp"
+                app:layout_constraintBottom_toBottomOf="@+id/eventAttend"
+                app:layout_constraintTop_toTopOf="@+id/eventAttend"/>
 
         <!-- Number of Salvations -->
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:gravity="center_vertical"
-            android:text="@string/event_salvations"
-            android:id="@+id/textView_salvations"
-            android:layout_alignRight="@+id/eventAttend"
-            android:layout_alignEnd="@+id/eventAttend"
-            android:layout_below="@+id/editTextEventAttend"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignBottom="@+id/editTextSalvations"/>
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:gravity="center_vertical"
+                android:text="@string/event_salvations"
+                android:id="@+id/textView_salvations"
+                android:layout_alignRight="@+id/eventAttend"
+                android:layout_alignEnd="@+id/eventAttend"
+                android:layout_below="@+id/editTextEventAttend"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignBottom="@+id/editTextSalvations"
+                android:layout_marginTop="24dp"
+                app:layout_constraintTop_toBottomOf="@+id/eventAttend"
+                android:layout_marginStart="24dp"
+                app:layout_constraintStart_toStartOf="parent"/>
 
 
         <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="number"
-            android:ems="10"
-            android:id="@+id/editTextSalvations"
-            android:text="@string/edittext_salvations"
-            android:layout_alignLeft="@+id/editTextEventAttend"
-            android:layout_alignStart="@+id/editTextEventAttend"
-            android:layout_below="@+id/editTextEventAttend"/>
-
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:ems="10"
+                android:id="@+id/editTextSalvations"
+                android:text="@string/edittext_salvations"
+                android:layout_alignLeft="@+id/editTextEventAttend"
+                android:layout_alignStart="@+id/editTextEventAttend"
+                android:layout_below="@+id/editTextEventAttend"
+                app:layout_constraintStart_toEndOf="@+id/textView_salvations"
+                android:layout_marginStart="24dp"
+                app:layout_constraintBottom_toBottomOf="@+id/textView_salvations"
+                app:layout_constraintTop_toTopOf="@+id/textView_salvations"/>
 
         <!-- Number of rededications -->
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:gravity="center_vertical"
-            android:text="@string/event_rededications"
-            android:id="@+id/textView_rededications"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignTop="@+id/editTextRededications"
-            android:layout_alignBottom="@+id/editTextRededications"/>
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:gravity="center_vertical"
+                android:text="@string/event_rededications"
+                android:id="@+id/textView_rededications"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignTop="@+id/editTextRededications"
+                android:layout_alignBottom="@+id/editTextRededications"
+                android:layout_marginStart="24dp"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="24dp"
+                app:layout_constraintTop_toBottomOf="@+id/textView_salvations"/>
 
         <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="number"
-            android:ems="10"
-            android:id="@+id/editTextRededications"
-            android:text="@string/edittext_rededications"
-            android:layout_alignLeft="@+id/editTextSalvations"
-            android:layout_alignStart="@+id/editTextSalvations"
-            android:layout_below="@+id/editTextSalvations"/>
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:ems="10"
+                android:id="@+id/editTextRededications"
+                android:text="@string/edittext_rededications"
+                android:layout_alignLeft="@+id/editTextSalvations"
+                android:layout_alignStart="@+id/editTextSalvations"
+                android:layout_below="@+id/editTextSalvations"
+                app:layout_constraintTop_toTopOf="@+id/textView_rededications"
+                app:layout_constraintStart_toEndOf="@+id/textView_rededications"
+                android:layout_marginStart="24dp"
+                app:layout_constraintBottom_toBottomOf="@+id/textView_rededications"/>
 
 
         <!-- Other Ministry -->
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:gravity="center_vertical"
-            android:text="@string/event_other"
-            android:id="@+id/textView_other"
-            android:layout_alignRight="@+id/textView_rededications"
-            android:layout_alignEnd="@+id/textView_rededications"
-            android:layout_alignTop="@+id/editTextOther"
-            android:layout_alignBottom="@+id/editTextOther"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"/>
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:gravity="center_vertical"
+                android:text="@string/event_other"
+                android:id="@+id/textView_other"
+                android:layout_alignRight="@+id/textView_rededications"
+                android:layout_alignEnd="@+id/textView_rededications"
+                android:layout_alignTop="@+id/editTextOther"
+                android:layout_alignBottom="@+id/editTextOther"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="24dp"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="24dp"
+                app:layout_constraintTop_toBottomOf="@+id/textView_rededications"/>
 
         <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="number"
-            android:ems="10"
-            android:id="@+id/editTextOther"
-            android:text="@string/edittext_other"
-            android:layout_alignLeft="@+id/editTextRededications"
-            android:layout_alignStart="@+id/editTextRededications"
-            android:layout_below="@+id/editTextRededications"/>
-
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:ems="10"
+                android:id="@+id/editTextOther"
+                android:text="@string/edittext_other"
+                android:layout_alignLeft="@+id/editTextRededications"
+                android:layout_alignStart="@+id/editTextRededications"
+                android:layout_below="@+id/editTextRededications"
+                app:layout_constraintTop_toTopOf="@+id/textView_other"
+                app:layout_constraintStart_toEndOf="@+id/textView_other"
+                android:layout_marginStart="24dp"
+                app:layout_constraintBottom_toBottomOf="@+id/textView_other"/>
 
         !-- Control Buttons -->
         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/button_send"
-            android:id="@+id/button_send"
-            android:layout_below="@+id/textView_other"
-            android:layout_alignLeft="@+id/textView_other"
-            android:layout_alignStart="@+id/textView_other"
-            android:layout_marginTop="25dp"
-            android:layout_alignRight="@+id/editTextOther"
-            android:layout_alignEnd="@+id/editTextOther"/>
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/button_send"
+                android:id="@+id/button_send"
+                android:layout_below="@+id/textView_other"
+                android:layout_alignLeft="@+id/textView_other"
+                android:layout_alignStart="@+id/textView_other"
+                android:layout_alignRight="@+id/editTextOther"
+                android:layout_alignEnd="@+id/editTextOther"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginStart="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="48dp"
+                app:layout_constraintTop_toBottomOf="@+id/textView_other"/>
 
-        EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="date"
-            android:ems="10"
-            android:id="@+id/editText"
-            android:layout_below="@+id/button_send"
-            android:layout_alignRight="@+id/textView_salvations"
-            android:layout_alignEnd="@+id/textView_salvations"/>
+        </android.support.constraint.ConstraintLayout>
 
-    </RelativeLayout>
-</ScrollView>
+    </ScrollView>
+</android.support.constraint.ConstraintLayout>
