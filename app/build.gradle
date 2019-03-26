@@ -3,6 +3,23 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 28
 
+    signingConfigs {
+        debug {
+            storeFile file('C:/Users/paul/Documents/sd/sss/sss.keystore.jks')
+            storePassword 'Duron2019KeyStore'
+            keyAlias 'CmaActRptApp'
+            keyPassword 'Duron2019CmaActRpt'
+            v2SigningEnabled false
+        }
+        release {
+            storeFile file('C:/Users/paul/Documents/sd/sss/sss.keystore.jks')
+            storePassword 'Duron2019KeyStore'
+            keyAlias 'CmaActRptApp'
+            keyPassword 'Duron2019CmaActRpt'
+            v2SigningEnabled false
+        }
+    }
+
     defaultConfig {
         applicationId "com.sss.android.cmaactivityreport"
         minSdkVersion 22
@@ -11,9 +28,37 @@ android {
         versionName "1.0"
     }
     buildTypes {
-        release {
+        debug {
+            debuggable true
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.debug
+        }
+        release {
+            debuggable false
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+
+            android.applicationVariants.all { variant ->
+                variant.outputs.all { output ->
+
+                    // build an output file name with the format:
+                    //      CmaActRpt-3.4.5-20180119-release.apk
+                    def SEP = "-"
+                    def cmaActRpt = "CmaActRpt"
+                    def bldType = variant.variantData.variantConfiguration.buildType.name
+                    def verName = variant.versionName
+                    def date = new Date();
+                    def fmtDate = date.format('yyyyMMdd')
+
+                    outputFileName = "${cmaActRpt}${SEP}${verName}${SEP}${fmtDate}${SEP}${bldType}.apk"
+
+                    def fmt_date = new Date().format('MM-dd-yyyy')
+                    resValue "string", "build_date", fmt_date
+                }
+            }
+
         }
     }
 }
