@@ -21,7 +21,7 @@ import android.widget.*;
  */
 public class ActivityMain extends AppCompatActivity
 {
-    private final static String TAG        = "ACtivityMain";
+    private final static String TAG        = "ActivityMain";
     private final static String EVENT_TYPE = "event_type";
     private final static String EVENT_DATE = "event_date";
 
@@ -44,8 +44,8 @@ public class ActivityMain extends AppCompatActivity
         Log.i(TAG, "onCreate()");
 
         // lookup widgets
-        mTextViewEventType = (TextView)findViewById(R.id.textViewEventType);
-        mTextViewEventDate = (TextView)findViewById(R.id.textViewEventDate);
+        mTextViewEventType = findViewById(R.id.textViewEventType);
+        mTextViewEventDate = findViewById(R.id.textViewEventDate);
 
         // configure the action bar and handle its messages
         ActionBar action_bar = getSupportActionBar();
