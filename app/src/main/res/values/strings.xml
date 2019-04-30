@@ -19,6 +19,8 @@
     <string name="edittext_salvations">0</string>
     <string name="edittext_rededications">0</string>
     <string name="edittext_other">0</string>
+    <string name="event_comment">Comment</string>
+    <string name="edittext_comment">Comment</string>
 
     <string name="button_send">Send</string>
 

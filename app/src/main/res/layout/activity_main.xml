@@ -58,10 +58,10 @@
 
             <!-- Event Name -->
             <TextView
-                    android:layout_width="55dp"
+                    android:id="@+id/eventName"
+                    android:layout_width="64dp"
                     android:layout_height="wrap_content"
                     android:text="@string/event_name"
-                    android:id="@+id/eventName"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:layout_alignParentStart="true"
                     android:layout_below="@+id/eventInfo"
@@ -73,117 +73,122 @@
                     android:layout_marginTop="16dp"
                     app:layout_constraintTop_toBottomOf="@+id/eventInfo"/>
 
-        <EditText
-                android:layout_width="235dp"
-                android:layout_height="43dp"
-                android:id="@+id/editTextEventName"
-                android:text="@string/edittext_event_name"
-                android:layout_below="@+id/eventInfo"
-                android:layout_alignParentEnd="true"
-                android:layout_toEndOf="@+id/eventName"
-                app:layout_constraintStart_toEndOf="@+id/eventName"
-                android:layout_marginStart="32dp"
-                app:layout_constraintBottom_toBottomOf="@+id/eventName"
-                app:layout_constraintTop_toTopOf="@+id/eventName"/>
-
-        <!-- Event Type -->
-        <TextView
-                android:layout_width="55dp"
-                android:layout_height="wrap_content"
-                android:text="@string/event_type"
-                android:id="@+id/textViewTypeTitle"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:layout_alignParentStart="true"
-                android:gravity="center_vertical"
-                android:layout_alignEnd="@+id/eventName"
-                android:layout_below="@+id/eventName"
-                android:layout_above="@+id/textViewEventDate"
-                app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="8dp"
-                app:layout_constraintTop_toBottomOf="@+id/eventName"/>
-
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/textViewEventType"
-                android:text="@string/edittext_type"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:layout_alignStart="@+id/editTextEventName"
-                android:layout_alignParentEnd="true"
-                android:layout_below="@+id/eventName"
-                app:layout_constraintStart_toEndOf="@+id/textViewTypeTitle"
-                android:layout_marginStart="32dp"
-                app:layout_constraintTop_toTopOf="@+id/textViewTypeTitle"/>
-
-        <!-- Event Date -->
-        <TextView
-                android:layout_width="55dp"
-                android:layout_height="wrap_content"
-                android:text="@string/event_date"
-                android:id="@+id/textViewDateTitle"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:layout_alignParentStart="true"
-                android:gravity="center_vertical"
-                android:layout_alignEnd="@+id/textViewTypeTitle"
-                android:layout_alignBottom="@+id/textViewEventDate"
-                android:layout_below="@+id/textViewTypeTitle"
-                android:layout_marginStart="24dp"
-                app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginTop="8dp"
-                app:layout_constraintTop_toBottomOf="@+id/textViewTypeTitle"/>
-
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="19dp"
-                android:inputType="date"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/edittext_date"
-                android:ems="10"
-                android:id="@+id/textViewEventDate"
-                android:layout_alignStart="@+id/textViewEventType"
-                android:layout_alignEnd="@+id/textViewEventType"
-                android:layout_below="@+id/textViewEventType"
-                app:layout_constraintStart_toEndOf="@+id/textViewDateTitle"
-                android:layout_marginStart="32dp"
-                app:layout_constraintTop_toTopOf="@+id/textViewDateTitle"/>
-
-        <!-- Totals Section -->
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:id="@+id/textView_totals"
-                android:text="@string/event_totals"
-                android:layout_below="@+id/textViewDateTitle"
-                android:layout_alignParentStart="true"
-                android:textStyle="bold"
-                android:paddingTop="10dp"
-                android:layout_marginTop="28dp"
-                app:layout_constraintTop_toBottomOf="@+id/textViewDateTitle"
-                android:layout_marginStart="24dp"
-                app:layout_constraintStart_toStartOf="parent"/>
-
-
-        <!-- Number of  CMA members attending the event -->
-        <TextView
-                android:layout_width="120dp"
-                android:layout_height="wrap_content"
-                android:text="@string/event_attend"
-                android:id="@+id/eventAttend"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:gravity="center_vertical"
-                android:layout_alignTop="@+id/editTextEventAttend"
-                android:layout_alignParentStart="true"
-                android:layout_alignBottom="@+id/editTextEventAttend"
-                android:layout_marginTop="16dp"
-                app:layout_constraintTop_toBottomOf="@+id/textView_totals"
-                android:layout_marginStart="24dp"
-                app:layout_constraintStart_toStartOf="parent"/>
-
             <EditText
+                    android:id="@+id/editTextEventName"
+                    android:layout_width="235dp"
+                    android:layout_height="48dp"
+                    android:text="@string/edittext_event_name"
+                    android:layout_below="@+id/eventInfo"
+                    android:layout_alignParentEnd="true"
+                    android:layout_toEndOf="@+id/eventName"
+                    app:layout_constraintStart_toEndOf="@+id/eventName"
+                    android:layout_marginStart="32dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/eventName"
+                    app:layout_constraintTop_toTopOf="@+id/eventName"/>
+
+            <!-- Event Type -->
+            <TextView
+                    android:id="@+id/textViewTypeTitle"
+                    android:layout_width="64dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/event_type"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_alignParentStart="true"
+                    android:gravity="center_vertical"
+                    android:layout_alignEnd="@+id/eventName"
+                    android:layout_below="@+id/eventName"
+                    android:layout_above="@+id/textViewEventDate"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintTop_toBottomOf="@+id/eventName"/>
+
+            <TextView
+                    android:id="@+id/textViewEventType"
+                    android:layout_width="wrap_content"
+                    android:layout_height="28dp"
+                    android:text="@string/edittext_type"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_alignStart="@+id/editTextEventName"
+                    android:layout_alignParentEnd="true"
+                    android:layout_below="@+id/eventName"
+                    app:layout_constraintStart_toEndOf="@+id/textViewTypeTitle"
+                    android:layout_marginStart="32dp"
+                    app:layout_constraintTop_toTopOf="@+id/textViewTypeTitle"
+                    android:layout_marginBottom="8dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/textViewTypeTitle"
+                    app:layout_constraintVertical_bias="0.0"/>
+
+            <!-- Event Date -->
+            <TextView
+                    android:layout_width="64dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/event_date"
+                    android:id="@+id/textViewDateTitle"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_alignParentStart="true"
+                    android:gravity="center_vertical"
+                    android:layout_alignEnd="@+id/textViewTypeTitle"
+                    android:layout_alignBottom="@+id/textViewEventDate"
+                    android:layout_below="@+id/textViewTypeTitle"
+                    android:layout_marginStart="24dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewTypeTitle"/>
+
+            <TextView
+                    android:layout_width="215dp"
+                    android:layout_height="28dp"
+                    android:inputType="date"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="@string/edittext_date"
+                    android:ems="10"
+                    android:id="@+id/textViewEventDate"
+                    android:layout_alignStart="@+id/textViewEventType"
+                    android:layout_alignEnd="@+id/textViewEventType"
+                    android:layout_below="@+id/textViewEventType"
+                    app:layout_constraintStart_toEndOf="@+id/textViewDateTitle"
+                    android:layout_marginStart="32dp"
+                    app:layout_constraintTop_toTopOf="@+id/textViewDateTitle"
+                    app:layout_constraintBottom_toBottomOf="@+id/textViewDateTitle"
+                    app:layout_constraintVertical_bias="1.0"/>
+
+            <!-- Totals Section -->
+            <TextView
+                    android:id="@+id/textView_totals"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="@string/event_totals"
+                    android:layout_below="@+id/textViewDateTitle"
+                    android:layout_alignParentStart="true"
+                    android:textStyle="bold"
+                    android:paddingTop="10dp"
+                    android:layout_marginTop="28dp"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewDateTitle"
+                    android:layout_marginStart="24dp"
+                    app:layout_constraintStart_toStartOf="parent"/>
+
+
+            <!-- Number of  CMA members attending the event -->
+            <TextView
+                    android:layout_width="152dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/event_attend"
+                    android:id="@+id/eventAttend"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:gravity="center_vertical"
+                    android:layout_alignTop="@+id/editTextEventAttend"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignBottom="@+id/editTextEventAttend"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintTop_toBottomOf="@+id/textView_totals"
+                    android:layout_marginStart="24dp"
+                    app:layout_constraintStart_toStartOf="parent"/>
+
+            <EditText
+                    android:layout_width="122dp"
+                    android:layout_height="46dp"
                     android:inputType="date"
                     android:text="@string/edittext_attend"
                     android:ems="10"
@@ -196,27 +201,27 @@
                     app:layout_constraintStart_toStartOf="@+id/editTextSalvations"
                     app:layout_constraintVertical_bias="0.761"/>
 
-        <!-- Number of Salvations -->
-        <TextView
-                android:layout_width="120dp"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:gravity="center_vertical"
-                android:text="@string/event_salvations"
-                android:id="@+id/textView_salvations"
-                android:layout_alignEnd="@+id/eventAttend"
-                android:layout_below="@+id/editTextEventAttend"
-                android:layout_alignParentStart="true"
-                android:layout_alignBottom="@+id/editTextSalvations"
-                android:layout_marginTop="24dp"
-                app:layout_constraintTop_toBottomOf="@+id/eventAttend"
-                android:layout_marginStart="24dp"
-                app:layout_constraintStart_toStartOf="parent"/>
+            <!-- Number of Salvations -->
+            <TextView
+                    android:layout_width="152dp"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:gravity="center_vertical"
+                    android:text="@string/event_salvations"
+                    android:id="@+id/textView_salvations"
+                    android:layout_alignEnd="@+id/eventAttend"
+                    android:layout_below="@+id/editTextEventAttend"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignBottom="@+id/editTextSalvations"
+                    android:layout_marginTop="24dp"
+                    app:layout_constraintTop_toBottomOf="@+id/eventAttend"
+                    android:layout_marginStart="24dp"
+                    app:layout_constraintStart_toStartOf="parent"/>
 
 
             <EditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="122dp"
+                    android:layout_height="46dp"
                     android:inputType="number"
                     android:ems="10"
                     android:id="@+id/editTextSalvations"
@@ -229,25 +234,25 @@
                     app:layout_constraintStart_toEndOf="@+id/imageButtonSlavationHelp"
                     android:layout_marginStart="8dp"/>
 
-        <!-- Number of rededications -->
-        <TextView
-                android:layout_width="120dp"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:gravity="center_vertical"
-                android:text="@string/event_rededications"
-                android:id="@+id/textView_rededications"
-                android:layout_alignParentStart="true"
-                android:layout_alignTop="@+id/editTextRededications"
-                android:layout_alignBottom="@+id/editTextRededications"
-                android:layout_marginStart="24dp"
-                app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginTop="24dp"
-                app:layout_constraintTop_toBottomOf="@+id/textView_salvations"/>
+            <!-- Number of rededications -->
+            <TextView
+                    android:layout_width="152dp"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:gravity="center_vertical"
+                    android:text="@string/event_rededications"
+                    android:id="@+id/textView_rededications"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignTop="@+id/editTextRededications"
+                    android:layout_alignBottom="@+id/editTextRededications"
+                    android:layout_marginStart="24dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginTop="24dp"
+                    app:layout_constraintTop_toBottomOf="@+id/textView_salvations"/>
 
             <EditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="122dp"
+                    android:layout_height="46dp"
                     android:inputType="number"
                     android:ems="10"
                     android:id="@+id/editTextRededications"
@@ -261,52 +266,91 @@
                     android:layout_marginStart="8dp"/>
 
 
-        <!-- Other Ministry -->
-        <TextView
-                android:layout_width="120dp"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:gravity="center_vertical"
-                android:text="@string/event_other"
-                android:id="@+id/textView_other"
-                android:layout_alignEnd="@+id/textView_rededications"
-                android:layout_alignTop="@+id/editTextOther"
-                android:layout_alignBottom="@+id/editTextOther"
-                android:layout_alignParentStart="true"
-                android:layout_marginStart="24dp"
-                app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginTop="24dp"
-                app:layout_constraintTop_toBottomOf="@+id/textView_rededications"/>
+            <!-- Other Ministry -->
+            <TextView
+                    android:layout_width="152dp"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:gravity="center_vertical"
+                    android:text="@string/event_other"
+                    android:id="@+id/textView_other"
+                    android:layout_alignEnd="@+id/textView_rededications"
+                    android:layout_alignTop="@+id/editTextOther"
+                    android:layout_alignBottom="@+id/editTextOther"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="24dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginTop="24dp"
+                    app:layout_constraintTop_toBottomOf="@+id/textView_rededications"/>
 
             <EditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:inputType="number"
-                    android:ems="10"
                     android:id="@+id/editTextOther"
                     android:text="@string/edittext_other"
+                    android:layout_width="122dp"
+                    android:layout_height="46dp"
+                    android:inputType="number"
+                    android:ems="10"
                     android:layout_alignStart="@+id/editTextRededications"
                     android:layout_below="@+id/editTextRededications"
                     app:layout_constraintTop_toTopOf="@+id/textView_other"
                     app:layout_constraintBottom_toBottomOf="@+id/textView_other"
                     app:layout_constraintStart_toEndOf="@+id/imageButtonOtherHelp"
-                    android:layout_marginStart="8dp"/>
+                    android:layout_marginStart="8dp"
+                    app:layout_constraintVertical_bias="0.59"/>
 
-        !-- Control Buttons -->
-        <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/button_send"
-                android:id="@+id/button_send"
-                android:layout_below="@+id/textView_other"
-                android:layout_alignStart="@+id/textView_other"
-                android:layout_alignEnd="@+id/editTextOther"
-                android:layout_marginEnd="8dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginStart="8dp"
-                app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginTop="48dp"
-                app:layout_constraintTop_toBottomOf="@+id/textView_other"/>
+
+            <!-- Comment Section -->
+            <TextView
+                    android:id="@+id/textView_comment"
+                    android:text="@string/event_comment"
+                    android:layout_width="152dp"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+
+                    android:layout_below="@+id/textViewDateTitle"
+                    android:layout_alignParentStart="true"
+                    android:textStyle="bold"
+                    android:paddingTop="10dp"
+                    android:layout_marginStart="24dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginTop="32dp"
+                    app:layout_constraintTop_toBottomOf="@+id/textView_other"/>
+
+            <EditText
+                    android:id="@+id/editTextComment"
+                    android:text="@string/edittext_comment"
+                    android:inputType="textMultiLine"
+                    android:gravity="top|left"
+                    android:background="@drawable/border"
+                    android:padding="5dp"
+                    android:layout_width="330dp"
+                    android:layout_height="100dp"
+                    android:ems="10"
+                    android:layout_alignStart="@+id/editTextRededications"
+                    android:layout_below="@+id/editTextRededications"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintTop_toBottomOf="@+id/textView_comment"
+                    app:layout_constraintStart_toStartOf="@+id/textView_comment"
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintEnd_toEndOf="@+id/editTextOther"
+                    app:layout_constraintHorizontal_bias="0.0"/>
+
+            !-- Control Buttons -->
+            <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/button_send"
+                    android:id="@+id/button_send"
+                    android:layout_below="@+id/textView_other"
+                    android:layout_alignStart="@+id/textView_other"
+                    android:layout_alignEnd="@+id/editTextOther"
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginStart="8dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintTop_toBottomOf="@+id/editTextComment"/>
+
             <ImageButton
                     android:layout_width="35dp"
                     android:layout_height="35dp"
@@ -318,6 +362,5 @@
                     app:layout_constraintBottom_toBottomOf="@+id/textView_rededications"/>
 
         </android.support.constraint.ConstraintLayout>
-
     </ScrollView>
 </android.support.constraint.ConstraintLayout>
