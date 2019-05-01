@@ -93,12 +93,12 @@ public class ActivityMain extends AppCompatActivity
         text_view_event_name.setOnFocusChangeListener(new View.OnFocusChangeListener()
         {
             @Override
-            public void onFocusChange(View view, boolean b)
+            public void onFocusChange(View view, boolean hasFocus)
             {
-                if(mIsInitialized == true)
+                if((mIsInitialized == true) && (hasFocus == true))
                 {
                     String event_name = text_view_event_name.getText().toString();
-                    String def_name = getString(R.string.edittext_def_event_name);
+                    String def_name   = getString(R.string.edittext_def_event_name);
                     if(event_name.equals(def_name))
                     {
                         text_view_event_name.setText("");
@@ -112,6 +112,7 @@ public class ActivityMain extends AppCompatActivity
                 }
             }
         });
+
 
         //----------------------------------------------------------------------
         // Event Type message handler associated with the title and type field
@@ -223,20 +224,71 @@ public class ActivityMain extends AppCompatActivity
 
 
         //----------------------------------------------------------------------
-        // Send Button event listener
+        // Totals message handlers
         //----------------------------------------------------------------------
-        Button button_send = (Button)findViewById(R.id.button_send);
-        button_send.setOnClickListener(new View.OnClickListener()
+        final TextView text_view_attend = findViewById(R.id.editTextEventAttend);
+        text_view_attend.setOnFocusChangeListener(new View.OnFocusChangeListener()
         {
             @Override
-            public void onClick(View v)
+            public void onFocusChange(View view, boolean b)
             {
-                Log.i("cmarpt", "send button selected");
-                emailActivityReport();
-                CMAActivityInfo cma_activity = new CMAActivityInfo();
-                cma_activity.mDataCMAActivity.setProperties();
+                String attend_str = text_view_attend.getText().toString();
+                String attend_def = getString(R.string.edittext_def_attend);
+                if(attend_str.equals(attend_def))
+                {
+                    text_view_attend.setText("");
+                }
             }
         });
+
+
+        final TextView text_view_salvations = findViewById(R.id.editTextSalvations);
+        text_view_salvations.setOnFocusChangeListener(new View.OnFocusChangeListener()
+        {
+            @Override
+            public void onFocusChange(View view, boolean b)
+            {
+                String salvations_str = text_view_salvations.getText().toString();
+                String salvations_def = getString(R.string.edittext_def_salvations);
+                if(salvations_str.equals(salvations_def))
+                {
+                    text_view_salvations.setText("");
+                }
+            }
+        });
+
+
+        final TextView text_view_rededications = findViewById(R.id.editTextRededications);
+        text_view_rededications.setOnFocusChangeListener(new View.OnFocusChangeListener()
+        {
+            @Override
+            public void onFocusChange(View view, boolean b)
+            {
+                String rededication_str = text_view_rededications.getText().toString();
+                String rededication_def = getString(R.string.edittext_def_rededications);
+                if(rededication_str.equals(rededication_def))
+                {
+                    text_view_rededications.setText("");
+                }
+            }
+        });
+
+
+        final TextView text_view_other = findViewById(R.id.editTextOther);
+        text_view_other.setOnFocusChangeListener(new View.OnFocusChangeListener()
+        {
+            @Override
+            public void onFocusChange(View view, boolean b)
+            {
+                String other_str = text_view_other.getText().toString();
+                String other_def = getString(R.string.edittext_def_other);
+                if(other_str.equals(other_def))
+                {
+                    text_view_other.setText("");
+                }
+            }
+        });
+
 
 
         //----------------------------------------------------------------------
@@ -275,6 +327,7 @@ public class ActivityMain extends AppCompatActivity
             }
         });
 
+
         //----------------------------------------------------------------------
         // Comment message handler
         //----------------------------------------------------------------------
@@ -305,6 +358,23 @@ public class ActivityMain extends AppCompatActivity
                 {
                     text_view_comment.setText("");
                 }
+            }
+        });
+
+
+        //----------------------------------------------------------------------
+        // Send Button event listener
+        //----------------------------------------------------------------------
+        Button button_send = (Button)findViewById(R.id.button_send);
+        button_send.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Log.i("cmarpt", "send button selected");
+                emailActivityReport();
+                CMAActivityInfo cma_activity = new CMAActivityInfo();
+                cma_activity.mDataCMAActivity.setProperties();
             }
         });
     }   // end protected void onCreate(Bundle savedInstanceState)

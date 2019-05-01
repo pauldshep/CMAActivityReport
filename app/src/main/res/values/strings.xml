@@ -3,7 +3,7 @@
     <string name="actionbar_title">CMA Activity Report</string>
 
     <string name="event_info">Event Information</string>
-    <string name="event_name">Name</string>
+    <string name="event_name">Event Name</string>
     <string name="event_type">Type</string>
     <string name="event_date">Date</string>
     <string name="event_attend">Attendance</string>
@@ -15,10 +15,10 @@
     <string name="edittext_date">date of event</string>
     <string name="edittext_type">type of event</string>
     <string name="edittext_def_event_name">name of event</string>
-    <string name="edittext_attend">0</string>
-    <string name="edittext_salvations">0</string>
-    <string name="edittext_rededications">0</string>
-    <string name="edittext_other">0</string>
+    <string name="edittext_def_attend">0</string>
+    <string name="edittext_def_salvations">0</string>
+    <string name="edittext_def_rededications">0</string>
+    <string name="edittext_def_other">0</string>
     <string name="event_comment">Comment</string>
     <string name="edittext_def_comment">Comment</string>
 
@@ -31,15 +31,17 @@
     <string name="action_bar_clear">Clear</string>
     <string name="action_bar_about">About</string>
 
-    <!-- Settings Activity Strings -->
+    <!-- Email Setting Strings -->
     <string name="settings_action_bar_title">Activity Report Settings</string>
     <string name="settings_email_title">EMail</string>
     <string name="settings_email_to">To:</string>
+    <string name="settings_email_to_def">Chapter Secretary</string>
     <string name="settings_email_addr">Addr:</string>
+    <string name="settings_email_addr_def">pauldshep@gmail.com</string>
     <string name="settings_email_from">From:</string>
-    <string name="settings_email_from_def">Paul Shepherd</string>
+    <string name="settings_email_from_def">CMA User</string>
     <string name="settings_email_subject">Subject:</string>
-    <string name="settings_email_subject_value">CMA Activity Report</string>
+    <string name="settings_email_subject_def">CMA Activity Report</string>
 
     <!-- About Activity Strings -->
     <string name="activity_about_title">About CMA Activity Report</string>
@@ -49,6 +51,4 @@
         Shepherd Software Solutions.  Please direct any comments and suggestions
         to: pauldshep@gmail.com
     </string>
-
-
 </resources>

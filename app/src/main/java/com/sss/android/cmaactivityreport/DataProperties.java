@@ -86,7 +86,6 @@ abstract class DataProperties
     }   // end
 
 
-    //**************************************************************************
     /**
      * Sets specified property file value locally and in the properties file.
      * @param propKey properities key

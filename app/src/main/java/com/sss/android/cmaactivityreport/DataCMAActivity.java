@@ -1,6 +1,7 @@
 package com.sss.android.cmaactivityreport;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.util.Log;
 import java.util.Properties;
 
@@ -25,21 +26,32 @@ public class DataCMAActivity extends DataProperties
     private final static String KEY_OTHER_MINISTRY = "key_other_ministry";
     private final static String KEY_COMMENTS       = "key_comments";
 
+    private final static String KEY_EMAIL_TO       = "key_email_to";
+    private final static String KEY_EMAIL_ADDR     = "key_email_addr";
+    private final static String KEY_EMAIL_FROM     = "key_email_from";
+    private final static String KEY_EMAIL_SUBJECT  = "key_email_subject";
+
 
     // member variables for the report parameters
-    public String mEventName;
-    public String mEventType;
-    public String mEventDate;
-    public String mCMAAttendence;
-    public String mSalvations;
-    public String mRededications;
-    public String mOtherMinistry;
-    public String mComments;
+    public String  mEventName;
+    public String  mEventType;
+    public String  mEventDate;
+    public String  mCMAAttendence;
+    public String  mSalvations;
+    public String  mRededications;
+    public String  mOtherMinistry;
+    public String  mComments;
+
+    // member variable for the report settings
+    public String mEmailTo;
+    public String mEmailAddr;
+    public String mEmailFrom;
+    public String mEmailSubject;
 
 
-    //**************************************************************************
     /**
      * Default Constructor
+     *
      * @param context of the current activity
      */
     public DataCMAActivity(Context context)
@@ -48,7 +60,6 @@ public class DataCMAActivity extends DataProperties
     }   // end public DataReport(Context context)
 
 
-    /***************************************************************************
     /**
      * Required for classes that extend abstract class DataProperties
      * Creates default properties file and populates settings data with
@@ -65,10 +76,10 @@ public class DataCMAActivity extends DataProperties
         UtilDate util_date = new UtilDate();
         mEventDate         = util_date.toString();
 
-        mCMAAttendence     = new Integer(0).toString();
-        mSalvations        = new Integer(0).toString();
-        mRededications     = new Integer(0).toString();
-        mOtherMinistry     = new Integer(0).toString();
+        mCMAAttendence     = Integer.toString(0);
+        mSalvations        = Integer.toString(0);
+        mRededications     = Integer.toString(0);
+        mOtherMinistry     = Integer.toString(0);
 
         mComments          = "No Event Comments";
 
@@ -77,12 +88,12 @@ public class DataCMAActivity extends DataProperties
     }
 
 
-    //**************************************************************************
     /**
      * Sets property values
      */
     public void setProperties()
     {
+        // event data
         setProperty(KEY_EVENT_NAME,     mEventName);
         setProperty(KEY_EVENT_TYPE,     mEventType);
         setProperty(KEY_EVENT_DATE,     mEventDate);
@@ -92,17 +103,19 @@ public class DataCMAActivity extends DataProperties
         setProperty(KEY_OTHER_MINISTRY, mOtherMinistry);
         setProperty(KEY_COMMENTS,       mComments);
 
+        // email settings
+
         Log.i(TAG, "setProperties(): " + toString());
     }
 
 
-    //**************************************************************************
     /**
      * Required for classes that extend abstract class DataProperties
      * Extracts the properties from the properties file
      */
     public void extractProperties()
     {
+        // event data
         mEventName     = mProperties.getProperty(KEY_EVENT_NAME);
         mEventType     = mProperties.getProperty(KEY_EVENT_TYPE);
         mEventDate     = mProperties.getProperty(KEY_EVENT_DATE);
@@ -112,7 +125,37 @@ public class DataCMAActivity extends DataProperties
         mOtherMinistry = mProperties.getProperty(KEY_OTHER_MINISTRY);
         mComments      = mProperties.getProperty(KEY_COMMENTS);
 
+        getEmailProperties();
+
         Log.i(TAG, "extractProperties(): " + toString());
+    }
+
+
+    /**
+     * Sets email parameters
+     */
+    public void setEmailProperties()
+    {
+        setProperty(KEY_EMAIL_TO,      mEmailTo);
+        setProperty(KEY_EMAIL_ADDR,    mEmailAddr);
+        setProperty(KEY_EMAIL_FROM,    mEmailFrom);
+        setProperty(KEY_EMAIL_SUBJECT, mEmailSubject);
+    }
+
+
+    /**
+     * Extract email settings
+     */
+    public void getEmailProperties()
+    {
+        mEmailTo = mProperties.getProperty(KEY_EMAIL_TO,
+                mDataContext.getString(R.string.settings_email_to_def));
+        mEmailAddr = mProperties.getProperty(KEY_EMAIL_ADDR,
+                mDataContext.getString(R.string.settings_email_addr_def));
+        mEmailFrom = mProperties.getProperty(KEY_EMAIL_FROM,
+                mDataContext.getString(R.string.settings_email_from_def));
+        mEmailSubject = mProperties.getProperty(KEY_EMAIL_SUBJECT,
+                mDataContext.getString(R.string.settings_email_subject_def));
     }
 
 
@@ -130,7 +173,11 @@ public class DataCMAActivity extends DataProperties
                 ", salvations = "   + mSalvations       +
                 ", reded = "        + mRededications    +
                 ", other = "        + mOtherMinistry    +
-                ", comments = "     + mComments;
+                ", comments = "     + mComments         +
+                ", email to = "     + mEmailTo          +
+                ", email addr = "   + mEmailAddr        +
+                ", email from = "   + mEmailFrom        +
+                ", email sub = "    + mEmailSubject;
 
         return ret_str;
     }
