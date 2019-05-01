@@ -14,6 +14,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.*;
+import org.w3c.dom.Text;
 
 
 /**
@@ -28,6 +29,9 @@ public class ActivityMain extends AppCompatActivity
     // widget variables
     private TextView mTextViewEventType;
     private TextView mTextViewEventDate;
+    private TextView mTextViewComment;
+
+    private Boolean  mIsInitialized;
 
 
     //**************************************************************************
@@ -43,9 +47,12 @@ public class ActivityMain extends AppCompatActivity
 
         Log.i(TAG, "onCreate()");
 
+        mIsInitialized = false;
+
         // lookup widgets
         mTextViewEventType = findViewById(R.id.textViewEventType);
         mTextViewEventDate = findViewById(R.id.textViewEventDate);
+        mTextViewComment   = findViewById(R.id.textViewComment);
 
         // configure the action bar and handle its messages
         ActionBar action_bar = getSupportActionBar();
@@ -64,6 +71,47 @@ public class ActivityMain extends AppCompatActivity
         ////////////////////////////////////////////////////////////////////////
         /////////////////////////// MESSAGE HANDLERS ///////////////////////////
         ////////////////////////////////////////////////////////////////////////
+
+        //----------------------------------------------------------------------
+        // Event Name message handler
+        //----------------------------------------------------------------------
+        final TextView text_view_event_name = (TextView)findViewById(R.id.editTextEventName);
+        text_view_event_name.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                String event_name = text_view_event_name.getText().toString();
+                String def_name   = getString(R.string.edittext_def_event_name);
+                if(event_name.equals(def_name))
+                {
+                    text_view_event_name.setText("");
+                }
+            }
+        });
+
+        text_view_event_name.setOnFocusChangeListener(new View.OnFocusChangeListener()
+        {
+            @Override
+            public void onFocusChange(View view, boolean b)
+            {
+                if(mIsInitialized == true)
+                {
+                    String event_name = text_view_event_name.getText().toString();
+                    String def_name = getString(R.string.edittext_def_event_name);
+                    if(event_name.equals(def_name))
+                    {
+                        text_view_event_name.setText("");
+                    }
+                }
+                else
+                {
+                    // I have to do this because by default event name is
+                    // initially selected
+                    mIsInitialized = true;
+                }
+            }
+        });
 
         //----------------------------------------------------------------------
         // Event Type message handler associated with the title and type field
@@ -224,6 +272,39 @@ public class ActivityMain extends AppCompatActivity
             {
                 helpDialog("Rededication",
                         "Those you personally prayed with for rededication or recommitment to Christ");
+            }
+        });
+
+        //----------------------------------------------------------------------
+        // Comment message handler
+        //----------------------------------------------------------------------
+        final TextView text_view_comment = (TextView)findViewById(R.id.editTextComment);
+
+        text_view_comment.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                String comment_str = text_view_comment.getText().toString();
+                String def_comment = getString(R.string.edittext_def_comment);
+                if(comment_str.equals(def_comment))
+                {
+                    text_view_comment.setText("");
+                }
+            }
+        });
+
+        text_view_comment.setOnFocusChangeListener(new View.OnFocusChangeListener()
+        {
+            @Override
+            public void onFocusChange(View view, boolean b)
+            {
+                String comment_str = text_view_comment.getText().toString();
+                String def_comment = getString(R.string.edittext_def_comment);
+                if(comment_str.equals(def_comment))
+                {
+                    text_view_comment.setText("");
+                }
             }
         });
     }   // end protected void onCreate(Bundle savedInstanceState)
