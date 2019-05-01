@@ -23,6 +23,7 @@ public class DataCMAActivity extends DataProperties
     private final static String KEY_SALVATIONS     = "key_salvations";
     private final static String KEY_REDEDICATIONS  = "key_rededications";
     private final static String KEY_OTHER_MINISTRY = "key_other_ministry";
+    private final static String KEY_COMMENTS       = "key_comments";
 
 
     // member variables for the report parameters
@@ -33,6 +34,7 @@ public class DataCMAActivity extends DataProperties
     public String mSalvations;
     public String mRededications;
     public String mOtherMinistry;
+    public String mComments;
 
 
     //**************************************************************************
@@ -68,6 +70,8 @@ public class DataCMAActivity extends DataProperties
         mRededications     = new Integer(0).toString();
         mOtherMinistry     = new Integer(0).toString();
 
+        mComments          = "No Event Comments";
+
         // create the properties data structure
         setProperties();
     }
@@ -86,6 +90,7 @@ public class DataCMAActivity extends DataProperties
         setProperty(KEY_SALVATIONS,     mSalvations);
         setProperty(KEY_REDEDICATIONS,  mRededications);
         setProperty(KEY_OTHER_MINISTRY, mOtherMinistry);
+        setProperty(KEY_COMMENTS,       mComments);
 
         Log.i(TAG, "setProperties(): " + toString());
     }
@@ -105,6 +110,7 @@ public class DataCMAActivity extends DataProperties
         mSalvations    = mProperties.getProperty(KEY_SALVATIONS);
         mRededications = mProperties.getProperty(KEY_REDEDICATIONS);
         mOtherMinistry = mProperties.getProperty(KEY_OTHER_MINISTRY);
+        mComments      = mProperties.getProperty(KEY_COMMENTS);
 
         Log.i(TAG, "extractProperties(): " + toString());
     }
@@ -123,7 +129,8 @@ public class DataCMAActivity extends DataProperties
                 ", attend = "       + mCMAAttendence    +
                 ", salvations = "   + mSalvations       +
                 ", reded = "        + mRededications    +
-                ", other = "        + mOtherMinistry;
+                ", other = "        + mOtherMinistry    +
+                ", comments = "     + mComments;
 
         return ret_str;
     }

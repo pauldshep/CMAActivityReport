@@ -22,7 +22,10 @@
                 android:orientation="vertical"
                 android:paddingLeft="8dp"
                 android:paddingRight="8dp"
-                android:scrollbars="vertical">
+                android:scrollbars="vertical"
+                android:paddingTop="8dp"
+                android:paddingEnd="8dp"
+                android:paddingBottom="8dp">
 
             <!-- Title: Event Information -->
             <ImageButton
@@ -54,7 +57,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     android:layout_marginStart="24dp"
                     app:layout_constraintStart_toStartOf="parent"
-                />
+                    android:textColor="#0F0F0F"/>
 
             <!-- Event Name -->
             <TextView
@@ -167,7 +170,8 @@
                     android:layout_marginTop="28dp"
                     app:layout_constraintTop_toBottomOf="@+id/textViewDateTitle"
                     android:layout_marginStart="24dp"
-                    app:layout_constraintStart_toStartOf="parent"/>
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:textColor="#0F0F0F"/>
 
 
             <!-- Number of  CMA members attending the event -->
@@ -306,7 +310,6 @@
                     android:layout_width="152dp"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-
                     android:layout_below="@+id/textViewDateTitle"
                     android:layout_alignParentStart="true"
                     android:textStyle="bold"
@@ -314,7 +317,8 @@
                     android:layout_marginStart="24dp"
                     app:layout_constraintStart_toStartOf="parent"
                     android:layout_marginTop="32dp"
-                    app:layout_constraintTop_toBottomOf="@+id/textView_other"/>
+                    app:layout_constraintTop_toBottomOf="@+id/textView_other"
+                    android:textColor="#0F0F0F"/>
 
             <EditText
                     android:id="@+id/editTextComment"

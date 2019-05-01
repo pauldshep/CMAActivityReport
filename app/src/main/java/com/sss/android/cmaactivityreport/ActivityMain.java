@@ -480,6 +480,7 @@ public class ActivityMain extends AppCompatActivity
         private EditText mEditTextSalvations;
         private EditText mEditTextRededications;
         private EditText mEditTextOtherMinistery;
+        private EditText mEditTextComments;
 
 
         /**
@@ -499,6 +500,7 @@ public class ActivityMain extends AppCompatActivity
             mEditTextSalvations     = (EditText)findViewById((R.id.editTextSalvations));
             mEditTextRededications  = (EditText)findViewById((R.id.editTextRededications));
             mEditTextOtherMinistery = (EditText)findViewById((R.id.editTextOther));
+            mEditTextComments       = (EditText)findViewById((R.id.editTextComment));
 
             // get current widget data
             getCMAActivityData();
@@ -519,6 +521,7 @@ public class ActivityMain extends AppCompatActivity
             mDataCMAActivity.mSalvations    = mEditTextSalvations.getText().toString();
             mDataCMAActivity.mRededications = mEditTextRededications.getText().toString();
             mDataCMAActivity.mOtherMinistry = mEditTextOtherMinistery.getText().toString();
+            mDataCMAActivity.mComments      = mEditTextComments.getText().toString();
 
             Log.i(TAG, "getCMAActivityData(): " + mDataCMAActivity.toString());
         }
@@ -537,6 +540,7 @@ public class ActivityMain extends AppCompatActivity
             mEditTextSalvations.setText(mDataCMAActivity.mSalvations);
             mEditTextRededications.setText(mDataCMAActivity.mRededications);
             mEditTextOtherMinistery.setText(mDataCMAActivity.mOtherMinistry);
+            mEditTextComments.setText(mDataCMAActivity.mComments);
 
             Log.i(TAG, "setCMAActivityData(): " + mDataCMAActivity.toString());
         }
@@ -550,14 +554,14 @@ public class ActivityMain extends AppCompatActivity
         public String buildActivityReport()
         {
             String activity_report =
-                            "\nEvent = "          + mDataCMAActivity.mEventName     +
-                            "\nEvent Type = "     + mDataCMAActivity.mEventType     +
-                            "\nEvent Date = "     + mDataCMAActivity.mEventDate     +
-                            "\nCMA Attendence = " + mDataCMAActivity.mCMAAttendence +
-                            "\nSalvations = "     + mDataCMAActivity.mSalvations    +
-                            "\nRededications = "  + mDataCMAActivity.mRededications +
-                            "\nOther = "          + mDataCMAActivity.mOtherMinistry +
-                            "\n\nComment: ";
+                    "Event = "            + mDataCMAActivity.mEventName     +
+                    ", Event Type = "     + mDataCMAActivity.mEventType     +
+                    ", Event Date = "     + mDataCMAActivity.mEventDate     +
+                    ", CMA Attendance = " + mDataCMAActivity.mCMAAttendence +
+                    ", Salvations = "     + mDataCMAActivity.mSalvations    +
+                    ", Rededications = "  + mDataCMAActivity.mRededications +
+                    ", Other = "          + mDataCMAActivity.mOtherMinistry +
+                    ", Comment: "         + mDataCMAActivity.mComments;
 
             return activity_report;
         }
