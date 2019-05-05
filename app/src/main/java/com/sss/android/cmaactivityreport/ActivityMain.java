@@ -365,15 +365,16 @@ public class ActivityMain extends AppCompatActivity
         //----------------------------------------------------------------------
         // Send Button event listener
         //----------------------------------------------------------------------
-        Button button_send = (Button)findViewById(R.id.button_send);
+        Button button_send = findViewById(R.id.button_send);
         button_send.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
-                Log.i("cmarpt", "send button selected");
-                emailActivityReport();
+                Log.i(TAG, "send button selected");
                 CMAActivityInfo cma_activity = new CMAActivityInfo();
+                //checkEmailSettings(cma_activity.mDataCMAActivity);
+                emailActivityReport();
                 cma_activity.mDataCMAActivity.setProperties();
             }
         });
@@ -394,7 +395,6 @@ public class ActivityMain extends AppCompatActivity
     }
 
 
-    //**************************************************************************
     /**
      * Handle action bar menu item selection
      * @param item
@@ -426,7 +426,6 @@ public class ActivityMain extends AppCompatActivity
                         Toast.LENGTH_SHORT).show();
                 cma_activity = new CMAActivityInfo();
                 cma_activity.mDataCMAActivity.getProperties();
-                cma_activity.mDataCMAActivity.extractProperties();
                 cma_activity.setCMAActivityData();
                 break;
 
@@ -434,7 +433,7 @@ public class ActivityMain extends AppCompatActivity
                 Toast.makeText(this, "Action Bar Clear Menu Item",
                         Toast.LENGTH_SHORT).show();
                 cma_activity = new CMAActivityInfo();
-                cma_activity.mDataCMAActivity.createDefaultProperties();
+                //cma_activity.mDataCMAActivity.createDefaultProperties();
                 cma_activity.setCMAActivityData();
                 break;
 
@@ -555,18 +554,35 @@ public class ActivityMain extends AppCompatActivity
     ///////////////////////// PRIVATE MEMBER FUNCTIONS /////////////////////////
     ////////////////////////////////////////////////////////////////////////////
     /**
-     * Builds CMA activity report and EMails it to the location specified in
-     * the settings dialog.
+     * Verifies email settings have been specified
+     * @return true if local email settings have been specified
      */
-    public void emailActivityReport()
+    private Boolean checkEmailSettings(DataCMAActivity dataCmaActivity)
     {
-        Log.i(TAG, "emailActivityReport()");
+        Log.i(TAG, "checkEmailSettings()");
+        Boolean settings_initialized = true;
 
-        // get email settings
-        DataActivitySettings data_settings = new DataActivitySettings(this);
-        Log.i(TAG, "Report Settings: " + data_settings);
+        if(dataCmaActivity.mEmailInit.equals(getString(R.string.boolean_false)))
+        {
+            settings_initialized = false;
+        }
 
-        // get report information and generate report text
+        return settings_initialized;
+    }
+
+
+    /**
+     * Builds CMA activity report and EMails it to the location specified in
+     * the settings dialog.  Note that the Intent Extras are already defined
+     * for send mail.
+     */
+    private void emailActivityReport()
+    {
+        // get all settings
+        DataCMAActivity data_cma = new DataCMAActivity(this);
+        Log.i(TAG, "emailActivityReport(): report settings: " + data_cma.toString());
+
+        // get report information and generate report text from widgets
         CMAActivityInfo activity_info = new CMAActivityInfo();
         String     activity_report = activity_info.buildActivityReport();
         Log.i(TAG, "Activity Report: " + activity_report);
@@ -574,9 +590,9 @@ public class ActivityMain extends AppCompatActivity
         // send the email
         Intent send_email = new Intent(Intent.ACTION_SEND);
         send_email.setType(("message/rfc822"));
-        send_email.putExtra(Intent.EXTRA_EMAIL,   new String[] {data_settings.mEmailAddr});
-        send_email.putExtra(Intent.EXTRA_SUBJECT, data_settings.mEmailSubject);
-        send_email.putExtra(Intent.EXTRA_TEXT,    activity_info.buildActivityReport());
+        send_email.putExtra(Intent.EXTRA_EMAIL,   new String[] {data_cma.mEmailAddr});
+        send_email.putExtra(Intent.EXTRA_SUBJECT, data_cma.mEmailSubject);
+        send_email.putExtra(Intent.EXTRA_TEXT,    activity_report);
 
         try
         {
@@ -643,22 +659,21 @@ public class ActivityMain extends AppCompatActivity
             Context context  = getApplicationContext();
             mDataCMAActivity = new DataCMAActivity(context);
 
-            // get the widgets
-            mEditViewEventName      = (EditText)findViewById((R.id.editTextEventName));
-            mTextViewEventType      = (TextView)findViewById((R.id.textViewEventType));
-            mTextViewEventDate      = (TextView)findViewById((R.id.textViewEventDate));
-            mEditTextAttend         = (EditText)findViewById((R.id.editTextEventAttend));
-            mEditTextSalvations     = (EditText)findViewById((R.id.editTextSalvations));
-            mEditTextRededications  = (EditText)findViewById((R.id.editTextRededications));
-            mEditTextOtherMinistery = (EditText)findViewById((R.id.editTextOther));
-            mEditTextComments       = (EditText)findViewById((R.id.editTextComment));
+            // get/initialize the widget identifiers
+            mEditViewEventName      = findViewById((R.id.editTextEventName));
+            mTextViewEventType      = findViewById((R.id.textViewEventType));
+            mTextViewEventDate      = findViewById((R.id.textViewEventDate));
+            mEditTextAttend         = findViewById((R.id.editTextEventAttend));
+            mEditTextSalvations     = findViewById((R.id.editTextSalvations));
+            mEditTextRededications  = findViewById((R.id.editTextRededications));
+            mEditTextOtherMinistery = findViewById((R.id.editTextOther));
+            mEditTextComments       = findViewById((R.id.editTextComment));
 
             // get current widget data
             getCMAActivityData();
         }
 
 
-        /***********************************************************************
         /**
          *  Get CMA activity information from the widgets and saves their
          *  values to program storage
@@ -678,7 +693,6 @@ public class ActivityMain extends AppCompatActivity
         }
 
 
-        /***********************************************************************
         /**
          * Sets CMA Activity Data from local storage
          */
@@ -705,14 +719,15 @@ public class ActivityMain extends AppCompatActivity
         public String buildActivityReport()
         {
             String activity_report =
-                    "Event = "            + mDataCMAActivity.mEventName     +
-                    ", Event Type = "     + mDataCMAActivity.mEventType     +
-                    ", Event Date = "     + mDataCMAActivity.mEventDate     +
-                    ", CMA Attendance = " + mDataCMAActivity.mCMAAttendence +
-                    ", Salvations = "     + mDataCMAActivity.mSalvations    +
-                    ", Rededications = "  + mDataCMAActivity.mRededications +
-                    ", Other = "          + mDataCMAActivity.mOtherMinistry +
-                    ", Comment: "         + mDataCMAActivity.mComments;
+                    "From = "               + mDataCMAActivity.mEmailFrom     +
+                    ", \nEvent = "          + mDataCMAActivity.mEventName     +
+                    ", \nEvent Type = "     + mDataCMAActivity.mEventType     +
+                    ", \nEvent Date = "     + mDataCMAActivity.mEventDate     +
+                    ", \nCMA Attendance = " + mDataCMAActivity.mCMAAttendence +
+                    ", \nSalvations = "     + mDataCMAActivity.mSalvations    +
+                    ", \nRededications = "  + mDataCMAActivity.mRededications +
+                    ", \nOther = "          + mDataCMAActivity.mOtherMinistry +
+                    ", \nComment: "         + mDataCMAActivity.mComments;
 
             return activity_report;
         }

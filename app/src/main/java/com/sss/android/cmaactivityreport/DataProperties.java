@@ -18,93 +18,86 @@ import java.util.Properties;
  */
 abstract class DataProperties
 {
-    private final static String TAG = "DataProperties";
+    private final static String TAG            = "DataProperties";
+    private final static String PROP_FILE_NAME = "CMA_Report.properties";
 
     public Context    mDataContext;
     public Properties mProperties;
-    public String     mPropFileName;
+
+    private File mPropFile;
 
 
     /**
      * Default Constructor
      */
-    public DataProperties(Context context, String propFileName)
+    public DataProperties(Context context)
     {
         mDataContext  = context;
         mProperties   = new Properties();
-        mPropFileName = propFileName;
+        mPropFile     = getPropertyFile();
+
+        getPropertiesFromFile();
     }
 
 
-    //**************************************************************************
     /**
      * Get report properties from the property file and set widget values.
      * Verify the properties file exists.  If it does not then create it.
      */
-    public void getProperties()
+    public void getPropertiesFromFile()
     {
-        Log.i(TAG, "getProperties()");
-        File prop_file = new File(mDataContext.getFilesDir(), mPropFileName);
+        Log.i(TAG, "getProperties(): file = " + PROP_FILE_NAME);
 
-        if(!prop_file.exists())
+        try
         {
-            // here the property file does not exits, create default
-            Log.i(TAG, "getProperties() - property file does not exist");
-            try
-            {
-                prop_file.createNewFile();
-                createDefaultProperties();
-                OutputStream out = new FileOutputStream(prop_file);
-                mProperties.store(out, "");
-            }
-            catch(IOException ioe)
-            {
-                Log.e(TAG, "could not create properties file: " + ioe.toString());
-            }
+            // read properties from file
+            InputStream in = new FileInputStream(mPropFile);
+            mProperties.load(in);
+            getProperties();
         }
-        else
+        catch(FileNotFoundException fnf)
         {
-            // here the properties file exits, read it
-            Log.i(TAG, "getProperties() - property file found");
-            try
-            {
-                InputStream in = new FileInputStream(prop_file);
-                mProperties.load(in);
-                extractProperties();
-            }
-            catch(FileNotFoundException fnf)
-            {
-                Log.e(TAG, "could not find properties file: " + fnf.toString());
-            }
-            catch(IOException ioe)
-            {
-                Log.e(TAG, "could not read properties file" + ioe.toString());
-            }
+            Log.e(TAG, "could not find properties file: " + fnf.toString());
+        }
+        catch(IOException ioe)
+        {
+            Log.e(TAG, "could not read properties file" + ioe.toString());
         }
 
-        Log.i(TAG, "settings = " + toString());
+        Log.i(TAG, "getProperties(): settings = " + toString());
     }   // end
 
 
     /**
-     * Sets specified property file value locally and in the properties file.
-     * @param propKey properities key
-     * @param propValue properities value
+     * Sets specified property file value locally.  This value must be written
+     * to the properties file with saveProperties
+     *
+     * @param propKey property key
+     * @param propValue property value
      */
     public void setProperty(String propKey, String propValue)
     {
         Log.i(TAG, "setProperty(key = " + propKey + ", value = " + propValue +")");
-        File prop_file = new File(mDataContext.getFilesDir(), mPropFileName);
+        mProperties.setProperty(propKey, propValue);
+     }
 
+
+    /**
+     * Saves properties to property file
+     */
+    public void saveProperties()
+    {
+        Log.i(TAG, "saveProperties(): saving properties to file: " +
+                mPropFile.getName());
         try
         {
-            mProperties.setProperty(propKey, propValue);
-            OutputStream out = new FileOutputStream(prop_file);
-            mProperties.store(out, "");
+            OutputStream out_str = new FileOutputStream(mPropFile);
+            mProperties.store(out_str, "");
         }
         catch(IOException ioe)
         {
-            Log.e(TAG, "could not save property to file: " + ioe.toString());
+            Log.e(TAG, "ERROR - could not save properties to file: " +
+                    ioe.toString());
         }
     }
 
@@ -118,6 +111,37 @@ abstract class DataProperties
     /**
      * Extracts property values
      */
-    abstract void extractProperties();
+    abstract void getProperties();
+
+
+    ////////////////////////////////////////////////////////////////////////////
+    /////////////////////////// PRIVATE MEMBER FUNCTIONS ///////////////////////
+    ////////////////////////////////////////////////////////////////////////////
+    private File getPropertyFile()
+    {
+        Log.i(TAG, "getPropertyFile(): file = " + PROP_FILE_NAME);
+
+        File prop_file = new File(mDataContext.getFilesDir(), PROP_FILE_NAME);
+
+        if(!prop_file.exists())
+        {
+            // here the property file does not exist, create it and initialize
+            Log.i(TAG, "getPropertyFile(): property file does not exist, creating");
+
+            try
+            {
+                prop_file.createNewFile();
+                createDefaultProperties();
+                OutputStream out = new FileOutputStream(mPropFile);
+                mProperties.store(out, "");
+            }
+            catch(IOException ioe)
+            {
+                Log.e(TAG, "ERROR - could not create property file: " + PROP_FILE_NAME);
+            }
+        }
+
+        return prop_file;
+    }
 
 }   // end public class DataProperties

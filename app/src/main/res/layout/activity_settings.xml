@@ -129,14 +129,26 @@
     <!-- USE and ABORT buttons -->
 
     <Button
+        android:id="@+id/settings_button_use"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="USE"
-        android:id="@+id/settings_button_use"
         android:onClick="onClickSettingsButtonUse"
         android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"/>
+
+    <!--
+    <Button
+        android:id="@+id/settings_button_reset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="RESET"
+        android:onClick="onClickSettingsButtonUse"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
+        -->
 
     <Button
         android:layout_width="wrap_content"

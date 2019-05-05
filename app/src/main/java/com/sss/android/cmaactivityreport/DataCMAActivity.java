@@ -26,6 +26,7 @@ public class DataCMAActivity extends DataProperties
     private final static String KEY_OTHER_MINISTRY = "key_other_ministry";
     private final static String KEY_COMMENTS       = "key_comments";
 
+    private final static String KEY_EMAIL_INIT     = "key_email_init";
     private final static String KEY_EMAIL_TO       = "key_email_to";
     private final static String KEY_EMAIL_ADDR     = "key_email_addr";
     private final static String KEY_EMAIL_FROM     = "key_email_from";
@@ -43,6 +44,7 @@ public class DataCMAActivity extends DataProperties
     public String  mComments;
 
     // member variable for the report settings
+    public String mEmailInit;
     public String mEmailTo;
     public String mEmailAddr;
     public String mEmailFrom;
@@ -56,35 +58,31 @@ public class DataCMAActivity extends DataProperties
      */
     public DataCMAActivity(Context context)
     {
-        super(context, PROP_FILE_NAME);
+        super(context);
+
+        getProperties();
     }   // end public DataReport(Context context)
 
 
     /**
      * Required for classes that extend abstract class DataProperties
-     * Creates default properties file and populates settings data with
-     * default value.
+     * Extracts the properties from the properties file
      */
-    public void createDefaultProperties()
+    public void getProperties()
     {
-        // defalut properties values
-        mEventName         = "CMA Event";
+        // event data
+        mEventName     = mProperties.getProperty(KEY_EVENT_NAME);
+        mEventType     = mProperties.getProperty(KEY_EVENT_TYPE);
+        mEventDate     = mProperties.getProperty(KEY_EVENT_DATE);
+        mCMAAttendence = mProperties.getProperty(KEY_ATTENDENCE);
+        mSalvations    = mProperties.getProperty(KEY_SALVATIONS);
+        mRededications = mProperties.getProperty(KEY_REDEDICATIONS);
+        mOtherMinistry = mProperties.getProperty(KEY_OTHER_MINISTRY);
+        mComments      = mProperties.getProperty(KEY_COMMENTS);
 
-        int event_type     = ActivityEventTypes.EVENT_TYPE_SECULAR;
-        mEventType         = ActivityEventTypes.CMAActivityTypes[event_type];
+        getEmailProperties();
 
-        UtilDate util_date = new UtilDate();
-        mEventDate         = util_date.toString();
-
-        mCMAAttendence     = Integer.toString(0);
-        mSalvations        = Integer.toString(0);
-        mRededications     = Integer.toString(0);
-        mOtherMinistry     = Integer.toString(0);
-
-        mComments          = "No Event Comments";
-
-        // create the properties data structure
-        setProperties();
+        Log.i(TAG, "extractProperties(): " + toString());
     }
 
 
@@ -104,42 +102,29 @@ public class DataCMAActivity extends DataProperties
         setProperty(KEY_COMMENTS,       mComments);
 
         // email settings
+        setProperty(KEY_EMAIL_INIT,     mEmailInit);
+
+        // save properties to file
+        saveProperties();
 
         Log.i(TAG, "setProperties(): " + toString());
     }
 
 
     /**
-     * Required for classes that extend abstract class DataProperties
-     * Extracts the properties from the properties file
+     * Saves email parameters xml persistence file.
      */
-    public void extractProperties()
+    public void saveEmailProperties()
     {
-        // event data
-        mEventName     = mProperties.getProperty(KEY_EVENT_NAME);
-        mEventType     = mProperties.getProperty(KEY_EVENT_TYPE);
-        mEventDate     = mProperties.getProperty(KEY_EVENT_DATE);
-        mCMAAttendence = mProperties.getProperty(KEY_ATTENDENCE);
-        mSalvations    = mProperties.getProperty(KEY_SALVATIONS);
-        mRededications = mProperties.getProperty(KEY_REDEDICATIONS);
-        mOtherMinistry = mProperties.getProperty(KEY_OTHER_MINISTRY);
-        mComments      = mProperties.getProperty(KEY_COMMENTS);
-
-        getEmailProperties();
-
-        Log.i(TAG, "extractProperties(): " + toString());
-    }
-
-
-    /**
-     * Sets email parameters
-     */
-    public void setEmailProperties()
-    {
+        setProperty(KEY_EMAIL_INIT,    mEmailInit);
         setProperty(KEY_EMAIL_TO,      mEmailTo);
         setProperty(KEY_EMAIL_ADDR,    mEmailAddr);
         setProperty(KEY_EMAIL_FROM,    mEmailFrom);
         setProperty(KEY_EMAIL_SUBJECT, mEmailSubject);
+
+        saveProperties();
+
+        Log.i(TAG, "saveEmailProperties()" + toStringEmail());
     }
 
 
@@ -148,6 +133,8 @@ public class DataCMAActivity extends DataProperties
      */
     public void getEmailProperties()
     {
+        mEmailInit = mProperties.getProperty(KEY_EMAIL_INIT,
+                mDataContext.getString(R.string.settings_email_init_def));
         mEmailTo = mProperties.getProperty(KEY_EMAIL_TO,
                 mDataContext.getString(R.string.settings_email_to_def));
         mEmailAddr = mProperties.getProperty(KEY_EMAIL_ADDR,
@@ -174,6 +161,7 @@ public class DataCMAActivity extends DataProperties
                 ", reded = "        + mRededications    +
                 ", other = "        + mOtherMinistry    +
                 ", comments = "     + mComments         +
+                ", email init = "   + mEmailInit        +
                 ", email to = "     + mEmailTo          +
                 ", email addr = "   + mEmailAddr        +
                 ", email from = "   + mEmailFrom        +
@@ -181,5 +169,71 @@ public class DataCMAActivity extends DataProperties
 
         return ret_str;
     }
+
+
+    /**
+     * Implements the toString() function for just the email settings
+     */
+    public String toStringEmail()
+    {
+        String ret_str = ", email init = "   + mEmailInit        +
+                         ", email to = "     + mEmailTo          +
+                         ", email addr = "   + mEmailAddr        +
+                         ", email from = "   + mEmailFrom        +
+                         ", email sub = "    + mEmailSubject;
+
+        return ret_str;
+    }
+
+
+    /**
+     * Required for classes that extend abstract class DataProperties
+     * Creates default properties file and populates settings data with
+     * default value.
+     */
+    public void createDefaultProperties()
+    {
+        // default properties values
+        mEventName         = "CMA Event";
+
+        int event_type     = ActivityEventTypes.EVENT_TYPE_SECULAR;
+        mEventType         = ActivityEventTypes.CMAActivityTypes[event_type];
+
+        UtilDate util_date = new UtilDate();
+        mEventDate         = util_date.toString();
+
+        mCMAAttendence     = Integer.toString(0);
+        mSalvations        = Integer.toString(0);
+        mRededications     = Integer.toString(0);
+        mOtherMinistry     = Integer.toString(0);
+
+        mComments          = "No Event Comments";
+
+        // email defaults
+        setEmailToDefault();
+
+        // create the properties data structure
+        setProperties();
+    }
+
+    /**
+     * Sets email properties to default
+     */
+    public void setEmailToDefault()
+    {
+        mEmailInit         = mDataContext.getString(R.string.boolean_false);
+        mEmailTo           = mDataContext.getString(R.string.settings_email_to_def);
+        mEmailAddr         = mDataContext.getString(R.string.settings_email_addr_def);
+        mEmailFrom         = mDataContext.getString(R.string.settings_email_from_def);
+        mEmailSubject      = mDataContext.getString(R.string.settings_email_subject_def);
+    }
+
+
+    ///////////////////////////////////////////////////////////////////////////
+    //////////////////////// PRIVATE MEMBER FUNCTIONS /////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
+    /**
+     *
+     */
 
 }   // end public class DataCMAActivity

@@ -20,6 +20,8 @@ import java.util.Properties;
  */
 public class DataActivitySettings extends DataProperties
 {
+    private final static String TAG              = "DataActivitySettings";
+
     // settings data variables
     public String mEmailTo;
     public String mEmailAddr;
@@ -32,9 +34,6 @@ public class DataActivitySettings extends DataProperties
     public final static String KEY_EMAIL_FROM    = "EmailFrom";
     public final static String KEY_EMAIL_SUBJECT = "EmailSubject";
 
-    private final static String TAG              = "DataActivitySettings";
-    private final static String PROP_FILE_NAME   = "Setting.properties";
-
 
     //**************************************************************************
     /**
@@ -43,7 +42,7 @@ public class DataActivitySettings extends DataProperties
      */
     public DataActivitySettings(Context context)
     {
-        super(context, PROP_FILE_NAME);
+        super(context);
         getProperties();
     }   // end public DataActivitySettings
 
@@ -54,8 +53,10 @@ public class DataActivitySettings extends DataProperties
      */
     public String toString()
     {
-        String ret_str = "to = "     + mEmailTo   + ", addr = " + mEmailAddr +
-                         ", from = " + mEmailFrom + ", sub = "  + mEmailSubject;
+        String ret_str = "to = "     + mEmailTo   +
+                         ", addr = " + mEmailAddr +
+                         ", from = " + mEmailFrom +
+                         ", sub = "  + mEmailSubject;
         return ret_str;
     }
 
@@ -86,7 +87,7 @@ public class DataActivitySettings extends DataProperties
     /**
      * Extracts the properties from the properties file
      */
-    protected void extractProperties()
+    protected void getProperties()
     {
         mEmailTo      = mProperties.getProperty(KEY_EMAIL_TO);
         mEmailAddr    = mProperties.getProperty(KEY_EMAIL_ADDR);

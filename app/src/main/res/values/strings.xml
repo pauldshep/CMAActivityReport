@@ -34,6 +34,7 @@
     <!-- Email Setting Strings -->
     <string name="settings_action_bar_title">Activity Report Settings</string>
     <string name="settings_email_title">EMail</string>
+    <string name="settings_email_init_def">false</string>
     <string name="settings_email_to">To:</string>
     <string name="settings_email_to_def">Chapter Secretary</string>
     <string name="settings_email_addr">Addr:</string>
@@ -42,6 +43,9 @@
     <string name="settings_email_from_def">CMA User</string>
     <string name="settings_email_subject">Subject:</string>
     <string name="settings_email_subject_def">CMA Activity Report</string>
+    <string name="email_button_use">USE</string>
+    <string name="email_button_reset">RESET</string>
+    <string name="email_button_abort">ABORT</string>
 
     <!-- About Activity Strings -->
     <string name="activity_about_title">About CMA Activity Report</string>
@@ -51,4 +55,8 @@
         Shepherd Software Solutions.  Please direct any comments and suggestions
         to: pauldshep@gmail.com
     </string>
+
+    <!-- General Definitions - do not translate -->
+    <string name="boolean_true">true</string>
+    <string name="boolean_false">false</string>
 </resources>
