@@ -1,9 +1,13 @@
 package com.sss.android.cmaactivityreport;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -51,6 +55,48 @@ public class ActivitySettings extends AppCompatActivity
 
         Log.i(TAG, "onCreate(): " + mDataCMAActivity.toStringEmail());
     }
+
+
+    /**
+     * Creates the action bar menu items
+     * @param menu
+     */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.setting_actionbar_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+
+    /**
+     * Handle action bar menu item selection
+     * @param item
+     * @return always true
+     */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+
+        switch(item.getItemId())
+        {
+            case R.id.action_bar_settings_reset:
+                // reset settings
+                break;
+
+            case R.id.action_bar_settings_help:
+                // display the help dialog
+                break;
+
+            default:
+                Log.e("ActivitySettings",
+                        "action bar menu item not handled = " + item.getItemId());
+                break;
+        }
+
+        return true;
+    }   // end public boolean onOptionsItemSelected(MenuItem item)
 
 
     ////////////////////////////////////////////////////////////////////////////

@@ -46,6 +46,9 @@
     <string name="email_button_use">USE</string>
     <string name="email_button_reset">RESET</string>
     <string name="email_button_abort">ABORT</string>
+    <string name="email_action_bar_reset">Reset</string>
+    <string name="email_action_bar_help">Help</string>
+
 
     <!-- About Activity Strings -->
     <string name="activity_about_title">About CMA Activity Report</string>

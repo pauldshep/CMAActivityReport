@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!-- reset all fields -->
+    <item
+            android:id="@+id/action_bar_settings_reset"
+            android:title="@string/email_action_bar_reset"
+            app:showAsAction="never"/>
+
+    <!-- show help dialog -->
+    <item
+            android:id="@+id/action_bar_settings_help"
+            android:title="@string/email_action_bar_help"
+            app:showAsAction="never"/>
+</menu>
