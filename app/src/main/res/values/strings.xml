@@ -58,6 +58,14 @@
         Shepherd Software Solutions.  Please direct any comments and suggestions
         to: pauldshep@gmail.com
     </string>
+    <string name="activity_about_email_button">Email Issue</string>
+    <string name="activity_about_my_email_addr">pauldshep@gmail.com</string>
+    <string name="activity_about_email_subject">CMA Activity Report Comments</string>
+    <string name="activity_about_email_text">
+        User Info\n  Name:  \n  Chapter:  \n  Officer:  \n    Phone:  \n\n
+        Phone or Tablet\n  Manufacturer:  \n  Model:  \n  Operating System: \n\n
+        Description of Issue:\n\n
+    </string>
 
     <!-- General Definitions - do not translate -->
     <string name="boolean_true">true</string>
