@@ -19,22 +19,24 @@ import java.util.Properties;
 abstract class DataProperties
 {
     private final static String TAG            = "DataProperties";
-    private final static String PROP_FILE_NAME = "CMA_Report.properties";
+    //private final static String PROP_FILE_NAME = "CMA_Report.properties";
 
-    public Context    mDataContext;
-    public Properties mProperties;
+    public  Context    mDataContext;
+    public  Properties mProperties;
 
-    private File mPropFile;
+    private File       mPropFile;
+    private String     mPropFileName;
 
 
     /**
      * Default Constructor
      */
-    public DataProperties(Context context)
+    public DataProperties(Context context, String propFileName)
     {
         mDataContext  = context;
         mProperties   = new Properties();
-        mPropFile     = getPropertyFile();
+        mPropFileName = propFileName;
+        mPropFile     = getPropertyFile(propFileName);
 
         getPropertiesFromFile();
     }
@@ -46,7 +48,7 @@ abstract class DataProperties
      */
     public void getPropertiesFromFile()
     {
-        Log.i(TAG, "getProperties(): file = " + PROP_FILE_NAME);
+        Log.i(TAG, "getProperties(): file = " + mPropFileName);
 
         try
         {
@@ -117,11 +119,19 @@ abstract class DataProperties
     ////////////////////////////////////////////////////////////////////////////
     /////////////////////////// PRIVATE MEMBER FUNCTIONS ///////////////////////
     ////////////////////////////////////////////////////////////////////////////
-    private File getPropertyFile()
-    {
-        Log.i(TAG, "getPropertyFile(): file = " + PROP_FILE_NAME);
 
-        File prop_file = new File(mDataContext.getFilesDir(), PROP_FILE_NAME);
+    /**
+     * Gets the properties file associated with the specified property file
+     * name.  If it does not exist then it is created.
+     *
+     * @param propFileName property file name
+     * @return properties file
+     */
+    private File getPropertyFile(String propFileName)
+    {
+        Log.i(TAG, "getPropertyFile(): file = " + propFileName);
+
+        File prop_file = new File(mDataContext.getFilesDir(), propFileName);
 
         if(!prop_file.exists())
         {
@@ -137,7 +147,7 @@ abstract class DataProperties
             }
             catch(IOException ioe)
             {
-                Log.e(TAG, "ERROR - could not create property file: " + PROP_FILE_NAME);
+                Log.e(TAG, "ERROR - could not create property file: " + propFileName);
             }
         }
 

@@ -554,14 +554,16 @@ public class ActivityMain extends AppCompatActivity
     ////////////////////////////////////////////////////////////////////////////
     /**
      * Verifies email settings have been specified
+     *
+     * @param dataCMAEmail encapsulates email settings
      * @return true if local email settings have been specified
      */
-    private Boolean checkEmailSettings(DataCMAActivity dataCmaActivity)
+    private Boolean checkEmailSettings(DataCMAEmail dataCMAEmail)
     {
         Log.i(TAG, "checkEmailSettings()");
         Boolean settings_initialized = true;
 
-        if(dataCmaActivity.mEmailInit.equals(getString(R.string.boolean_false)))
+        if(dataCMAEmail.mEmailInit.equals(getString(R.string.boolean_false)))
         {
             settings_initialized = false;
         }
@@ -578,8 +580,8 @@ public class ActivityMain extends AppCompatActivity
     private void emailActivityReport()
     {
         // get all settings
-        DataCMAActivity data_cma = new DataCMAActivity(this);
-        Log.i(TAG, "emailActivityReport(): report settings: " + data_cma.toString());
+        DataCMAEmail data_email = new DataCMAEmail(this);
+        Log.i(TAG, "emailActivityReport(): report settings: " + data_email.toString());
 
         // get report information and generate report text from widgets
         CMAActivityInfo activity_info = new CMAActivityInfo();
@@ -589,8 +591,8 @@ public class ActivityMain extends AppCompatActivity
         // send the email
         Intent send_email = new Intent(Intent.ACTION_SEND);
         send_email.setType(("message/rfc822"));
-        send_email.putExtra(Intent.EXTRA_EMAIL,   new String[] {data_cma.mEmailAddr});
-        send_email.putExtra(Intent.EXTRA_SUBJECT, data_cma.mEmailSubject);
+        send_email.putExtra(Intent.EXTRA_EMAIL,   new String[] {data_email.mEmailAddr});
+        send_email.putExtra(Intent.EXTRA_SUBJECT, data_email.mEmailSubject);
         send_email.putExtra(Intent.EXTRA_TEXT,    activity_report);
 
         try
@@ -635,8 +637,9 @@ public class ActivityMain extends AppCompatActivity
      */
     private class CMAActivityInfo
     {
-        // class to hold, save, and recall activity data
+        // classes to hold, save, and recall activity data
         DataCMAActivity mDataCMAActivity;
+        DataCMAEmail    mDataCMAEmail;
 
         // application widgets
         private EditText mEditViewEventName;
@@ -657,6 +660,7 @@ public class ActivityMain extends AppCompatActivity
             // create class instance to hold the data
             Context context  = getApplicationContext();
             mDataCMAActivity = new DataCMAActivity(context);
+            mDataCMAEmail    = new DataCMAEmail(context);
 
             // get/initialize the widget identifiers
             mEditViewEventName      = findViewById((R.id.editTextEventName));
@@ -718,7 +722,7 @@ public class ActivityMain extends AppCompatActivity
         public String buildActivityReport()
         {
             String activity_report =
-                    "From = "               + mDataCMAActivity.mEmailFrom     +
+                    "From = "               + mDataCMAEmail.mEmailFrom        +
                     ", \nEvent = "          + mDataCMAActivity.mEventName     +
                     ", \nEvent Type = "     + mDataCMAActivity.mEventType     +
                     ", \nEvent Date = "     + mDataCMAActivity.mEventDate     +

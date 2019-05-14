@@ -23,6 +23,7 @@ public class ActivitySettings extends AppCompatActivity
 
     private Context         mAppContext;
     private DataCMAActivity mDataCMAActivity;
+    private DataCMAEmail    mDataCMAEmail;
 
 
     /**
@@ -44,16 +45,17 @@ public class ActivitySettings extends AppCompatActivity
         mEditTextEmailFrom    = findViewById(R.id.editText_email_from);
         mEditTextEmailSubject = findViewById(R.id.editText_email_subject);
 
-        // get current settings from dataCMAActivity
+        // get current settings
         mAppContext           = getApplicationContext();
         mDataCMAActivity      = new DataCMAActivity(mAppContext);
+        mDataCMAEmail         = new DataCMAEmail(mAppContext);
 
-        mEditTextEmailTo.setText(mDataCMAActivity.mEmailTo);
-        mEditTextEmailAddr.setText(mDataCMAActivity.mEmailAddr);
-        mEditTextEmailFrom.setText(mDataCMAActivity.mEmailFrom);
-        mEditTextEmailSubject.setText(mDataCMAActivity.mEmailSubject);
+        mEditTextEmailTo.setText(mDataCMAEmail.mEmailTo);
+        mEditTextEmailAddr.setText(mDataCMAEmail.mEmailAddr);
+        mEditTextEmailFrom.setText(mDataCMAEmail.mEmailFrom);
+        mEditTextEmailSubject.setText(mDataCMAEmail.mEmailSubject);
 
-        Log.i(TAG, "onCreate(): " + mDataCMAActivity.toStringEmail());
+        Log.i(TAG, "onCreate(): " + mDataCMAEmail.toString());
     }
 
 
@@ -110,18 +112,18 @@ public class ActivitySettings extends AppCompatActivity
      */
     public void onClickSettingsButtonUse(View view)
     {
-        mDataCMAActivity.mEmailInit    = mAppContext.getString(R.string.boolean_true);
-        mDataCMAActivity.mEmailTo      = mEditTextEmailTo.getText().toString();
-        mDataCMAActivity.mEmailAddr    = mEditTextEmailAddr.getText().toString();
-        mDataCMAActivity.mEmailFrom    = mEditTextEmailFrom.getText().toString();
-        mDataCMAActivity.mEmailSubject = mEditTextEmailSubject.getText().toString();
+        mDataCMAEmail.mEmailInit    = mAppContext.getString(R.string.boolean_true);
+        mDataCMAEmail.mEmailTo      = mEditTextEmailTo.getText().toString();
+        mDataCMAEmail.mEmailAddr    = mEditTextEmailAddr.getText().toString();
+        mDataCMAEmail.mEmailFrom    = mEditTextEmailFrom.getText().toString();
+        mDataCMAEmail.mEmailSubject = mEditTextEmailSubject.getText().toString();
 
         Toast.makeText(this, "Using New Application Settings",
                 Toast.LENGTH_SHORT).show();
 
-        mDataCMAActivity.saveEmailProperties();
+        mDataCMAEmail.saveProperties();
 
-        Log.i(TAG, "onClickSettingsButtonUse(): " + mDataCMAActivity.toStringEmail());
+        Log.i(TAG, "onClickSettingsButtonUse(): " + mDataCMAEmail.toString());
 
         // go back to the main activity
         finish();
