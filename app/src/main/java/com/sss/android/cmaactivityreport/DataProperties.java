@@ -48,13 +48,14 @@ abstract class DataProperties
      */
     public void getPropertiesFromFile()
     {
-        Log.i(TAG, "getProperties(): file = " + mPropFileName);
+        Log.i(TAG, "getPropertiesFromFile(): file = " + mPropFileName);
 
         try
         {
             // read properties from file
             InputStream in = new FileInputStream(mPropFile);
             mProperties.load(in);
+            Log.i(TAG, "getPropertiesFromFile(): properties = " + mProperties);
             getProperties();
         }
         catch(FileNotFoundException fnf)
@@ -66,7 +67,7 @@ abstract class DataProperties
             Log.e(TAG, "could not read properties file" + ioe.toString());
         }
 
-        Log.i(TAG, "getProperties(): settings = " + toString());
+        Log.i(TAG, "getPropertiesFromFile(): properties = " + mProperties);
     }   // end
 
 
@@ -87,10 +88,12 @@ abstract class DataProperties
     /**
      * Saves properties to property file
      */
-    public void saveProperties()
+    protected void savePropertiesToFile()
     {
-        Log.i(TAG, "saveProperties(): saving properties to file: " +
+        Log.i(TAG, "savePropertiesToFile(): file name = " +
                 mPropFile.getName());
+        Log.i(TAG, "savePropertiesToFile(): properties = " + mProperties);
+
         try
         {
             OutputStream out_str = new FileOutputStream(mPropFile);

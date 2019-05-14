@@ -130,7 +130,6 @@ public class ActivitySettings extends AppCompatActivity
     }
 
 
-    //**************************************************************************
     /**
      * Message handler for the settings activity ABORT button.  This goes back
      * to the main activity without making any changes to the settings.
@@ -144,8 +143,6 @@ public class ActivitySettings extends AppCompatActivity
         // go back to the previous activity
         finish();
     }
-
-
 
 
 }   // end public class ActivitySettings extends AppCompatActivity

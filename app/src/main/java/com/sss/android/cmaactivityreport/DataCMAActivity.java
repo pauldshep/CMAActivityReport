@@ -102,49 +102,11 @@ public class DataCMAActivity extends DataProperties
         setProperty(KEY_OTHER_MINISTRY, mOtherMinistry);
         setProperty(KEY_COMMENTS,       mComments);
 
-        // email settings
-        //setProperty(KEY_EMAIL_INIT,     mEmailInit);
-
         // save properties to file
-        saveProperties();
+        savePropertiesToFile();
 
         Log.i(TAG, "setProperties(): " + toString());
     }
-
-
-//    /**
-//     * Saves email parameters xml persistence file.
-//     */
-//    public void saveEmailProperties()
-//    {
-//        setProperty(KEY_EMAIL_INIT,    mEmailInit);
-//        setProperty(KEY_EMAIL_TO,      mEmailTo);
-//        setProperty(KEY_EMAIL_ADDR,    mEmailAddr);
-//        setProperty(KEY_EMAIL_FROM,    mEmailFrom);
-//        setProperty(KEY_EMAIL_SUBJECT, mEmailSubject);
-//
-//        saveProperties();
-//
-//        Log.i(TAG, "saveEmailProperties()" + toStringEmail());
-//    }
-
-
-//    /**
-//     * Extract email settings
-//     */
-//    public void getEmailProperties()
-//    {
-//        mEmailInit = mProperties.getProperty(KEY_EMAIL_INIT,
-//                mDataContext.getString(R.string.settings_email_init_def));
-//        mEmailTo = mProperties.getProperty(KEY_EMAIL_TO,
-//                mDataContext.getString(R.string.settings_email_to_def));
-//        mEmailAddr = mProperties.getProperty(KEY_EMAIL_ADDR,
-//                mDataContext.getString(R.string.settings_email_addr_def));
-//        mEmailFrom = mProperties.getProperty(KEY_EMAIL_FROM,
-//                mDataContext.getString(R.string.settings_email_from_def));
-//        mEmailSubject = mProperties.getProperty(KEY_EMAIL_SUBJECT,
-//                mDataContext.getString(R.string.settings_email_subject_def));
-//    }
 
 
     /**
@@ -165,21 +127,6 @@ public class DataCMAActivity extends DataProperties
 
         return ret_str;
     }
-
-
-//    /**
-//     * Implements the toString() function for just the email settings
-//     */
-//    public String toStringEmail()
-//    {
-//        String ret_str = ", email init = "   + mEmailInit        +
-//                         ", email to = "     + mEmailTo          +
-//                         ", email addr = "   + mEmailAddr        +
-//                         ", email from = "   + mEmailFrom        +
-//                         ", email sub = "    + mEmailSubject;
-//
-//        return ret_str;
-//    }
 
 
     /**
@@ -205,24 +152,9 @@ public class DataCMAActivity extends DataProperties
 
         mComments          = "No Event Comments";
 
-        // email defaults
-        //setEmailToDefault();
-
         // create the properties data structure
         setProperties();
     }
-
-//    /**
-//     * Sets email properties to default
-//     */
-//    public void setEmailToDefault()
-//    {
-//        mEmailInit         = mDataContext.getString(R.string.boolean_false);
-//        mEmailTo           = mDataContext.getString(R.string.settings_email_to_def);
-//        mEmailAddr         = mDataContext.getString(R.string.settings_email_addr_def);
-//        mEmailFrom         = mDataContext.getString(R.string.settings_email_from_def);
-//        mEmailSubject      = mDataContext.getString(R.string.settings_email_subject_def);
-//    }
 
 
     ///////////////////////////////////////////////////////////////////////////

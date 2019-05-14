@@ -372,9 +372,12 @@ public class ActivityMain extends AppCompatActivity
             public void onClick(View v)
             {
                 Log.i(TAG, "send button selected");
-                CMAActivityInfo cma_activity = new CMAActivityInfo();
-                //checkEmailSettings(cma_activity.mDataCMAActivity);
+
+                // email the activity report
                 emailActivityReport();
+
+                // save the activity information
+                CMAActivityInfo cma_activity = new CMAActivityInfo();
                 cma_activity.mDataCMAActivity.setProperties();
             }
         });
@@ -555,17 +558,57 @@ public class ActivityMain extends AppCompatActivity
     /**
      * Verifies email settings have been specified
      *
-     * @param dataCMAEmail encapsulates email settings
+     * @param dataCMAEmail encapsulates current email settings
      * @return true if local email settings have been specified
      */
     private Boolean checkEmailSettings(DataCMAEmail dataCMAEmail)
     {
         Log.i(TAG, "checkEmailSettings()");
         Boolean settings_initialized = true;
+        String  error_msg            = "NONE";
 
         if(dataCMAEmail.mEmailInit.equals(getString(R.string.boolean_false)))
         {
+            // Email Initialized: general setting
+            error_msg = "ERROR - email settings not initialized";
             settings_initialized = false;
+        }
+
+        if(dataCMAEmail.mEmailTo.equals(getString(R.string.settings_email_to_def)))
+        {
+            // Email To: send email to the chapter secretary
+            error_msg = "ERROR - chapter secretary not specified";
+            settings_initialized = false;
+        }
+
+        if(dataCMAEmail.mEmailAddr.equals(getString(R.string.settings_email_addr_def)))
+        {
+            // EMail Address: do not send this email to me please
+            error_msg = "ERROR - chapter secretary email address not specified";
+            settings_initialized = false;
+        }
+
+        if(dataCMAEmail.mEmailFrom.equals(getString(R.string.settings_email_from_def)))
+        {
+            // Email From
+            error_msg = "ERROR - email from not specified";
+            settings_initialized = false;
+        }
+
+
+//        if(dataCMAEmail.mEmailSubject.equals(getString(R.string.settings_email_subject_def)))
+//        {
+//            // Email Subject: OK to use default CMA Activity Report
+//            error_msg = "ERROR - email subject not specified";
+//            settings_initialized = false;
+//        }
+
+        // display an error message
+        if(settings_initialized == false)
+        {
+            Log.i(TAG, "checkEmailSettings(): " +
+                    "WARNING - email settings not initialized: " + error_msg);
+            Toast.makeText(this, error_msg, Toast.LENGTH_LONG).show();
         }
 
         return settings_initialized;
@@ -579,31 +622,42 @@ public class ActivityMain extends AppCompatActivity
      */
     private void emailActivityReport()
     {
-        // get all settings
+        // get email settings and verify they have been set
         DataCMAEmail data_email = new DataCMAEmail(this);
-        Log.i(TAG, "emailActivityReport(): report settings: " + data_email.toString());
+        Log.i(TAG, "emailActivityReport(): email settings: " + data_email.toString());
 
-        // get report information and generate report text from widgets
-        CMAActivityInfo activity_info = new CMAActivityInfo();
-        String     activity_report = activity_info.buildActivityReport();
-        Log.i(TAG, "Activity Report: " + activity_report);
-
-        // send the email
-        Intent send_email = new Intent(Intent.ACTION_SEND);
-        send_email.setType(("message/rfc822"));
-        send_email.putExtra(Intent.EXTRA_EMAIL,   new String[] {data_email.mEmailAddr});
-        send_email.putExtra(Intent.EXTRA_SUBJECT, data_email.mEmailSubject);
-        send_email.putExtra(Intent.EXTRA_TEXT,    activity_report);
-
-        try
+        if(checkEmailSettings(data_email) == false)
         {
-            startActivity(Intent.createChooser(send_email,
-                    "Send CMA Report Email"));
+            // display settings activity
+            Intent settings_intent = new Intent(getApplicationContext(),
+                    ActivitySettings.class);
+            startActivity(settings_intent);
         }
-        catch(android.content.ActivityNotFoundException ex)
+        else
         {
-            Toast.makeText(this, "WARNING: there are no email clients installed.",
-                    Toast.LENGTH_SHORT).show();
+
+            // get report information and generate report text from widgets
+            CMAActivityInfo activity_info = new CMAActivityInfo();
+            String activity_report = activity_info.buildActivityReport();
+            Log.i(TAG, "emailActivityReport(): report = " + activity_report);
+
+            // send the email
+            Intent send_email = new Intent(Intent.ACTION_SEND);
+            send_email.setType(("message/rfc822"));
+            send_email.putExtra(Intent.EXTRA_EMAIL, new String[]{data_email.mEmailAddr});
+            send_email.putExtra(Intent.EXTRA_SUBJECT, data_email.mEmailSubject);
+            send_email.putExtra(Intent.EXTRA_TEXT, activity_report);
+
+            try
+            {
+                startActivity(Intent.createChooser(send_email,
+                        "Send CMA Report Email"));
+            }
+            catch(android.content.ActivityNotFoundException ex)
+            {
+                Toast.makeText(this, "WARNING: there are no email clients installed.",
+                        Toast.LENGTH_SHORT).show();
+            }
         }
     }   // end public void emailActivityReport()
 

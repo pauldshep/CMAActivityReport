@@ -59,22 +59,7 @@ public class DataCMAEmail extends DataProperties
         mEmailSubject = mProperties.getProperty(KEY_EMAIL_SUBJECT,
                 mDataContext.getString(R.string.settings_email_subject_def));
 
-        Log.i(TAG, "extractProperties(): " + toString());
-    }
-
-
-    /**
-     * Sets property values
-     */
-    public void setProperties()
-    {
-        // email settings
-        setProperty(KEY_EMAIL_INIT,     mEmailInit);
-
-        // save properties to file
-        saveProperties();
-
-        Log.i(TAG, "setProperties(): " + toString());
+        Log.i(TAG, "getProperties(): " + toString());
     }
 
 
@@ -89,7 +74,7 @@ public class DataCMAEmail extends DataProperties
         setProperty(KEY_EMAIL_FROM,    mEmailFrom);
         setProperty(KEY_EMAIL_SUBJECT, mEmailSubject);
 
-        saveProperties();
+        savePropertiesToFile();
 
         Log.i(TAG, "saveEmailProperties()" + toString());
     }
@@ -127,7 +112,7 @@ public class DataCMAEmail extends DataProperties
         mEmailSubject      = mDataContext.getString(R.string.settings_email_subject_def);
 
         // create the properties data structure
-        setProperties();
+        //setProperties();
     }
 
 
