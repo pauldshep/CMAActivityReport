@@ -72,6 +72,10 @@ public class ActivitySettings extends AppCompatActivity
     }
 
 
+    ////////////////////////////////////////////////////////////////////////////
+    //////////////////////////// MESSAGE HANDLERS //////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////
+
     /**
      * Handle action bar menu item selection
      * @param item
@@ -84,7 +88,7 @@ public class ActivitySettings extends AppCompatActivity
         switch(item.getItemId())
         {
             case R.id.action_bar_settings_reset:
-                // reset settings
+                resetActivitySettingsToDefault();
                 break;
 
             case R.id.action_bar_settings_help:
@@ -99,11 +103,6 @@ public class ActivitySettings extends AppCompatActivity
 
         return true;
     }   // end public boolean onOptionsItemSelected(MenuItem item)
-
-
-    ////////////////////////////////////////////////////////////////////////////
-    //////////////////////////// MESSAGE HANDLERS //////////////////////////////
-    ////////////////////////////////////////////////////////////////////////////
 
     //**************************************************************************
     /**
@@ -144,6 +143,19 @@ public class ActivitySettings extends AppCompatActivity
         finish();
     }
 
+
+    ////////////////////////////////////////////////////////////////////////////
+    //////////////////////// PRIVATE MEMBER FUNCTIONS //////////////////////////
+    ////////////////////////////////////////////////////////////////////////////
+    private void resetActivitySettingsToDefault()
+    {
+        mDataCMAEmail.mEmailInit = getString(R.string.boolean_true);
+
+        mEditTextEmailTo.setText(getString(R.string.settings_email_to_def));
+        mEditTextEmailAddr.setText(getString(R.string.settings_email_addr_def));
+        mEditTextEmailFrom.setText(getString(R.string.settings_email_from_def));
+        mEditTextEmailSubject.setText(getString(R.string.settings_email_subject_def));
+    }
 
 }   // end public class ActivitySettings extends AppCompatActivity
 
