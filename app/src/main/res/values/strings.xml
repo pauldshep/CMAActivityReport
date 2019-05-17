@@ -53,6 +53,12 @@
     <string name="email_action_bar_reset">Reset</string>
     <string name="email_action_bar_help">Help</string>
 
+    <!-- Help button strings -->
+    <string name="help_attendance">Number of CMA Members at the event</string>
+    <string name="help_salvation">Those you personally prayed with to accept Christ as Lord and Savior</string>
+    <string name="help_rededication">Those you personally prayed with for rededication or recommitment to Christ</string>
+    <string name="help_other">Those you personally prayed with or helped in a matter other than salvation or rededication</string>
+
 
     <!-- About Activity Strings -->
     <string name="activity_about_title">About CMA Activity Report</string>

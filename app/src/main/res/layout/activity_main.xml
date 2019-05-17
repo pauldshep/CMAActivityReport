@@ -37,15 +37,7 @@
                     android:layout_marginStart="8dp"
                     app:layout_constraintTop_toTopOf="@+id/textView_other"
                     app:layout_constraintBottom_toBottomOf="@+id/textView_other"/>
-            <ImageButton
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
-                    app:srcCompat="@android:drawable/ic_menu_help"
-                    android:id="@+id/imageButtonSlavationHelp"
-                    app:layout_constraintStart_toEndOf="@+id/textView_salvations"
-                    android:layout_marginStart="8dp"
-                    app:layout_constraintTop_toTopOf="@+id/textView_salvations"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView_salvations"/>
+
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -124,10 +116,10 @@
 
             <!-- Event Date -->
             <TextView
-                    android:id="@+id/textViewDateTitle"
                     android:layout_width="64dp"
                     android:layout_height="wrap_content"
                     android:text="@string/event_date"
+                    android:id="@+id/textViewDateTitle"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:layout_alignParentStart="true"
                     android:gravity="center_vertical"
@@ -140,13 +132,13 @@
                     app:layout_constraintTop_toBottomOf="@+id/textViewTypeTitle"/>
 
             <TextView
-                    android:id="@+id/textViewEventDate"
                     android:layout_width="215dp"
                     android:layout_height="28dp"
                     android:inputType="date"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:text="@string/edittext_date"
                     android:ems="10"
+                    android:id="@+id/textViewEventDate"
                     android:layout_alignStart="@+id/textViewEventType"
                     android:layout_alignEnd="@+id/textViewEventType"
                     android:layout_below="@+id/textViewEventType"
@@ -190,6 +182,16 @@
                     android:layout_marginStart="24dp"
                     app:layout_constraintStart_toStartOf="parent"/>
 
+            <ImageButton
+                    android:id="@+id/imageButtonAttendHelp"
+                    app:srcCompat="@android:drawable/ic_menu_help"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    app:layout_constraintTop_toTopOf="@+id/eventAttend"
+                    app:layout_constraintBottom_toBottomOf="@+id/eventAttend"
+                    app:layout_constraintStart_toEndOf="@+id/eventAttend"
+                    android:layout_marginStart="8dp"/>
+
             <EditText
                     android:id="@+id/editTextEventAttend"
                     android:layout_width="122dp"
@@ -202,8 +204,9 @@
                     android:layout_below="@+id/textView_totals"
                     app:layout_constraintBottom_toBottomOf="@+id/eventAttend"
                     app:layout_constraintTop_toTopOf="@+id/eventAttend"
-                    app:layout_constraintStart_toStartOf="@+id/editTextSalvations"
-                    app:layout_constraintVertical_bias="0.761"/>
+                    app:layout_constraintVertical_bias="0.272"
+                    app:layout_constraintStart_toEndOf="@+id/imageButtonAttendHelp"
+                    android:layout_marginStart="8dp"/>
 
             <!-- Number of Salvations -->
             <TextView
@@ -222,6 +225,15 @@
                     android:layout_marginStart="24dp"
                     app:layout_constraintStart_toStartOf="parent"/>
 
+            <ImageButton
+                    android:id="@+id/imageButtonSalvationHelp"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    app:srcCompat="@android:drawable/ic_menu_help"
+                    app:layout_constraintStart_toEndOf="@+id/textView_salvations"
+                    android:layout_marginStart="8dp"
+                    app:layout_constraintTop_toTopOf="@+id/textView_salvations"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView_salvations"/>
 
             <EditText
                     android:layout_width="122dp"
@@ -235,7 +247,7 @@
                     app:layout_constraintBottom_toBottomOf="@+id/textView_salvations"
                     app:layout_constraintTop_toTopOf="@+id/textView_salvations"
                     app:layout_constraintVertical_bias="0.333"
-                    app:layout_constraintStart_toEndOf="@+id/imageButtonSlavationHelp"
+                    app:layout_constraintStart_toEndOf="@+id/imageButtonSalvationHelp"
                     android:layout_marginStart="8dp"/>
 
             <!-- Number of rededications -->

@@ -3,7 +3,6 @@ package com.sss.android.cmaactivityreport;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.media.Image;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -14,7 +13,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.*;
-import org.w3c.dom.Text;
 
 
 /**
@@ -242,25 +240,24 @@ public class ActivityMain extends AppCompatActivity
         //----------------------------------------------------------------------
         // Help Buttons
         //----------------------------------------------------------------------
-        ImageButton ib_other_help = findViewById(R.id.imageButtonOtherHelp);
-        ib_other_help.setOnClickListener(new View.OnClickListener()
+
+        ImageButton ib_attend = findViewById(R.id.imageButtonAttendHelp);
+        ib_attend.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
-                helpDialog("Other Ministry",
-                    "Those you personally prayed with or helped in a matter other than salvation or rededication");
+                helpDialog("Attendance", getString(R.string.help_attendance));
             }
         });
 
-        ImageButton ib_salvation    = findViewById(R.id.imageButtonSlavationHelp);
+        ImageButton ib_salvation = findViewById(R.id.imageButtonSalvationHelp);
         ib_salvation.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
-                helpDialog("Salvation",
-                        "Those you personally prayed with to accept Christ as Lord and Savior");
+                helpDialog("Salvation", getString(R.string.help_salvation));
             }
         });
 
@@ -270,8 +267,17 @@ public class ActivityMain extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                helpDialog("Rededication",
-                        "Those you personally prayed with for rededication or recommitment to Christ");
+                helpDialog("Rededication", getString(R.string.help_rededication));
+            }
+        });
+
+        ImageButton ib_other_help   = findViewById(R.id.imageButtonOtherHelp);
+        ib_other_help.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                helpDialog("Other Ministry", getString(R.string.help_other));
             }
         });
 
