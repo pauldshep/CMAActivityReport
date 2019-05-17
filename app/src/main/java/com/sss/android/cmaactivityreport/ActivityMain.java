@@ -27,9 +27,15 @@ public class ActivityMain extends AppCompatActivity
     private final static String EVENT_DATE = "event_date";
 
     // widget variables
-    private TextView mTextViewEventType;
-    private TextView mTextViewEventDate;
-    private TextView mTextViewComment;
+    private EditText mEditTextEventName;    // event name
+    private TextView mTextViewEventType;    // event type
+    private TextView mTextViewDateTitle;    // title string for event date
+    private TextView mTextViewEventDate;    // event date
+    private TextView mTextViewComment;      // general comments
+    private EditText mEditTextAttend;       // event cma attendance
+    private EditText mEditTextSalvations;   // number of salvations
+    private EditText mEditTextRededicate;   // number of rededications
+    private EditText mEditTextOther;
 
     private Boolean  mIsInitialized;
 
@@ -50,22 +56,24 @@ public class ActivityMain extends AppCompatActivity
         mIsInitialized = false;
 
         // lookup widgets
-        mTextViewEventType = findViewById(R.id.textViewEventType);
-        mTextViewEventDate = findViewById(R.id.textViewEventDate);
-        mTextViewComment   = findViewById(R.id.textViewComment);
+        mEditTextEventName  = findViewById(R.id.editTextEventName);
+        mTextViewEventType  = findViewById(R.id.textViewEventType);
+        mTextViewDateTitle  = findViewById(R.id.textViewDateTitle);
+        mTextViewEventDate  = findViewById(R.id.textViewEventDate);
+        mTextViewComment    = findViewById(R.id.textViewComment);
+        mEditTextAttend     = findViewById(R.id.editTextEventAttend);
+        mEditTextSalvations = findViewById(R.id.editTextSalvations);
+        mEditTextRededicate = findViewById(R.id.editTextRededications);
+        mEditTextOther      = findViewById(R.id.editTextOther);
 
         // configure the action bar and handle its messages
         ActionBar action_bar = getSupportActionBar();
         action_bar.setTitle(R.string.actionbar_title);
 
-        // configure the event type display
-        Intent this_intent      = getIntent();
-        int event_type          = this_intent.getIntExtra(ActivityEventTypes.EVENT_TYPE, ActivityEventTypes.DEFAULT_EVENT_TYPE);
-        mTextViewEventType.setText(ActivityEventTypes.CMAActivityTypes[event_type]);
 
-        // configure the date display
-        UtilDate util_date      = new UtilDate();
-        mTextViewEventDate.setText(util_date.toString());
+
+        // set report parameters to their default values
+        setReportParametersToDefault();
 
 
         ////////////////////////////////////////////////////////////////////////
@@ -75,33 +83,32 @@ public class ActivityMain extends AppCompatActivity
         //----------------------------------------------------------------------
         // Event Name message handler
         //----------------------------------------------------------------------
-        final TextView text_view_event_name = (TextView)findViewById(R.id.editTextEventName);
-        text_view_event_name.setOnClickListener(new View.OnClickListener()
+        mEditTextEventName.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View view)
             {
-                String event_name = text_view_event_name.getText().toString();
+                String event_name = mEditTextEventName.getText().toString();
                 String def_name   = getString(R.string.edittext_def_event_name);
                 if(event_name.equals(def_name))
                 {
-                    text_view_event_name.setText("");
+                    mEditTextEventName.setText("");
                 }
             }
         });
 
-        text_view_event_name.setOnFocusChangeListener(new View.OnFocusChangeListener()
+        mEditTextEventName.setOnFocusChangeListener(new View.OnFocusChangeListener()
         {
             @Override
             public void onFocusChange(View view, boolean hasFocus)
             {
                 if((mIsInitialized == true) && (hasFocus == true))
                 {
-                    String event_name = text_view_event_name.getText().toString();
+                    String event_name = mEditTextEventName.getText().toString();
                     String def_name   = getString(R.string.edittext_def_event_name);
                     if(event_name.equals(def_name))
                     {
-                        text_view_event_name.setText("");
+                        mEditTextEventName.setText("");
                     }
                 }
                 else
@@ -143,44 +150,14 @@ public class ActivityMain extends AppCompatActivity
         //----------------------------------------------------------------------
         // Event Date TextView
         //----------------------------------------------------------------------
-        TextView text_view_date_title = (TextView)findViewById(R.id.textViewDateTitle);
-        text_view_date_title.setOnClickListener(new View.OnClickListener()
+        mTextViewDateTitle.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
-                Log.i("ActivityMain", "Date onClick() start");
-
-                DatePickerFragment date_picker = new DatePickerFragment()
-                {
-                    /**
-                     * Override onDateSet().  This function is called when the
-                     * date picker OK button is selected. It is not called if
-                     * CANCEL is selected and the specified date will remain
-                     * the current date.
-                     *
-                     * @param view of the date picker dialog fragment
-                     * @param year user specified year
-                     * @param month user specified month
-                     * @param day user specified day
-                     */
-                    public void onDateSet(DatePicker view, int year, int month, int day)
-                    {
-                        int    loc_month = month + 1;
-                        String date_str  =  loc_month + "-" + day + "-" + year;
-                        Log.i("ActivityMain", "specified date = " + date_str);
-                        TextView date_text_view = (TextView)findViewById(R.id.textViewEventDate);
-                        date_text_view.setText(date_str);
-                    }
-                };
-
-                UtilDate util_date = new UtilDate();
-                date_picker.setArguments(util_date.buildBundle());
-                date_picker.show(getFragmentManager(), "datePicker");
-
-                String date_fr_picker   = date_picker.toString();
-                Log.d("ActivityMain", "Date onClick() end " + date_fr_picker);
-            }
+                Log.i(TAG, "mTextViewDateTitle.setOnClickListener()");
+                displayDatePicker();
+            }   // end mTextViewDateTitle.setOnClickListener
         });
 
         mTextViewEventDate.setOnClickListener(new View.OnClickListener()
@@ -188,38 +165,9 @@ public class ActivityMain extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                Log.i("ActivityMain", "Date onClick() start");
-
-                DatePickerFragment date_picker = new DatePickerFragment()
-                {
-                    /**
-                     * Override onDateSet().  This function is called when the
-                     * date picker OK button is selected. It is not called if
-                     * CANCEL is selected and the specified date will remain
-                     * the current date.
-                     *
-                     * @param view of the date picker dialog fragment
-                     * @param year user specified year
-                     * @param month user specified month
-                     * @param day user specified day
-                     */
-                    public void onDateSet(DatePicker view, int year, int month, int day)
-                    {
-                        int loc_month = month + 1;
-                        String date_str =  loc_month + "-" + day + "-" + year;
-                        Log.i("ActivityMain", "specified date = " + date_str);
-                        TextView date_text_view = (TextView)findViewById(R.id.textViewEventDate);
-                        date_text_view.setText(date_str);
-                    }
-                };
-
-                UtilDate util_date = new UtilDate();
-                date_picker.setArguments(util_date.buildBundle());
-                date_picker.show(getFragmentManager(), "datePicker");
-
-                String date_fr_picker = date_picker.toString();
-                Log.d("ActivityMain", "Date onClick() end " + date_fr_picker);
-            }   // end public void onClick(View v)
+                Log.i(TAG, "mTextViewEventDate.setOnClickListener()");
+                displayDatePicker();
+            }   // end mTextViewEventDate.setOnClickListener
         });
 
 
@@ -432,11 +380,10 @@ public class ActivityMain extends AppCompatActivity
                 break;
 
             case R.id.action_bar_clear:
+                // sets display to default
                 Toast.makeText(this, "Action Bar Clear Menu Item",
                         Toast.LENGTH_SHORT).show();
-                cma_activity = new CMAActivityInfo();
-                //cma_activity.mDataCMAActivity.createDefaultProperties();
-                cma_activity.setCMAActivityData();
+                setReportParametersToDefault();
                 break;
 
             case R.id.action_bar_about:
@@ -544,7 +491,7 @@ public class ActivityMain extends AppCompatActivity
         Log.i(TAG, "onRestoreInstanceState(): restoring event type = " + event_type);
 
         // restore event date
-        String event_date = outState.getString(EVENT_TYPE, "01/01/01");
+        String event_date = outState.getString(EVENT_DATE, "01/01/01");
         mTextViewEventDate.setText(event_date);
         Log.i(TAG, "onRestoreInstanceState(): restoring event date = " + event_date);
     }
@@ -553,6 +500,67 @@ public class ActivityMain extends AppCompatActivity
     ////////////////////////////////////////////////////////////////////////////
     ///////////////////////// PRIVATE MEMBER FUNCTIONS /////////////////////////
     ////////////////////////////////////////////////////////////////////////////
+    /**
+     * Displays the Date Picker
+     */
+    private void displayDatePicker()
+    {
+        Log.i(TAG, "displayDatePicker()");
+        DatePickerFragment date_picker = new DatePickerFragment();
+        UtilDate util_date = new UtilDate();
+        date_picker.setArguments(util_date.buildBundle());
+        date_picker.show(getFragmentManager(), "DatePicker");
+    }
+
+    /**
+     * Sets activity report parameters display to their default values
+     */
+    private void setReportParametersToDefault()
+    {
+        Log.i(TAG, "setReportParametersToDefault()");
+
+        // event name
+        mEditTextEventName.setText(getString(R.string.edittext_def_event_name));
+
+        // event type
+        mTextViewEventType.setText(getDefaultEventType());
+
+        // event date
+        UtilDate util_date = new UtilDate();
+        mTextViewEventDate.setText(util_date.toString());
+
+        // attendance
+        mEditTextAttend.setText(getString(R.string.edittext_def_attend));
+
+        // salvations
+        mEditTextSalvations.setText(getString(R.string.edittext_def_salvations));
+
+        // rededications
+        mEditTextRededicate.setText(getString(R.string.edittext_def_rededications));
+
+        // other ministry
+        mEditTextOther.setText(getString(R.string.edittext_def_other));
+
+        // comments
+        mTextViewComment.setText(getString(R.string.edittext_def_comment));
+    }
+
+
+    /**
+     * Get the default event type from the EventTypes activity
+     *
+     * @return default event type
+     */
+    private String getDefaultEventType()
+    {
+        Intent this_intent = getIntent();
+        int event_type     = this_intent.getIntExtra(
+                ActivityEventTypes.EVENT_TYPE, ActivityEventTypes.DEFAULT_EVENT_TYPE);
+
+        return ActivityEventTypes.CMAActivityTypes[event_type];
+    }
+
+
     /**
      * Verifies email settings have been specified
      *
@@ -763,6 +771,27 @@ public class ActivityMain extends AppCompatActivity
             mEditTextComments.setText(mDataCMAActivity.mComments);
 
             Log.i(TAG, "setCMAActivityData(): " + mDataCMAActivity.toString());
+        }
+
+
+        /**
+         * Clears CMA Activity data by setting everything in the display to its
+         * default value.  These values are not written to storage
+         */
+        public void clearCMAActivityData()
+        {
+            Context app_context = getApplicationContext();
+
+            mEditViewEventName.setText(getString(R.string.edittext_def_event_name));
+            mTextViewEventType.setText(getString(R.string.event_type));
+            mTextViewEventDate.setText(getString(R.string.event_date));
+            mEditTextAttend.setText(getString(R.string.edittext_def_attend));
+            mEditTextSalvations.setText(getString(R.string.edittext_def_salvations));
+            mEditTextRededications.setText(getString(R.string.edittext_def_rededications));
+            mEditTextOtherMinistery.setText(getString(R.string.event_name));
+            mEditTextComments.setText(getString(R.string.event_name));
+
+            Log.i(TAG, "clearCMAActivityData(): ");
         }
 
 

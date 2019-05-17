@@ -3,20 +3,26 @@ package com.sss.android.cmaactivityreport;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.DatePicker;
+import android.widget.TextView;
 
 import java.util.Calendar;
 
 /**
- * Displays a date picker in a dialog fragment
+ * Displays a date picker in a dialog fragment.
+ * Reference: https://stackoverflow.com/questions/27225815/android-how-to-show-datepicker-in-fragment
+ * Reference: https://android--code.blogspot.com/2015/08/android-datepickerdialog-example.html
  *
  * Created by Paul Shepherd on 5/25/2016.
  */
 public class DatePickerFragment extends DialogFragment
         implements android.app.DatePickerDialog.OnDateSetListener
 {
+    private final static String TAG = "DatePickerFragment";
+
     // class data: user specified day, month, and year
     public int mDay;
     public int mMonth;
@@ -35,7 +41,7 @@ public class DatePickerFragment extends DialogFragment
         mMonth = date_info.getInt(UtilDate.UTIL_DATE_MONTH);
         mYear  = date_info.getInt(UtilDate.UTIL_DATE_YEAR);
 
-        Log.d("DatePickerFragment", toString());
+        Log.d(TAG, "onCreateDialog(): " + toString());
 
         // Create a new instance of DatePickerFragment and return it
         return new android.app.DatePickerDialog(getActivity(), this, mYear, mMonth, mDay);
@@ -58,7 +64,9 @@ public class DatePickerFragment extends DialogFragment
         mMonth = month;
         mYear  = year;
 
-        Log.i("DatePickerFragment", "onDateSet: " + toString());
+        TextView tv_event_date = getActivity().findViewById(R.id.textViewEventDate);
+        tv_event_date.setText(toString());
+        Log.i(TAG, "onDateSet(): " + toString());
     }
 
     /**

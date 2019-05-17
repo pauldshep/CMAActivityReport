@@ -18,7 +18,7 @@ import android.widget.ListView;
 public class ActivityEventTypes extends AppCompatActivity
 {
     // identifies the current event type in the array
-    public final static String EVENT_TYPE         = "event_id";
+    public final static String EVENT_TYPE   = "event_id";
 
     // request code associated with event types
     public final static int    REQUEST_CODE = 1;

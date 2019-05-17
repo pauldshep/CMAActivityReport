@@ -124,10 +124,10 @@
 
             <!-- Event Date -->
             <TextView
+                    android:id="@+id/textViewDateTitle"
                     android:layout_width="64dp"
                     android:layout_height="wrap_content"
                     android:text="@string/event_date"
-                    android:id="@+id/textViewDateTitle"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:layout_alignParentStart="true"
                     android:gravity="center_vertical"
@@ -140,13 +140,13 @@
                     app:layout_constraintTop_toBottomOf="@+id/textViewTypeTitle"/>
 
             <TextView
+                    android:id="@+id/textViewEventDate"
                     android:layout_width="215dp"
                     android:layout_height="28dp"
                     android:inputType="date"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:text="@string/edittext_date"
                     android:ems="10"
-                    android:id="@+id/textViewEventDate"
                     android:layout_alignStart="@+id/textViewEventType"
                     android:layout_alignEnd="@+id/textViewEventType"
                     android:layout_below="@+id/textViewEventType"
@@ -176,10 +176,10 @@
 
             <!-- Number of  CMA members attending the event -->
             <TextView
+                    android:id="@+id/eventAttend"
                     android:layout_width="152dp"
                     android:layout_height="wrap_content"
                     android:text="@string/event_attend"
-                    android:id="@+id/eventAttend"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:gravity="center_vertical"
                     android:layout_alignTop="@+id/editTextEventAttend"
@@ -191,12 +191,12 @@
                     app:layout_constraintStart_toStartOf="parent"/>
 
             <EditText
+                    android:id="@+id/editTextEventAttend"
                     android:layout_width="122dp"
                     android:layout_height="46dp"
                     android:inputType="date"
                     android:text="@string/edittext_def_attend"
                     android:ems="10"
-                    android:id="@+id/editTextEventAttend"
                     android:paddingTop="10dp"
                     android:layout_alignEnd="@+id/textViewEventDate"
                     android:layout_below="@+id/textView_totals"
@@ -255,11 +255,11 @@
                     app:layout_constraintTop_toBottomOf="@+id/textView_salvations"/>
 
             <EditText
+                    android:id="@+id/editTextRededications"
                     android:layout_width="122dp"
                     android:layout_height="46dp"
                     android:inputType="number"
                     android:ems="10"
-                    android:id="@+id/editTextRededications"
                     android:text="@string/edittext_def_rededications"
                     android:layout_alignLeft="@+id/editTextSalvations"
                     android:layout_alignStart="@+id/editTextSalvations"
