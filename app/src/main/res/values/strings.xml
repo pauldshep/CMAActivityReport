@@ -80,4 +80,7 @@
     <!-- General Definitions - do not translate -->
     <string name="boolean_true">true</string>
     <string name="boolean_false">false</string>
+    <string name="increment_char">+</string>
+    <string name="decrement_char">-</string>
+
 </resources>

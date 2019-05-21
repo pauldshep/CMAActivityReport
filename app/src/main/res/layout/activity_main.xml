@@ -14,7 +14,9 @@
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent">
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginTop="4dp"
+            app:layout_constraintHorizontal_bias="0.0">
 
         <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
@@ -166,10 +168,12 @@
                     android:textColor="#0F0F0F"/>
 
 
-            <!-- Number of  CMA members attending the event -->
+            <!--
+            Number of CMA members attending the event
+            -->
             <TextView
                     android:id="@+id/eventAttend"
-                    android:layout_width="152dp"
+                    android:layout_width="125dp"
                     android:layout_height="wrap_content"
                     android:text="@string/event_attend"
                     android:textAppearance="?android:attr/textAppearanceMedium"
@@ -194,28 +198,51 @@
 
             <EditText
                     android:id="@+id/editTextEventAttend"
-                    android:layout_width="122dp"
-                    android:layout_height="46dp"
+                    android:layout_width="50dp"
+                    android:layout_height="40dp"
                     android:inputType="date"
                     android:text="@string/edittext_def_attend"
+                    android:gravity="center"
                     android:ems="10"
                     android:paddingTop="10dp"
                     android:layout_alignEnd="@+id/textViewEventDate"
                     android:layout_below="@+id/textView_totals"
                     app:layout_constraintBottom_toBottomOf="@+id/eventAttend"
                     app:layout_constraintTop_toTopOf="@+id/eventAttend"
-                    app:layout_constraintVertical_bias="0.272"
+                    app:layout_constraintVertical_bias="0.357"
                     app:layout_constraintStart_toEndOf="@+id/imageButtonAttendHelp"
                     android:layout_marginStart="8dp"/>
 
-            <!-- Number of Salvations -->
+            <Button
+                    android:id="@+id/btnIncAttend"
+                    android:text="@string/increment_char"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    app:layout_constraintStart_toEndOf="@+id/editTextEventAttend"
+                    app:layout_constraintBottom_toBottomOf="@+id/eventAttend"
+                    app:layout_constraintTop_toTopOf="@+id/eventAttend"
+                    android:layout_marginStart="8dp"/>
+
+            <Button
+                    android:id="@+id/btnDecAttend"
+                    android:text="@string/decrement_char"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    app:layout_constraintStart_toEndOf="@+id/btnIncAttend"
+                    app:layout_constraintTop_toTopOf="@+id/eventAttend"
+                    app:layout_constraintBottom_toBottomOf="@+id/eventAttend"/>
+
+
+            <!--
+            Number of Salvations
+            -->
             <TextView
-                    android:layout_width="152dp"
+                    android:id="@+id/textView_salvations"
+                    android:layout_width="125dp"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:gravity="center_vertical"
                     android:text="@string/event_salvations"
-                    android:id="@+id/textView_salvations"
                     android:layout_alignEnd="@+id/eventAttend"
                     android:layout_below="@+id/editTextEventAttend"
                     android:layout_alignParentStart="true"
@@ -236,28 +263,51 @@
                     app:layout_constraintBottom_toBottomOf="@+id/textView_salvations"/>
 
             <EditText
-                    android:layout_width="122dp"
-                    android:layout_height="46dp"
+                    android:id="@+id/editTextSalvations"
+                    android:layout_width="50dp"
+                    android:layout_height="40dp"
                     android:inputType="number"
                     android:ems="10"
-                    android:id="@+id/editTextSalvations"
                     android:text="@string/edittext_def_salvations"
+                    android:gravity="center"
                     android:layout_alignStart="@+id/editTextEventAttend"
                     android:layout_below="@+id/editTextEventAttend"
                     app:layout_constraintBottom_toBottomOf="@+id/textView_salvations"
                     app:layout_constraintTop_toTopOf="@+id/textView_salvations"
-                    app:layout_constraintVertical_bias="0.333"
+                    app:layout_constraintVertical_bias="0.357"
                     app:layout_constraintStart_toEndOf="@+id/imageButtonSalvationHelp"
                     android:layout_marginStart="8dp"/>
 
-            <!-- Number of rededications -->
+            <Button
+                    android:id="@+id/btnIncSalvations"
+                    android:text="@string/increment_char"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    app:layout_constraintTop_toTopOf="@+id/textView_salvations"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView_salvations"
+                    app:layout_constraintStart_toEndOf="@+id/editTextSalvations"
+                    android:layout_marginStart="8dp"/>
+
+            <Button
+                    android:id="@+id/btnDecSalvations"
+                    android:text="@string/decrement_char"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    app:layout_constraintTop_toTopOf="@+id/textView_salvations"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView_salvations"
+                    app:layout_constraintStart_toEndOf="@+id/btnIncSalvations"
+                    />
+
+            <!--
+            Number of rededications
+            -->
             <TextView
-                    android:layout_width="152dp"
+                    android:id="@+id/textView_rededications"
+                    android:layout_width="125dp"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:gravity="center_vertical"
                     android:text="@string/event_rededications"
-                    android:id="@+id/textView_rededications"
                     android:layout_alignParentStart="true"
                     android:layout_alignTop="@+id/editTextRededications"
                     android:layout_alignBottom="@+id/editTextRededications"
@@ -268,11 +318,12 @@
 
             <EditText
                     android:id="@+id/editTextRededications"
-                    android:layout_width="122dp"
-                    android:layout_height="46dp"
+                    android:layout_width="50dp"
+                    android:layout_height="40dp"
                     android:inputType="number"
                     android:ems="10"
                     android:text="@string/edittext_def_rededications"
+                    android:gravity="center"
                     android:layout_alignLeft="@+id/editTextSalvations"
                     android:layout_alignStart="@+id/editTextSalvations"
                     android:layout_below="@+id/editTextSalvations"
@@ -281,10 +332,33 @@
                     app:layout_constraintStart_toEndOf="@+id/imageButtonRededicationHelp"
                     android:layout_marginStart="8dp"/>
 
+            <Button
+                    android:id="@+id/btnIncRededications"
+                    android:text="@string/increment_char"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    app:layout_constraintTop_toTopOf="@+id/textView_rededications"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView_rededications"
+                    app:layout_constraintStart_toEndOf="@+id/editTextRededications"
+                    android:layout_marginStart="8dp"/>
 
-            <!-- Other Ministry -->
+            <Button
+                    android:id="@+id/btnDecRededications"
+                    android:text="@string/decrement_char"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    app:layout_constraintTop_toTopOf="@+id/textView_rededications"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView_rededications"
+                    app:layout_constraintStart_toEndOf="@+id/btnIncRededications"
+                    />
+
+
+            <!--
+            Other Ministry
+            -->
             <TextView
-                    android:layout_width="152dp"
+                    android:layout_alignBottom="@+id/editTextOther"
+                    android:layout_width="125dp"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:gravity="center_vertical"
@@ -292,7 +366,6 @@
                     android:id="@+id/textView_other"
                     android:layout_alignEnd="@+id/textView_rededications"
                     android:layout_alignTop="@+id/editTextOther"
-                    android:layout_alignBottom="@+id/editTextOther"
                     android:layout_alignParentStart="true"
                     android:layout_marginStart="24dp"
                     app:layout_constraintStart_toStartOf="parent"
@@ -302,9 +375,10 @@
             <EditText
                     android:id="@+id/editTextOther"
                     android:text="@string/edittext_def_other"
-                    android:layout_width="122dp"
-                    android:layout_height="46dp"
+                    android:layout_width="50dp"
+                    android:layout_height="40dp"
                     android:inputType="number"
+                    android:gravity="center"
                     android:ems="10"
                     android:layout_alignStart="@+id/editTextRededications"
                     android:layout_below="@+id/editTextRededications"
@@ -314,12 +388,34 @@
                     android:layout_marginStart="8dp"
                     app:layout_constraintVertical_bias="0.59"/>
 
+            <Button
+                    android:id="@+id/btnIncOther"
+                    android:text="@string/increment_char"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    app:layout_constraintTop_toTopOf="@+id/textView_other"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView_other"
+                    app:layout_constraintStart_toEndOf="@+id/editTextOther"
+                    android:layout_marginStart="8dp"/>
 
-            <!-- Comment Section -->
+            <Button
+                    android:id="@+id/btnDecOther"
+                    android:text="@string/decrement_char"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    app:layout_constraintTop_toTopOf="@+id/textView_other"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView_other"
+                    app:layout_constraintVertical_bias="0.545"
+                    app:layout_constraintStart_toEndOf="@+id/btnIncOther"/>
+
+
+            <!--
+            Comment Section
+            -->
             <TextView
                     android:id="@+id/textViewComment"
                     android:text="@string/event_comment"
-                    android:layout_width="152dp"
+                    android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:layout_below="@+id/textViewDateTitle"
@@ -339,16 +435,18 @@
                     android:gravity="top|left"
                     android:background="@drawable/border"
                     android:padding="5dp"
-                    android:layout_width="322dp"
-                    android:layout_height="101dp"
+                    android:layout_width="304dp"
+                    android:layout_height="91dp"
                     android:ems="10"
                     android:layout_alignStart="@+id/editTextRededications"
                     android:layout_below="@+id/editTextRededications"
                     android:layout_marginTop="16dp"
                     app:layout_constraintTop_toBottomOf="@+id/textViewComment"
                     app:layout_constraintStart_toStartOf="@+id/textViewComment"
-                    app:layout_constraintEnd_toEndOf="@+id/editTextOther"
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintEnd_toEndOf="@+id/btnDecOther"
                     app:layout_constraintHorizontal_bias="0.0"/>
+
 
             !-- Control Buttons -->
             <Button
@@ -375,6 +473,7 @@
                     android:layout_marginStart="8dp"
                     app:layout_constraintTop_toTopOf="@+id/textView_rededications"
                     app:layout_constraintBottom_toBottomOf="@+id/textView_rededications"/>
+
 
         </android.support.constraint.ConstraintLayout>
     </ScrollView>

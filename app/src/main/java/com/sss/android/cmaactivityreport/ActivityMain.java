@@ -64,6 +64,8 @@ public class ActivityMain extends AppCompatActivity
         mEditTextRededicate = findViewById(R.id.editTextRededications);
         mEditTextOther      = findViewById(R.id.editTextOther);
 
+
+
         // configure the action bar and handle its messages
         ActionBar action_bar = getSupportActionBar();
         action_bar.setTitle(R.string.actionbar_title);
@@ -171,67 +173,152 @@ public class ActivityMain extends AppCompatActivity
 
         //----------------------------------------------------------------------
         // Totals message handlers
+        // Attendence
         //----------------------------------------------------------------------
-        final TextView text_view_attend = findViewById(R.id.editTextEventAttend);
-        text_view_attend.setOnFocusChangeListener(new View.OnFocusChangeListener()
+        mEditTextAttend.setOnFocusChangeListener(new View.OnFocusChangeListener()
         {
             @Override
             public void onFocusChange(View view, boolean b)
             {
-                String attend_str = text_view_attend.getText().toString();
+                String attend_str = mEditTextAttend.getText().toString();
                 String attend_def = getString(R.string.edittext_def_attend);
                 if(attend_str.equals(attend_def))
                 {
-                    text_view_attend.setText("");
+                    mEditTextAttend.setText("");
                 }
             }
         });
 
+        Button btn_inc_attend = findViewById(R.id.btnIncAttend);
+        btn_inc_attend.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                incDecEditText(mEditTextAttend, 1);
+            }
+        });
 
-        final TextView text_view_salvations = findViewById(R.id.editTextSalvations);
-        text_view_salvations.setOnFocusChangeListener(new View.OnFocusChangeListener()
+        Button btn_dec_attend = findViewById(R.id.btnDecAttend);
+        btn_dec_attend.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                incDecEditText(mEditTextAttend, -1);
+            }
+        });
+
+
+        //----------------------------------------------------------------------
+        // Salvations
+
+        mEditTextSalvations.setOnFocusChangeListener(new View.OnFocusChangeListener()
         {
             @Override
             public void onFocusChange(View view, boolean b)
             {
-                String salvations_str = text_view_salvations.getText().toString();
+                String salvations_str = mEditTextSalvations.getText().toString();
                 String salvations_def = getString(R.string.edittext_def_salvations);
                 if(salvations_str.equals(salvations_def))
                 {
-                    text_view_salvations.setText("");
+                    mEditTextSalvations.setText("");
                 }
             }
         });
 
+        Button btn_inc_salvations = findViewById(R.id.btnIncSalvations);
+        btn_inc_salvations.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                incDecEditText(mEditTextSalvations, 1);
+            }
+        });
 
-        final TextView text_view_rededications = findViewById(R.id.editTextRededications);
-        text_view_rededications.setOnFocusChangeListener(new View.OnFocusChangeListener()
+        Button btn_dec_salvations = findViewById(R.id.btnDecSalvations);
+        btn_dec_salvations.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                incDecEditText(mEditTextSalvations, -1);
+            }
+        });
+
+
+        //----------------------------------------------------------------------
+        // Rededicate
+
+        mEditTextRededicate.setOnFocusChangeListener(new View.OnFocusChangeListener()
         {
             @Override
             public void onFocusChange(View view, boolean b)
             {
-                String rededication_str = text_view_rededications.getText().toString();
+                String rededication_str = mEditTextRededicate.getText().toString();
                 String rededication_def = getString(R.string.edittext_def_rededications);
                 if(rededication_str.equals(rededication_def))
                 {
-                    text_view_rededications.setText("");
+                    mEditTextRededicate.setText("");
                 }
             }
         });
 
+        Button btn_inc_rededications = findViewById(R.id.btnIncRededications);
+        btn_inc_rededications.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                incDecEditText(mEditTextRededicate, 1);
+            }
+        });
 
-        final TextView text_view_other = findViewById(R.id.editTextOther);
-        text_view_other.setOnFocusChangeListener(new View.OnFocusChangeListener()
+        Button btn_dec_rededications = findViewById(R.id.btnDecRededications);
+        btn_dec_rededications.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                incDecEditText(mEditTextRededicate, -1);
+            }
+        });
+
+        //----------------------------------------------------------------------
+        // Other
+
+        mEditTextOther.setOnFocusChangeListener(new View.OnFocusChangeListener()
         {
             @Override
             public void onFocusChange(View view, boolean b)
             {
-                String other_str = text_view_other.getText().toString();
+                String other_str = mEditTextOther.getText().toString();
                 String other_def = getString(R.string.edittext_def_other);
                 if(other_str.equals(other_def))
                 {
-                    text_view_other.setText("");
+                    mEditTextOther.setText("");
                 }
+            }
+        });
+
+        Button btn_inc_other = findViewById(R.id.btnIncOther);
+        btn_inc_other.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                incDecEditText(mEditTextOther, 1);
+            }
+        });
+
+        Button btn_dec_other = findViewById(R.id.btnDecOther);
+        btn_dec_other.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                incDecEditText(mEditTextOther, -1);
             }
         });
 
@@ -506,6 +593,35 @@ public class ActivityMain extends AppCompatActivity
     ////////////////////////////////////////////////////////////////////////////
     ///////////////////////// PRIVATE MEMBER FUNCTIONS /////////////////////////
     ////////////////////////////////////////////////////////////////////////////
+    /**
+     * Increments or decrements the numeric value in an EditText and updates
+     * the EditText display.
+     *
+     * @param editText
+     * @param inc_dec
+     */
+    private void incDecEditText(EditText editText, int inc_dec)
+    {
+        int int_val;
+
+        try
+        {
+            int_val = Integer.parseInt(editText.getText().toString());
+            int_val += inc_dec;
+
+            if(int_val < 0)
+            {
+                int_val = 0;
+            }
+        }
+        catch(NumberFormatException nfe)
+        {
+            int_val = 0;
+        }
+
+        editText.setText(Integer.toString(int_val));
+    }   // end private void incDecEditText(EditText editText, int inc_dec)
+
     /**
      * Displays the Date Picker
      */
