@@ -10,7 +10,7 @@
     <string name="event_date">Date</string>
     <string name="event_attend">Attendance</string>
     <string name="event_salvations">Salvations</string>
-    <string name="event_rededications">Rededications</string>
+    <string name="event_rededications">Rededicate</string>
     <string name="event_other">Other Ministry</string>
     <string name="event_totals">Totals</string>
     <string name="edittext_type">type of event</string>
