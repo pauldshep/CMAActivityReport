@@ -36,8 +36,8 @@ abstract class DataProperties
         mDataContext  = context;
         mProperties   = new Properties();
         mPropFileName = propFileName;
-        mPropFile     = getPropertyFile(propFileName);
 
+        getPropertyFile(propFileName);
         getPropertiesFromFile();
     }
 
@@ -128,22 +128,21 @@ abstract class DataProperties
      * name.  If it does not exist then it is created.
      *
      * @param propFileName property file name
-     * @return properties file
      */
-    private File getPropertyFile(String propFileName)
+    private void getPropertyFile(String propFileName)
     {
         Log.i(TAG, "getPropertyFile(): file = " + propFileName);
 
-        File prop_file = new File(mDataContext.getFilesDir(), propFileName);
+        mPropFile = new File(mDataContext.getFilesDir(), propFileName);
 
-        if(!prop_file.exists())
+        if(!mPropFile.exists())
         {
             // here the property file does not exist, create it and initialize
             Log.i(TAG, "getPropertyFile(): property file does not exist, creating");
 
             try
             {
-                prop_file.createNewFile();
+                mPropFile.createNewFile();
                 createDefaultProperties();
                 OutputStream out = new FileOutputStream(mPropFile);
                 mProperties.store(out, "");
@@ -153,8 +152,6 @@ abstract class DataProperties
                 Log.e(TAG, "ERROR - could not create property file: " + propFileName);
             }
         }
-
-        return prop_file;
     }
 
 }   // end public class DataProperties

@@ -200,7 +200,7 @@
             <EditText
                     android:id="@+id/editTextEventAttend"
                     android:layout_width="50dp"
-                    android:layout_height="44dp"
+                    android:layout_height="50dp"
                     android:inputType="date"
                     android:text="@string/edittext_def_attend"
                     android:gravity="center"
@@ -266,7 +266,7 @@
             <EditText
                     android:id="@+id/editTextSalvations"
                     android:layout_width="50dp"
-                    android:layout_height="44dp"
+                    android:layout_height="50dp"
                     android:inputType="number"
                     android:ems="10"
                     android:text="@string/edittext_def_salvations"
@@ -320,7 +320,7 @@
             <EditText
                     android:id="@+id/editTextRededications"
                     android:layout_width="50dp"
-                    android:layout_height="44dp"
+                    android:layout_height="50dp"
                     android:inputType="number"
                     android:ems="10"
                     android:text="@string/edittext_def_rededications"
@@ -377,7 +377,7 @@
                     android:id="@+id/editTextOther"
                     android:text="@string/edittext_def_other"
                     android:layout_width="50dp"
-                    android:layout_height="44dp"
+                    android:layout_height="50dp"
                     android:inputType="number"
                     android:gravity="center"
                     android:ems="10"
@@ -436,17 +436,15 @@
                     android:gravity="top|left"
                     android:background="@drawable/border"
                     android:padding="5dp"
-                    android:layout_width="329dp"
-                    android:layout_height="93dp"
+                    android:layout_width="311dp"
+                    android:layout_height="86dp"
                     android:ems="10"
                     android:layout_alignStart="@+id/editTextRededications"
                     android:layout_below="@+id/editTextRededications"
                     android:layout_marginTop="16dp"
                     app:layout_constraintTop_toBottomOf="@+id/textViewComment"
                     app:layout_constraintStart_toStartOf="@+id/textViewComment"
-                    android:layout_marginEnd="8dp"
-                    app:layout_constraintEnd_toEndOf="@+id/btnDecOther"
-                    app:layout_constraintHorizontal_bias="0.0"/>
+                    />
 
 
             !-- Control Buttons -->

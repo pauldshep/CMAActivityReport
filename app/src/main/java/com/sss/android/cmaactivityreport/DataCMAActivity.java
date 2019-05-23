@@ -14,7 +14,6 @@ import java.util.Properties;
 public class DataCMAActivity extends DataProperties
 {
     private final static String TAG                = "DataCMAActivity";
-    //private final static String PROP_FILE_NAME     = "Report.properties";
     private final static String PROP_FILE_NAME     = "CMA_Report.properties";
 
     // property file keys
@@ -27,13 +26,6 @@ public class DataCMAActivity extends DataProperties
     private final static String KEY_OTHER_MINISTRY = "key_other_ministry";
     private final static String KEY_COMMENTS       = "key_comments";
 
-//    private final static String KEY_EMAIL_INIT     = "key_email_init";
-//    private final static String KEY_EMAIL_TO       = "key_email_to";
-//    private final static String KEY_EMAIL_ADDR     = "key_email_addr";
-//    private final static String KEY_EMAIL_FROM     = "key_email_from";
-//    private final static String KEY_EMAIL_SUBJECT  = "key_email_subject";
-
-
     // member variables for the report parameters
     public String  mEventName;
     public String  mEventType;
@@ -44,13 +36,6 @@ public class DataCMAActivity extends DataProperties
     public String  mOtherMinistry;
     public String  mComments;
 
-//    // member variable for the report settings
-//    public String mEmailInit;
-//    public String mEmailTo;
-//    public String mEmailAddr;
-//    public String mEmailFrom;
-//    public String mEmailSubject;
-
 
     /**
      * Default Constructor
@@ -60,30 +45,36 @@ public class DataCMAActivity extends DataProperties
     public DataCMAActivity(Context context)
     {
         super(context, PROP_FILE_NAME);
-
         getProperties();
     }   // end public DataReport(Context context)
 
 
     /**
-     * Required for classes that extend abstract class DataProperties
-     * Extracts the properties from the properties file
+     * Required for classes that extend abstract class DataProperties.
+     * Extracts the properties from the properties file.  If a property is not
+     * in the data file then a default value is used.
      */
     public void getProperties()
     {
         // event data
-        mEventName     = mProperties.getProperty(KEY_EVENT_NAME);
-        mEventType     = mProperties.getProperty(KEY_EVENT_TYPE);
-        mEventDate     = mProperties.getProperty(KEY_EVENT_DATE);
-        mCMAAttendence = mProperties.getProperty(KEY_ATTENDENCE);
-        mSalvations    = mProperties.getProperty(KEY_SALVATIONS);
-        mRededications = mProperties.getProperty(KEY_REDEDICATIONS);
-        mOtherMinistry = mProperties.getProperty(KEY_OTHER_MINISTRY);
-        mComments      = mProperties.getProperty(KEY_COMMENTS);
+        mEventName     = mProperties.getProperty(KEY_EVENT_NAME,
+                         mDataContext.getString(R.string.edittext_def_event_name));
+        mEventType     = mProperties.getProperty(KEY_EVENT_TYPE,
+                         mDataContext.getString(R.string.edittext_def_type));
+        mEventDate     = mProperties.getProperty(KEY_EVENT_DATE,
+                         mDataContext.getString(R.string.edittext_def_date));
+        mCMAAttendence = mProperties.getProperty(KEY_ATTENDENCE,
+                         mDataContext.getString(R.string.edittext_def_attend));
+        mSalvations    = mProperties.getProperty(KEY_SALVATIONS,
+                         mDataContext.getString(R.string.edittext_def_salvations));
+        mRededications = mProperties.getProperty(KEY_REDEDICATIONS,
+                         mDataContext.getString(R.string.edittext_def_rededications));
+        mOtherMinistry = mProperties.getProperty(KEY_OTHER_MINISTRY,
+                         mDataContext.getString(R.string.edittext_def_other));
+        mComments      = mProperties.getProperty(KEY_COMMENTS,
+                         mDataContext.getString(R.string.edittext_def_comment));
 
-        //getEmailProperties();
-
-        Log.i(TAG, "extractProperties(): " + toString());
+        Log.i(TAG, "getProperties(): " + toString());
     }
 
 
@@ -136,6 +127,8 @@ public class DataCMAActivity extends DataProperties
      */
     public void createDefaultProperties()
     {
+        Log.i(TAG, "createDefaultProperties()");
+
         // default properties values
         mEventName         = "CMA Event";
 

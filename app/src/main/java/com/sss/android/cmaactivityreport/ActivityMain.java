@@ -34,6 +34,7 @@ public class ActivityMain extends AppCompatActivity
     private EditText mEditTextSalvations;   // number of salvations
     private EditText mEditTextRededicate;   // number of rededications
     private EditText mEditTextOther;
+    private EditText mEditTextComment;
 
     private Boolean  mIsInitialized;
 
@@ -63,6 +64,7 @@ public class ActivityMain extends AppCompatActivity
         mEditTextSalvations = findViewById(R.id.editTextSalvations);
         mEditTextRededicate = findViewById(R.id.editTextRededications);
         mEditTextOther      = findViewById(R.id.editTextOther);
+        mEditTextComment    = findViewById(R.id.editTextComment);
 
 
 
@@ -370,34 +372,75 @@ public class ActivityMain extends AppCompatActivity
 
 
         //----------------------------------------------------------------------
-        // Comment message handler
+        // Comment edit text message handlers
         //----------------------------------------------------------------------
-        final TextView text_view_comment = (TextView)findViewById(R.id.editTextComment);
-
-        text_view_comment.setOnClickListener(new View.OnClickListener()
+        mEditTextComment.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View view)
             {
-                String comment_str = text_view_comment.getText().toString();
-                String def_comment = getString(R.string.edittext_def_comment);
-                if(comment_str.equals(def_comment))
+                Log.i(TAG, "mEditTextComment.setOnClickListener()");
+                try
                 {
-                    text_view_comment.setText("");
+                    String comment_str = mEditTextComment.getText().toString();
+                    String def_comment = getString(R.string.edittext_def_comment);
+                    if(comment_str.equals(def_comment))
+                    {
+                        mEditTextComment.setText("");
+                    }
+                }
+                catch(IndexOutOfBoundsException ioobe)
+                {
+                    Log.e(TAG, "ERROR: " + ioobe);
                 }
             }
         });
 
-        text_view_comment.setOnFocusChangeListener(new View.OnFocusChangeListener()
+        mEditTextComment.setOnLongClickListener(new View.OnLongClickListener()
+        {
+            // This is here to handle the crash caused by rubbing the TextEdit
+            // when it has the default text in it???
+            // TODO: wrap the string processing in a thread critical section
+            @Override
+            public boolean onLongClick(View view)
+            {
+                Log.i(TAG, "mEditTextComment.setOnLongClickListener()");
+                try
+                {
+                    String comment_str = mEditTextComment.getText().toString();
+                    String def_comment = getString(R.string.edittext_def_comment);
+                    if(comment_str.equals(def_comment))
+                    {
+                        mEditTextComment.setText("");
+                    }
+                }
+                catch(IndexOutOfBoundsException ioobe)
+                {
+                    Log.e(TAG, "ERROR: " + ioobe);
+                }
+
+                return false;
+            }
+        });
+
+        mEditTextComment.setOnFocusChangeListener(new View.OnFocusChangeListener()
         {
             @Override
             public void onFocusChange(View view, boolean b)
             {
-                String comment_str = text_view_comment.getText().toString();
-                String def_comment = getString(R.string.edittext_def_comment);
-                if(comment_str.equals(def_comment))
+                Log.i(TAG, "mEditTextComment.setOnFocusChangeListener()");
+                try
                 {
-                    text_view_comment.setText("");
+                    String comment_str = mEditTextComment.getText().toString();
+                    String def_comment = getString(R.string.edittext_def_comment);
+                    if(comment_str.equals(def_comment))
+                    {
+                        mEditTextComment.setText("");
+                    }
+                }
+                catch(IndexOutOfBoundsException ioobe)
+                {
+                    Log.e(TAG, "ERROR: " + ioobe);
                 }
             }
         });

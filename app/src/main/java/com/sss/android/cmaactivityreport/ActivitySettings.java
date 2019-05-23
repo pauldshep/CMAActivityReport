@@ -38,6 +38,7 @@ public class ActivitySettings extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
         setTitle("Activity Report Settings");
+        Log.i(TAG, "onCreate()");
 
         // set dialog values
         mEditTextEmailTo      = findViewById(R.id.editText_email_to);
